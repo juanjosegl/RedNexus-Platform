@@ -1,0 +1,23 @@
+# Clúster local con minikube. Lo usa: bash scripts/k8s-up.sh minikube
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rednexus
+resources:
+  - ../../base
+components:
+  - ../../components/dev
+configMapGenerator:
+  - name: api-config
+    behavior: merge
+    literals:
+      # Ollama corre fuera del clúster, en el equipo anfitrion (minikube crea este nombre)
+      - OLLAMA_URL=http://host.minikube.internal:11434
+patches:
+  # El addon "ingress" de minikube instala ingress-nginx
+  - target:
+      kind: Ingress
+      name: rednexus
+    patch: |
+      - op: add
+        path: /spec/ingressClassName
+        value: nginx

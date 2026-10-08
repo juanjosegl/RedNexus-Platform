@@ -1,0 +1,23 @@
+# Comun a los clústeres locales (k3d y minikube): imagenes :dev construidas en tu equipo
+# y secretos de prueba.
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+images:
+  - name: rednexus-api
+    newTag: dev
+  - name: rednexus-api-migrate
+    newTag: dev
+  - name: rednexus-web
+    newTag: dev
+# SOLO para desarrollo local: valores de prueba sin valor real. En el ambiente de demo
+# los secretos van cifrados con Sealed Secrets, nunca en texto plano en Git.
+secretGenerator:
+  - name: postgres-secrets
+    literals:
+      - POSTGRES_USER=rednexus
+      - POSTGRES_PASSWORD=rednexus
+      - POSTGRES_DB=rednexus
+  - name: api-secrets
+    literals:
+      - DATABASE_URL=postgresql://rednexus:rednexus@postgres:5432/rednexus
+      - JWT_SECRET=solo-para-desarrollo-local

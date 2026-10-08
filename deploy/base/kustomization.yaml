@@ -1,0 +1,26 @@
+# Base comun a todos los ambientes. Cada overlay (deploy/overlays/*) define imagenes,
+# secretos y la URL de Ollama de su ambiente.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rednexus
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: rednexus
+resources:
+  - namespace.yaml
+  - postgres.yaml
+  - redis.yaml
+  - api.yaml
+  - worker.yaml
+  - web.yaml
+  - ingress.yaml
+configMapGenerator:
+  - name: api-config
+    literals:
+      - NODE_ENV=production
+      - PORT=3000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - OLLAMA_URL=http://ollama:11434
+      - OLLAMA_LLM_MODEL=llama3.2:3b
+      - OLLAMA_EMBED_MODEL=nomic-embed-text

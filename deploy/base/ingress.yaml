@@ -1,0 +1,16 @@
+# Entrada HTTP. Cada overlay elige el controlador: Traefik en k3d, NGINX en minikube.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rednexus
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  name: http

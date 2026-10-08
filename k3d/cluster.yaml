@@ -1,0 +1,15 @@
+# Clúster local de Kubernetes (k3s dentro de Docker) declarado como código.
+# Crear:   k3d cluster create --config k3d/cluster.yaml
+# Apagar:  k3d cluster stop rednexus      Encender: k3d cluster start rednexus
+# Borrar:  k3d cluster delete rednexus
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: rednexus
+servers: 1
+agents: 0 # un solo nodo: alcanza para el MVP y cabe en equipos de 8 GB
+ports:
+  # El Ingress (Traefik, incluido en k3s) queda en http://localhost:8080
+  - port: 8080:80
+    nodeFilters:
+      - loadbalancer

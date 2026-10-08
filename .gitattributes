@@ -1,0 +1,2 @@
+# Saltos de linea LF en todos los sistemas: los scripts .sh fallan en WSL si tienen CRLF
+* text=auto eol=lf

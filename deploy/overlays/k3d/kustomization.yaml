@@ -1,0 +1,24 @@
+# Clúster local con k3d. Lo usa: bash scripts/k8s-up.sh
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# Tambien aqui: lo generado en este overlay (secretos, config) debe caer en el mismo namespace
+namespace: rednexus
+resources:
+  - ../../base
+components:
+  - ../../components/dev
+configMapGenerator:
+  - name: api-config
+    behavior: merge
+    literals:
+      # Ollama corre fuera del clúster, en el equipo anfitrion (k3d crea este nombre)
+      - OLLAMA_URL=http://host.k3d.internal:11434
+patches:
+  # k3s trae Traefik como controlador de Ingress
+  - target:
+      kind: Ingress
+      name: rednexus
+    patch: |
+      - op: add
+        path: /spec/ingressClassName
+        value: traefik

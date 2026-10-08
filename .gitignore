@@ -1,0 +1,10 @@
+.env
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Estado y credenciales de OpenTofu (nunca a Git)
+*.tfstate
+*.tfstate.*
+.terraform/
