@@ -5,8 +5,6 @@ kind: Component
 images:
   - name: rednexus-api
     newTag: dev
-  - name: rednexus-api-migrate
-    newTag: dev
   - name: rednexus-web
     newTag: dev
 # SOLO para desarrollo local: valores de prueba sin valor real. En el ambiente de demo
