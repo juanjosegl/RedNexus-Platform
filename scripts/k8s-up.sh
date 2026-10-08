@@ -9,7 +9,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 TOOL="${1:-k3d}"
 CLUSTER=rednexus
-IMAGES=(rednexus-api:dev rednexus-api-migrate:dev rednexus-web:dev)
+IMAGES=(rednexus-api:dev rednexus-web:dev)
 
 case "$TOOL" in
   k3d | minikube) ;;
@@ -46,7 +46,7 @@ else
 fi
 
 echo "==> Construyendo imagenes desde los repos hermanos"
-docker compose build migrate api web
+docker compose build api web
 
 echo "==> Cargando imagenes en el clúster"
 if [ "$TOOL" = k3d ]; then

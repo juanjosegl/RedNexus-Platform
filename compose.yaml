@@ -4,13 +4,14 @@
 #   ├── RedNexus-Frontend/
 #   └── RedNexus-Platform/   <- este repo
 #
-# Uso:     docker compose up -d --build     ->  http://localhost:8088
-# Apagar:  docker compose down              (agrega -v para borrar la base de datos)
+# Sistema completo:        docker compose up -d --build           ->  http://localhost:8088
+# Solo backend (para quien
+# programa el frontend):   docker compose up -d --build api worker -> API en http://localhost:3000
+# Apagar:                  docker compose down                     (-v borra tambien la base de datos)
 #
-# Para programar dia a dia no hace falta: basta con el docker-compose.yml del backend
-# (solo Postgres y Redis) y correr la API y el frontend con npm. Este archivo sirve para
-# probar las imagenes tal como iran a Kubernetes, y tambien las construye para k3d
-# (scripts/k8s-up.sh).
+# Las imagenes se construyen con el codigo que tengas en ../RedNexus-Backend y ../RedNexus-Frontend:
+# haz `git pull` en esos repos y repite el comando con --build para usar la ultima version.
+# Tambien las construye scripts/k8s-up.sh para Kubernetes.
 name: rednexus
 
 x-api-env: &api-env
@@ -45,10 +46,9 @@ services:
     mem_limit: 128m
 
   migrate:
-    image: rednexus-api-migrate:dev
-    build:
-      context: ../RedNexus-Backend
-      target: migrate
+    # Misma imagen que la API. Migraciones + datos sinteticos (el seed usa upsert: se puede repetir)
+    image: rednexus-api:dev
+    command: ['sh', '-c', 'prisma migrate deploy && prisma db seed']
     environment:
       DATABASE_URL: postgresql://rednexus:rednexus@postgres:5432/rednexus
     depends_on:
@@ -59,6 +59,10 @@ services:
     image: rednexus-api:dev
     build: ../RedNexus-Backend
     environment: *api-env
+    # Publicada para que `npm run dev` del frontend (proxy de Vite a localhost:3000) la use.
+    # No la levantes junto con `npm run start:dev` del backend: los dos usan el puerto 3000.
+    ports:
+      - '3000:3000'
     extra_hosts:
       - host.docker.internal:host-gateway
     depends_on:

@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [developer, test, main]
+  push:
+    branches: [developer, test, main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Cada overlay debe renderizar y cumplir el esquema de Kubernetes
+      - name: Kustomize + kubeconform
+        run: |
+          for overlay in deploy/overlays/*/; do
+            echo "::group::$overlay"
+            kubectl kustomize "$overlay" \
+              | docker run -i --rm ghcr.io/yannh/kubeconform:latest -strict -summary -
+            echo "::endgroup::"
+          done
+
+      - name: Docker Compose
+        run: docker compose config --quiet
+
+      - name: Scripts
+        run: shellcheck scripts/*.sh
