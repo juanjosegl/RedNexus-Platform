@@ -1,0 +1,62 @@
+@startuml 04-despliegue-local
+' Vista física (4+1): lo que levanta scripts/k8s-up.sh [k3d|minikube]
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+skinparam shadowing false
+skinparam LegendBackgroundColor #ffffff
+skinparam LegendBorderColor #999999
+skinparam ArrowColor #555555
+skinparam actor {
+  BackgroundColor #08427b
+  BorderColor #052e56
+}
+skinparam node {
+  BackgroundColor #f4f8fc
+  BorderColor #2e6295
+}
+skinparam artifact {
+  BackgroundColor #438dd5
+  FontColor white
+  BorderColor #2e6295
+}
+skinparam database {
+  BackgroundColor #438dd5
+  FontColor white
+  BorderColor #2e6295
+}
+skinparam file {
+  BackgroundColor #fff7e0
+  BorderColor #c9a227
+}
+
+actor "Usuario" as user
+
+node "Equipo de desarrollo\n<<Mac M1 8 GB + Colima | Windows + WSL2 + Docker>>" as host {
+  node "Ollama\n<<proceso nativo, puerto 11434>>" as ollama {
+    artifact "llama3.2:3b" as llm
+    artifact "nomic-embed-text" as emb
+  }
+  node "Clúster Kubernetes de un nodo\n<<k3d 'rednexus' | minikube perfil 'rednexus'>>" as k8s {
+    node "Ingress\n<<Traefik en k3d | ingress-nginx en minikube>>" as ing
+    node "namespace rednexus" as ns {
+      artifact "Deployment web\nrednexus-web (Nginx + SPA)" as web
+      artifact "Deployment api\nrednexus-api\ninitContainer: prisma migrate deploy" as api
+      artifact "Deployment worker\nrednexus-api: node dist/worker" as worker
+      database "StatefulSet postgres\npgvector/pgvector:pg17\nPVC 1 Gi" as pg
+      database "Deployment redis\nredis:7-alpine" as redis
+      file "ConfigMap api-config\nSecrets api-secrets y postgres-secrets" as cfg
+    }
+  }
+}
+
+user --> ing : HTTP\nlocalhost:8080
+ing --> web
+web --> api : /api
+api --> pg : SQL 5432
+api --> redis : 6379
+worker --> redis : 6379
+worker --> pg : SQL 5432
+worker --> ollama : host.k3d.internal:11434
+cfg ..> api : envFrom
+cfg ..> worker : envFrom
+@enduml

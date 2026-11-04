@@ -1,0 +1,61 @@
+@startuml 08-secuencia-solicitud-emparejamiento
+' Publicar una solicitud y emparejar con IA (asíncrono)
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam ParticipantBackgroundColor #dbeafe
+skinparam ParticipantBorderColor #1168bd
+skinparam DatabaseBackgroundColor #dbeafe
+skinparam QueueBackgroundColor #dbeafe
+skinparam ActorBackgroundColor #08427b
+skinparam BoxPadding 8
+autonumber
+
+actor "Estudiante" as S
+box "RedNexus" #f4f8fc
+  participant "Aplicación web" as W
+  participant "API" as A
+  database "PostgreSQL\n+ pgvector" as DB
+  queue "Redis\n(BullMQ)" as Q
+  participant "Worker de IA" as K
+end box
+participant "Ollama" as O #e5e5e5
+
+S -> W : Escribe su duda y envía
+W -> A : POST /api/help-requests { text } + JWT
+A -> A : JwtAuthGuard valida el token
+A -> DB : INSERT HelpRequest (PENDING)
+A -> Q : add("match", { requestId })
+A --> W : 201 { id, status: PENDING }
+W --> S : "Buscando ayudantes..."
+
+== Procesamiento asíncrono en el worker ==
+
+Q -> K : Entrega el trabajo (3 intentos, backoff exponencial)
+K -> DB : Lee la solicitud
+note right of K : Si ya no está PENDING,\ntermina (reintento idempotente)
+K -> O : classify(text) con llama3.2:3b
+O --> K : { area, topics, level }
+K -> O : embed(text) con nomic-embed-text
+O --> K : vector de 768 dimensiones
+K -> DB : Top 10 perfiles por distancia coseno
+alt Sin IA o sin perfiles indexados
+  K -> DB : Respaldo: coincidencia de palabras con bio y etiquetas
+end
+K -> K : rank(): 0,8 × similitud + 0,2 × calificación → top 3
+loop Por cada uno de los 3 candidatos
+  K -> O : explain(solicitud, perfil)
+  O --> K : "Te puede ayudar porque..."
+end
+K -> DB : Transacción: INSERT Match ×3 y status MATCHED
+
+== Seguimiento desde la web ==
+
+loop Cada 5 segundos mientras esté PENDING
+  W -> A : GET /api/help-requests/:id
+  A -> DB : Solicitud + candidatos
+  A --> W : status + matches[]
+end
+W --> S : Muestra 3 ayudantes con su explicación
+@enduml

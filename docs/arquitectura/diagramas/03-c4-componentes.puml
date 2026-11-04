@@ -1,0 +1,63 @@
+@startuml 03-c4-componentes
+' C4 nivel 3: módulos de NestJS de la API y del worker (RedNexus-Backend/src/modules)
+!include <C4/C4_Component>
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+HIDE_STEREOTYPE()
+skinparam LegendFontColor #222222
+skinparam LegendBackgroundColor #ffffff
+skinparam LegendBorderColor #999999
+
+Container(web, "Aplicación web", "Vue 3")
+
+Boundary(apic, "API", "contenedor NestJS") {
+  Component(auth, "AuthModule", "Controlador + servicio", "Registro y login con bcrypt, JWT de 7 días y JwtAuthGuard")
+  Component(users, "UsersModule", "Controlador + servicio", "Perfil: nombre, bio y etiquetas; promedio de calificaciones")
+  Component(hr, "HelpRequestsModule", "Controlador + servicio", "Crear, listar, ver detalle y cerrar solicitudes")
+  Component(matches, "MatchesController", "MatchingModule", "Bandeja del ayudante; aceptar o rechazar")
+  Component(ratings, "RatingsModule", "Controlador + servicio", "Calificar de 1 a 5, una vez por solicitud")
+  Component(health, "HealthModule", "Terminus", "/api/health para las sondas de Kubernetes")
+  Component(producer, "QueueModule", "BullMQ", "Productor de la cola ai")
+  Component(prisma1, "PrismaService", "Prisma 7 + adapter-pg", "Acceso a datos")
+}
+
+Boundary(workc, "Worker de IA", "contenedor NestJS sin HTTP") {
+  Component(proc, "AiProcessor", "WorkerHost", "Concurrencia 2; al arrancar reencola lo pendiente")
+  Component(msvc, "MatchingService", "Servicio", "Búsqueda semántica con respaldo por etiquetas; guarda el top 3")
+  Component(rank, "ranking", "Función", "80 % similitud + 20 % calificación; umbral mínimo 0,15")
+  Component(prov, "AiProvider", "Interfaz", "OllamaProvider o MockAiProvider según AI_PROVIDER")
+  Component(prisma2, "PrismaService", "Prisma 7", "Acceso a datos y SQL de pgvector")
+}
+
+ContainerDb(db, "PostgreSQL + pgvector", "PostgreSQL 17")
+ContainerQueue(redis, "Redis", "Redis 7")
+System_Ext(ollama, "Ollama", "Modelos locales")
+
+Rel(web, auth, "/api/auth")
+Rel(web, users, "/api/users")
+Rel(web, hr, "/api/help-requests")
+Rel(web, matches, "/api/matches")
+Rel(web, ratings, "/api/ratings")
+Rel(users, producer, "embed-profile")
+Rel(hr, producer, "match")
+Rel(auth, prisma1, "")
+Rel(users, prisma1, "")
+Rel(hr, prisma1, "")
+Rel(matches, prisma1, "")
+Rel(ratings, prisma1, "")
+Rel(producer, redis, "Encola")
+Rel(prisma1, db, "SQL")
+Rel(redis, proc, "Entrega trabajos")
+Rel(proc, msvc, "matchRequest / indexProfile")
+Rel(msvc, rank, "Ordena candidatos")
+Rel(msvc, prov, "embed, classify, explain")
+Rel(msvc, prisma2, "")
+Rel(prov, ollama, "HTTP/JSON")
+Rel(prisma2, db, "SQL, distancia coseno")
+
+Lay_R(auth, users)
+Lay_R(users, hr)
+Lay_R(hr, matches)
+Lay_R(matches, ratings)
+Lay_D(apic, workc)
+@enduml
