@@ -14,7 +14,7 @@ Boundary(apic, "API", "contenedor NestJS") {
   Component(auth, "AuthModule", "Controlador + servicio", "Registro y login con bcrypt, JWT de 7 días y JwtAuthGuard")
   Component(users, "UsersModule", "Controlador + servicio", "Perfil: nombre, bio y etiquetas; promedio de calificaciones")
   Component(hr, "HelpRequestsModule", "Controlador + servicio", "Crear, listar, ver detalle y cerrar solicitudes")
-  Component(matches, "MatchesController", "MatchingModule", "Bandeja del ayudante; aceptar o rechazar")
+  Component(matches, "MatchesController", "MatchingModule", "Bandeja del colaborador; aceptar o rechazar")
   Component(ratings, "RatingsModule", "Controlador + servicio", "Calificar de 1 a 5, una vez por solicitud")
   Component(health, "HealthModule", "Terminus", "/api/health para las sondas de Kubernetes")
   Component(producer, "QueueModule", "BullMQ", "Productor de la cola ai")

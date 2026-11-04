@@ -24,8 +24,8 @@ skinparam rectangle {
 hide <<previsto>> stereotype
 
 actor "Usuario registrado" as usr
-actor "Estudiante\nsolicitante" as sol
-actor "Ayudante" as ayu
+actor "Solicitante" as sol
+actor "Colaborador" as ayu
 actor "Worker de IA\n<<sistema>>" as ia
 
 sol -up-|> usr

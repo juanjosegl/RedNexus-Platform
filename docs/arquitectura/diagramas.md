@@ -71,7 +71,7 @@ Tomado de `RedNexus-Backend/prisma/schema.prisma`. El detalle de cada campo, su 
 
 ## 7. Casos de uso
 
-En el MVP un mismo usuario puede pedir y dar ayuda: *Estudiante solicitante* y *Ayudante* son especializaciones de *Usuario registrado* y heredan sus casos de uso.
+En el MVP un mismo usuario puede pedir y dar ayuda: *Solicitante* y *Colaborador* son especializaciones de *Usuario registrado* y heredan sus casos de uso.
 
 ![Casos de uso](img/07-casos-de-uso.png)
 
@@ -83,7 +83,7 @@ La API responde de inmediato con `PENDING`; el trabajo pesado ocurre en el worke
 
 ## 9. Secuencia: aceptar la ayuda y calificar
 
-Solo el primer ayudante que acepta se queda con la solicitud; los demás reciben un 409.
+Solo el primer colaborador que acepta se queda con la solicitud; los demás reciben un 409.
 
 ![Secuencia de aceptar y calificar](img/09-secuencia-aceptar-calificar.png)
 

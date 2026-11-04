@@ -12,7 +12,7 @@ skinparam ActorBackgroundColor #08427b
 skinparam BoxPadding 8
 autonumber
 
-actor "Estudiante" as S
+actor "Solicitante" as S
 box "RedNexus" #f4f8fc
   participant "Aplicación web" as W
   participant "API" as A
@@ -28,7 +28,7 @@ A -> A : JwtAuthGuard valida el token
 A -> DB : INSERT HelpRequest (PENDING)
 A -> Q : add("match", { requestId })
 A --> W : 201 { id, status: PENDING }
-W --> S : "Buscando ayudantes..."
+W --> S : "Buscando colaboradores..."
 
 == Procesamiento asíncrono en el worker ==
 
@@ -57,5 +57,5 @@ loop Cada 5 segundos mientras esté PENDING
   A -> DB : Solicitud + candidatos
   A --> W : status + matches[]
 end
-W --> S : Muestra 3 ayudantes con su explicación
+W --> S : Muestra 3 colaboradores con su explicación
 @enduml
