@@ -30,6 +30,10 @@ if [ "$TOOL" = k3d ]; then
   if ! k3d cluster list "$CLUSTER" >/dev/null 2>&1; then
     echo "==> Creando el clúster $CLUSTER (k3d)"
     k3d cluster create --config k3d/cluster.yaml
+  elif ! k3d cluster list "$CLUSTER" --no-headers | awk '{print $2}' | grep -q '^1/1$'; then
+    # Existe pero esta apagado (por ejemplo, despues de reiniciar el equipo o de k3d cluster stop)
+    echo "==> Encendiendo el clúster $CLUSTER (k3d)"
+    k3d cluster start "$CLUSTER"
   fi
   kubectl config use-context "k3d-$CLUSTER" >/dev/null
 else
