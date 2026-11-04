@@ -10,11 +10,11 @@ skinparam LegendBorderColor #999999
 AddElementTag("previsto", $bgColor="#eef4fb", $fontColor="#1d3b5c", $borderColor="#438dd5", $borderStyle=DashedLine())
 AddRelTag("previsto", $lineStyle=DashedLine())
 
-Person(sol, "Estudiante solicitante", "Publica una duda académica y recibe ayudantes recomendados")
-Person(ayu, "Ayudante", "Estudiante avanzado, docente o profesional que comparte lo que sabe")
+Person(sol, "Solicitante", "Publica una duda académica y recibe colaboradores recomendados")
+Person(ayu, "Colaborador", "Estudiante avanzado, docente o profesional que comparte lo que sabe")
 Person(ops, "Equipo de desarrollo y operación", "Construye, despliega y monitorea la plataforma")
 
-System(rn, "RedNexus", "Red de apoyo académico que empareja solicitudes con ayudantes usando IA local")
+System(rn, "RedNexus", "Red de apoyo académico que empareja solicitudes con colaboradores usando IA local")
 
 System_Ext(ia, "Modelos de IA locales (Ollama)", "llama3.2:3b para clasificar y explicar; nomic-embed-text para embeddings")
 System_Ext(gh, "GitHub", "Repositorios, GitHub Actions y registro de imágenes GHCR")

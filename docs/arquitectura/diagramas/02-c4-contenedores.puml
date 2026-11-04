@@ -10,11 +10,11 @@ skinparam LegendBorderColor #999999
 AddElementTag("previsto", $bgColor="#eef4fb", $fontColor="#1d3b5c", $borderColor="#438dd5", $borderStyle=DashedLine())
 AddRelTag("previsto", $lineStyle=DashedLine())
 
-Person(sol, "Estudiante solicitante")
-Person(ayu, "Ayudante")
+Person(sol, "Solicitante")
+Person(ayu, "Colaborador")
 
 Boundary(rn, "RedNexus", "sistema") {
-  Container(web, "Aplicación web", "Vue 3, Vite, Pinia, Tailwind; servida por Nginx", "Interfaz del estudiante y del ayudante. Reenvía /api a la API")
+  Container(web, "Aplicación web", "Vue 3, Vite, Pinia, Tailwind; servida por Nginx", "Interfaz del solicitante y del colaborador. Reenvía /api a la API")
   Container(api, "API", "NestJS 12, Prisma 7", "REST bajo /api con JWT y Swagger. Registra solicitudes y encola el trabajo de IA")
   Container(worker, "Worker de IA", "NestJS + BullMQ", "Clasifica, genera embeddings, empareja el top 3 y explica")
   ContainerDb(db, "Base de datos", "PostgreSQL 17 + pgvector", "Usuarios, solicitudes, candidatos, calificaciones y vectores de 768 dimensiones")
