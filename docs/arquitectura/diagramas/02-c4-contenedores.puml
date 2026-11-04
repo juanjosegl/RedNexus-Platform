@@ -1,0 +1,50 @@
+@startuml 02-c4-contenedores
+' C4 nivel 2: contenedores. La API y el worker usan la misma imagen (rednexus-api).
+!include <C4/C4_Container>
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+HIDE_STEREOTYPE()
+skinparam LegendFontColor #222222
+skinparam LegendBackgroundColor #ffffff
+skinparam LegendBorderColor #999999
+AddElementTag("previsto", $bgColor="#eef4fb", $fontColor="#1d3b5c", $borderColor="#438dd5", $borderStyle=DashedLine())
+AddRelTag("previsto", $lineStyle=DashedLine())
+
+Person(sol, "Estudiante solicitante")
+Person(ayu, "Ayudante")
+
+Boundary(rn, "RedNexus", "sistema") {
+  Container(web, "Aplicación web", "Vue 3, Vite, Pinia, Tailwind; servida por Nginx", "Interfaz del estudiante y del ayudante. Reenvía /api a la API")
+  Container(api, "API", "NestJS 12, Prisma 7", "REST bajo /api con JWT y Swagger. Registra solicitudes y encola el trabajo de IA")
+  Container(worker, "Worker de IA", "NestJS + BullMQ", "Clasifica, genera embeddings, empareja el top 3 y explica")
+  ContainerDb(db, "Base de datos", "PostgreSQL 17 + pgvector", "Usuarios, solicitudes, candidatos, calificaciones y vectores de 768 dimensiones")
+  ContainerQueue(redis, "Cola de trabajos", "Redis 7", "Trabajos de BullMQ con 3 reintentos y backoff")
+  ContainerDb(audio, "Audios", "Volumen compartido", "Notas de voz (previsto)", $tags="previsto")
+  Container(whisper, "Transcripción", "whisper.cpp", "Voz a texto (previsto)", $tags="previsto")
+}
+
+System_Ext(ollama, "Ollama", "En el equipo anfitrión: llama3.2:3b y nomic-embed-text")
+
+Rel(sol, web, "Usa", "HTTPS")
+Rel(ayu, web, "Usa", "HTTPS")
+Rel(web, api, "Llama a /api", "HTTP/JSON")
+Rel(api, db, "Lee y escribe", "SQL")
+Rel(api, redis, "Encola trabajos")
+Rel(worker, redis, "Consume trabajos")
+Rel(worker, db, "Guarda candidatos y vectores", "SQL")
+Rel(worker, ollama, "embed, classify, explain", "HTTP/JSON :11434")
+Rel(api, audio, "Guarda el audio", $tags="previsto")
+Rel(worker, audio, "Lee el audio", $tags="previsto")
+Rel(worker, whisper, "Transcribe", $tags="previsto")
+
+Lay_R(sol, ayu)
+Lay_R(api, worker)
+Lay_R(db, redis)
+
+legend right
+  |<#08427b>     | Persona |
+  |<#438dd5>     | Contenedor |
+  |<#999999>     | Sistema externo |
+  | - - - -      | Previsto, no construido |
+endlegend
+@enduml

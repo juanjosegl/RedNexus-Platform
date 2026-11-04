@@ -1,0 +1,37 @@
+@startuml 01-c4-contexto
+' C4 nivel 1: contexto del sistema
+!include <C4/C4_Context>
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+HIDE_STEREOTYPE()
+skinparam LegendFontColor #222222
+skinparam LegendBackgroundColor #ffffff
+skinparam LegendBorderColor #999999
+AddElementTag("previsto", $bgColor="#eef4fb", $fontColor="#1d3b5c", $borderColor="#438dd5", $borderStyle=DashedLine())
+AddRelTag("previsto", $lineStyle=DashedLine())
+
+Person(sol, "Estudiante solicitante", "Publica una duda académica y recibe ayudantes recomendados")
+Person(ayu, "Ayudante", "Estudiante avanzado, docente o profesional que comparte lo que sabe")
+Person(ops, "Equipo de desarrollo y operación", "Construye, despliega y monitorea la plataforma")
+
+System(rn, "RedNexus", "Red de apoyo académico que empareja solicitudes con ayudantes usando IA local")
+
+System_Ext(ia, "Modelos de IA locales (Ollama)", "llama3.2:3b para clasificar y explicar; nomic-embed-text para embeddings")
+System_Ext(gh, "GitHub", "Repositorios, GitHub Actions y registro de imágenes GHCR")
+
+Rel(sol, rn, "Publica solicitudes, ve candidatos y califica", "HTTPS")
+Rel(ayu, rn, "Mantiene su perfil, acepta o rechaza", "HTTPS")
+Rel(rn, ia, "Clasifica, vectoriza y explica", "HTTP/JSON, red propia")
+Rel(ops, gh, "Sube código y revisa PR")
+Rel(gh, rn, "Publica imágenes y despliega (previsto)", $tags="previsto")
+
+Lay_R(sol, ayu)
+Lay_D(ayu, ops)
+
+legend right
+  |<#08427b>     | Persona |
+  |<#1168bd>     | Nuestro sistema |
+  |<#999999>     | Sistema externo |
+  | - - - -      | Previsto, no construido |
+endlegend
+@enduml

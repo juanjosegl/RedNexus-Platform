@@ -1,0 +1,78 @@
+@startuml 07-casos-de-uso
+' Casos de uso. En el MVP un mismo usuario puede pedir y dar ayuda.
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+skinparam shadowing false
+skinparam LegendBackgroundColor #ffffff
+skinparam LegendBorderColor #999999
+left to right direction
+skinparam actor {
+  BackgroundColor #08427b
+  BorderColor #052e56
+}
+skinparam usecase {
+  BackgroundColor #dbeafe
+  BorderColor #1168bd
+}
+skinparam usecase<<previsto>> {
+  BackgroundColor #ffffff
+  BorderStyle dashed
+}
+skinparam rectangle {
+  BorderColor #1168bd
+}
+hide <<previsto>> stereotype
+
+actor "Usuario registrado" as usr
+actor "Estudiante\nsolicitante" as sol
+actor "Ayudante" as ayu
+actor "Worker de IA\n<<sistema>>" as ia
+
+sol -up-|> usr
+ayu -up-|> usr
+
+rectangle "RedNexus" {
+  usecase "Registrarse" as UC1
+  usecase "Iniciar sesión" as UC2
+  usecase "Gestionar perfil\ny habilidades" as UC3
+
+  usecase "Publicar solicitud\npor texto" as UC4
+  usecase "Publicar solicitud\npor nota de voz" as UC5 <<previsto>>
+  usecase "Ver mis solicitudes\ny candidatos" as UC6
+  usecase "Cerrar solicitud" as UC7
+  usecase "Calificar la ayuda" as UC8
+
+  usecase "Ver solicitudes donde\nsoy candidato" as UC9
+  usecase "Aceptar o rechazar\nsolicitud" as UC10
+
+  usecase "Emparejar top 3\ncon explicación" as UC13
+  usecase "Clasificar la solicitud" as UC11
+  usecase "Generar embeddings" as UC12
+  usecase "Transcribir nota de voz" as UC14 <<previsto>>
+}
+
+usr --> UC1
+usr --> UC2
+usr --> UC3
+sol --> UC4
+sol --> UC5
+sol --> UC6
+sol --> UC7
+sol --> UC8
+ayu --> UC9
+ayu --> UC10
+
+UC4 ..> UC13 : <<include>>
+UC5 ..> UC14 : <<include>>
+UC13 ..> UC11 : <<include>>
+UC13 ..> UC12 : <<include>>
+
+UC11 <-- ia
+UC12 <-- ia
+UC13 <-- ia
+UC14 <-- ia
+
+legend right
+  Borde punteado: previsto, no construido
+endlegend
+@enduml
