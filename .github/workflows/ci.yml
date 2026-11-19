@@ -27,3 +27,14 @@ jobs:
 
       - name: Scripts
         run: shellcheck scripts/*.sh
+
+      # Asistente RAG: formato del golden dataset, sintaxis de los scripts y compose de Open WebUI
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Asistente RAG
+        run: |
+          python asistente-rag/scripts/validate_dataset.py
+          python -m py_compile asistente-rag/evaluate_rag.py asistente-rag/scripts/*.py
+          docker compose -f asistente-rag/docker-compose.yml config --quiet
