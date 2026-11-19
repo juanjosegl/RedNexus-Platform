@@ -8,3 +8,8 @@
 *.tfstate
 *.tfstate.*
 .terraform/
+
+# Asistente RAG (Python)
+.venv/
+__pycache__/
+*.pyc
