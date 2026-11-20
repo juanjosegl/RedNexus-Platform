@@ -25,6 +25,7 @@ Si Open WebUI no está disponible, el backend usa un mock (`SUPPORT_PROVIDER=moc
 | [model/](model) | [System prompt](model/system-prompt.md), [configuración del RAG e hiperparámetros](model/configuracion.md) y capturas |
 | [golden-dataset/](golden-dataset) | Casos de prueba (pregunta → comportamiento esperado), uno por integrante |
 | [evaluate_rag.py](evaluate_rag.py) | Evaluación: latencia, palabras clave, juez (fidelidad y completitud) y % de éxito |
+| [scripts/setup_openwebui.py](scripts/setup_openwebui.py) | Configura Open WebUI por API: RAG, base de conocimiento y modelo |
 | [runs/](runs) | Resultados de cada corrida |
 | [docs/](docs) | Informe `Informe-modelo-rag-RedNexus.pdf`, sus secciones y las [tareas del equipo](docs/tareas.md) |
 
@@ -53,17 +54,22 @@ Todos los comandos se corren dentro de esta carpeta (`cd asistente-rag`).
    ```bash
    docker compose up -d
    ```
-3. En **Workspace → Knowledge** crea `Base RedNexus` y sube todos los `.md` de `knowledge-base/` (menos `_plantilla.md`).
-4. En **Workspace → Models** crea `asistente-rednexus` con base `qwen2.5:3b`, la knowledge `Base RedNexus`, el
+3. Crea una API key en **Settings → Account → API keys** y pégala en `.env` (`cp .env.example .env`).
+4. Con el entorno de Python de la sección "Evaluar", configura el RAG, sube la base de conocimiento y crea el
+   modelo `asistente-rednexus` con un solo comando:
+   ```bash
+   python scripts/setup_openwebui.py
+   ```
+   Hace por API lo mismo que se haría a mano: embeddings `nomic-embed-text`, corte por tokens (400/60), Top K 4,
+   knowledge `Base RedNexus` con todos los `.md` de `knowledge-base/`, y el modelo con el
    [system prompt](model/system-prompt.md) y los parámetros de [configuracion.md](model/configuracion.md).
-5. Crea una API key en **Settings → Account → API keys**.
+   Vuelve a correrlo cada vez que cambie un documento o el prompt.
 
 ## Evaluar
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env    # pega la API key
 python scripts/validate_dataset.py --min-total 50
 python evaluate_rag.py
 ```
@@ -73,9 +79,16 @@ palabras clave y el juez le da al menos 3. Meta: **70 % o más**.
 
 ### Corridas
 
-| Run | Configuración | Éxito | Fidelidad | Completitud | Latencia media |
-| --- | --- | --- | --- | --- | --- |
-| _pendiente_ | | | | | |
+Corridas parciales con los 18 casos difíciles (seguridad, fuera de alcance, normas, privacidad, PQRS y
+emparejamiento), mientras el equipo completa los documentos y los casos que faltan para llegar a 50.
+
+| Run | Prompt | Corte | Éxito | Fidelidad | Completitud | Latencia media |
+| --- | --- | --- | --- | --- | --- | --- |
+| `v1_chunk400_ov60_parcial18` | v1 | 400/60 | 83,3 % | 4,33 | 3,94 | 18,6 s |
+| `v2_prompt_chunk400_ov60_parcial18` | v2.1 | 400/60 | 66,7 % | 3,94 | 3,67 | 22,6 s |
+| `v2.2_prompt_chunk400_ov60_parcial18` | v2.2 | 400/60 | **88,9 %** | 4,83 | 4,33 | 19,3 s |
+
+Detalle y análisis en [docs/informe/F-pruebas.md](docs/informe/F-pruebas.md#f4-resultados-con-el-golden-dataset).
 
 ## Cómo aportar
 
