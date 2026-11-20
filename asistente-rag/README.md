@@ -8,6 +8,8 @@ Actividad 2 del módulo 6 del Diplomado CloudForge AI 5.0 (Unicomfacauca). Vive 
 integración está en [RedNexus-Backend](https://github.com/juanjosegl/RedNexus-Backend) (módulo `support`) y
 [RedNexus-Frontend](https://github.com/juanjosegl/RedNexus-Frontend) (página `/ayuda`).
 
+> **Entrega de la actividad:** [ENTREGA.md](ENTREGA.md) resume el resultado y dónde está cada requisito.
+
 ## Cómo encaja en RedNexus
 
 ```
