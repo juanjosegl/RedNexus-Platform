@@ -38,3 +38,9 @@ jobs:
           python asistente-rag/scripts/validate_dataset.py
           python -m py_compile asistente-rag/evaluate_rag.py asistente-rag/scripts/*.py
           docker compose -f asistente-rag/docker-compose.yml config --quiet
+      - name: ML (dataset sintético y experimentos)
+        run: |
+          # el dataset en JSON debe ser exactamente el que genera el script
+          python ml/data/build_dataset.py
+          git diff --exit-code ml/data
+          python -m py_compile ml/rednexus_ml.py ml/run_experiments.py ml/scripts/*.py
