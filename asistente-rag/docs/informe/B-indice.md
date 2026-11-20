@@ -1,3 +1,9 @@
 # B. Índice
 
-<!-- Integrante A: índice con las secciones A a G y sus subtítulos. Los números de página se ponen al armar el PDF. -->
+- A. Portada
+- B. Índice
+- C. Introducción
+- D. Problema que resuelve
+- E. Definición del modelo
+- F. Implementación y análisis de pruebas
+- G. Conclusiones y trabajos futuros
