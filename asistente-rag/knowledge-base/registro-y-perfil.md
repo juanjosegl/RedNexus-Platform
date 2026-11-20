@@ -17,7 +17,7 @@ El registro es crear tu cuenta con tu nombre, tu correo y una contraseña. El pe
 
 Para iniciar sesión, pulsa **Iniciar sesión** en el menú, escribe tu correo y tu contraseña y pulsa **Iniciar sesión**. Entras a la página de inicio.
 
-Con la sesión iniciada, el menú muestra **Solicitudes**, tu nombre y **Cerrar sesión**. Para salir, pulsa **Cerrar sesión**: la app cierra tu sesión y te lleva a Iniciar sesión.
+Con la sesión iniciada, el menú muestra **Solicitudes**, **Ayudar**, **Ayuda**, tu nombre y **Cerrar sesión**. Para salir, pulsa **Cerrar sesión**: la app cierra tu sesión y te lleva a Iniciar sesión.
 
 Si ya tienes la sesión iniciada, las pantallas de Iniciar sesión y Registrarse te devuelven al inicio. Si no la tienes y abres una página que la necesita, como Solicitudes, la app te lleva a Iniciar sesión.
 
