@@ -10,15 +10,26 @@ PR a `developer` con `Closes #N`. Las tareas DOC y la IA-08 son en RedNexus-Plat
 
 ## Resumen
 
-| Quién | Backend | Frontend | Platform (`asistente-rag/`) |
+| Issue | Tarea | Repo | Asignada a |
 | --- | --- | --- | --- |
-| Juanjo | BE-07 Módulo `support` | FE-08 Página de ayuda | IA-08 RAG, modelo y evaluación |
-| Integrante A | BE-09 Variables de entorno | FE-09 Enlace "Ayuda" en el menú | DOC-05 Registro y perfil |
-| Integrante B | BE-08 Respuestas del mock | FE-10 Preguntas sugeridas | DOC-06 Solicitudes de ayuda |
-| Integrante C | BE-10 Pruebas e2e | FE-11 Burbuja de mensaje | DOC-07 Calificaciones |
-| Integrante D | BE-11 Documentación Swagger | FE-12 Preguntas frecuentes | DOC-08 Preguntas frecuentes |
+| [#30](https://github.com/juanjosegl/RedNexus-Backend/issues/30) | BE-07 Módulo `support` | Backend | Juanjo · hecho |
+| [#25](https://github.com/juanjosegl/RedNexus-Frontend/issues/25) | FE-08 Página de ayuda | Frontend | Juanjo · hecho |
+| [#21](https://github.com/juanjosegl/RedNexus-Platform/issues/21) | IA-08 RAG, modelo y evaluación | Platform | Juanjo |
+| — | BE-12 / FE-13 PQRS (endpoint y página) | Backend y Frontend | Juanjo |
+| [#28](https://github.com/juanjosegl/RedNexus-Frontend/issues/28) | FE-11 Burbuja de mensaje | Frontend | Daniel |
+| [#22](https://github.com/juanjosegl/RedNexus-Platform/issues/22) | DOC-05 Registro y perfil | Platform | Daniel |
+| [#27](https://github.com/juanjosegl/RedNexus-Frontend/issues/27) | FE-10 Preguntas sugeridas | Frontend | Josefa |
+| [#31](https://github.com/juanjosegl/RedNexus-Backend/issues/31) | BE-08 Respuestas del mock | Backend | Por asignar |
+| [#32](https://github.com/juanjosegl/RedNexus-Backend/issues/32) | BE-09 Variables de entorno | Backend | Por asignar |
+| [#33](https://github.com/juanjosegl/RedNexus-Backend/issues/33) | BE-10 Pruebas e2e | Backend | Por asignar |
+| [#34](https://github.com/juanjosegl/RedNexus-Backend/issues/34) | BE-11 Documentación Swagger | Backend | Por asignar |
+| [#26](https://github.com/juanjosegl/RedNexus-Frontend/issues/26) | FE-09 Enlace "Ayuda" en el menú | Frontend | Por asignar |
+| [#29](https://github.com/juanjosegl/RedNexus-Frontend/issues/29) | FE-12 Preguntas frecuentes | Frontend | Por asignar |
+| [#23](https://github.com/juanjosegl/RedNexus-Platform/issues/23) | DOC-06 Solicitudes de ayuda | Platform | Por asignar |
+| [#24](https://github.com/juanjosegl/RedNexus-Platform/issues/24) | DOC-07 Calificaciones | Platform | Por asignar |
+| [#25](https://github.com/juanjosegl/RedNexus-Platform/issues/25) | DOC-08 Preguntas frecuentes | Platform | Por asignar |
 
-Todas las tareas de los integrantes son de tamaño **S** y dependen de BE-07, FE-08 e IA-08 (ya fusionadas).
+Las tareas de los integrantes son de tamaño **S** y dependen de BE-07, FE-08 e IA-08, que ya están en `developer`.
 
 ---
 
@@ -37,6 +48,13 @@ Rama `feature/FE-08-pagina-ayuda` · Frontend · M
 - Ruta `/ayuda` con el chat, historial de hasta 10 turnos, fuentes y estados de carga y error.
 - Deja marcados los lugares donde entran FE-10, FE-11 y FE-12.
 
+### BE-12 y FE-13 · PQRS
+Ramas `feature/BE-12-pqrs` y `feature/FE-13-pqrs` · M
+
+- `POST /api/pqrs`, `GET /api/pqrs/mine` y `GET /api/pqrs/:id`, con número de radicado (`PQRS-000001`) y estados
+  Radicada, En revisión y Respondida.
+- Página `/pqrs` con el formulario y "Mis PQRS", enlazada desde la ayuda. Es el canal al que remite el asistente.
+
 ### IA-08 · RAG, modelo personalizado y evaluación
 Rama `feature/IA-08-asistente-rag` · Platform · L
 
@@ -50,7 +68,7 @@ Rama `feature/IA-08-asistente-rag` · Platform · L
 ## Backend
 
 ### BE-08 · Respuestas del mock del asistente
-**Integrante B** · Rama `feature/BE-08-respuestas-mock` · S
+Rama `feature/BE-08-respuestas-mock` · S
 
 Hoy el mock siempre responde lo mismo. La idea es que responda algo útil según la pregunta, para que la demo
 desplegada (sin Open WebUI) tenga sentido.
@@ -80,7 +98,7 @@ Archivos: `src/modules/support/providers/mock.provider.ts` y un nuevo `mock.prov
 **Listo cuando** `npm test` pasa y, con `SUPPORT_PROVIDER=mock`, "¿cómo me registro?" responde sobre el registro.
 
 ### BE-09 · Variables de entorno del asistente
-**Integrante A** · Rama `feature/BE-09-variables-asistente` · S
+Rama `feature/BE-09-variables-asistente` · S
 
 El código ya lee estas variables (`src/config/configuration.ts`), pero no están documentadas.
 
@@ -104,7 +122,7 @@ El código ya lee estas variables (`src/config/configuration.ts`), pero no está
 **Listo cuando** el CI pasa y alguien del equipo puede conectar el backend a Open WebUI leyendo solo el README.
 
 ### BE-10 · Pruebas e2e del asistente
-**Integrante C** · Rama `feature/BE-10-e2e-asistente` · S
+Rama `feature/BE-10-e2e-asistente` · S
 
 Archivo nuevo: `test/support.e2e-spec.ts`. Copia la estructura de `test/health.e2e-spec.ts`, pero importando
 `ConfigModule.forRoot({ isGlobal: true, load: [configuration] })` y `SupportModule`, y activando
@@ -122,7 +140,7 @@ Archivo nuevo: `test/support.e2e-spec.ts`. Copia la estructura de `test/health.e
 **Listo cuando** `npm run test:e2e` pasa.
 
 ### BE-11 · Documentación Swagger del asistente
-**Integrante D** · Rama `feature/BE-11-swagger-asistente` · S
+Rama `feature/BE-11-swagger-asistente` · S
 
 Archivo: `src/modules/support/support.controller.ts`.
 
@@ -141,7 +159,7 @@ Toma una captura de esa pantalla: va en el informe.
 ## Frontend
 
 ### FE-09 · Enlace "Ayuda" en el menú
-**Integrante A** · Rama `feature/FE-09-enlace-ayuda` · S
+Rama `feature/FE-09-enlace-ayuda` · S
 
 Archivos: `src/layouts/DefaultLayout.vue` y `src/layouts/__tests__/DefaultLayout.spec.ts`.
 
@@ -153,7 +171,7 @@ Archivos: `src/layouts/DefaultLayout.vue` y `src/layouts/__tests__/DefaultLayout
 **Listo cuando** `npm test` pasa y el enlace lleva a la página de ayuda.
 
 ### FE-10 · Preguntas sugeridas
-**Integrante B** · Rama `feature/FE-10-preguntas-sugeridas` · S
+Rama `feature/FE-10-preguntas-sugeridas` · S
 
 Archivos nuevos en `src/features/support/`: `suggestions.ts`, `SuggestedQuestions.vue` y su prueba en `__tests__/`.
 
@@ -168,7 +186,7 @@ Archivos nuevos en `src/features/support/`: `suggestions.ts`, `SuggestedQuestion
 **Listo cuando** `npm test` pasa y al hacer clic en una sugerencia el asistente responde.
 
 ### FE-11 · Burbuja de mensaje del chat
-**Integrante C** · Rama `feature/FE-11-mensaje-chat` · S
+Rama `feature/FE-11-mensaje-chat` · S
 
 Archivos nuevos: `src/features/support/ChatMessage.vue` y su prueba en `__tests__/`.
 
@@ -183,7 +201,7 @@ Archivos nuevos: `src/features/support/ChatMessage.vue` y su prueba en `__tests_
 **Listo cuando** `npm test` pasa y el chat se ve igual o mejor que antes.
 
 ### FE-12 · Preguntas frecuentes y acceso desde el inicio
-**Integrante D** · Rama `feature/FE-12-preguntas-frecuentes` · S
+Rama `feature/FE-12-preguntas-frecuentes` · S
 
 Archivos: nuevo `src/features/support/FaqList.vue` con su prueba, `SupportView.vue` y `src/features/home/HomeView.vue`.
 
@@ -204,12 +222,12 @@ Archivos: nuevo `src/features/support/FaqList.vue` con su prueba, `SupportView.v
 Las cuatro tareas DOC son iguales; cambia el tema. Repo RedNexus-Platform, rama `docs/DOC-0X-<tema>` desde
 `developer`. Todas las rutas de esta sección son dentro de `asistente-rag/`.
 
-| Tarea | Quién | Documento | Archivo de casos | Categoría | Sección del informe |
-| --- | --- | --- | --- | --- | --- |
-| DOC-05 | Integrante A | `registro-y-perfil.md` | `golden-dataset/<tu-usuario>.jsonl` | `registro_perfil` | A. Portada y B. Índice |
-| DOC-06 | Integrante B | `solicitudes-de-ayuda.md` | `golden-dataset/<tu-usuario>.jsonl` | `solicitudes` | C. Introducción |
-| DOC-07 | Integrante C | `calificaciones.md` | `golden-dataset/<tu-usuario>.jsonl` | `calificaciones` | F.2 Capturas de la interfaz |
-| DOC-08 | Integrante D | `preguntas-frecuentes.md` | `golden-dataset/<tu-usuario>.jsonl` | `problemas_comunes` | G. Conclusiones |
+| Tarea | Documento | Archivo de casos | Categoría | Sección del informe |
+| --- | --- | --- | --- | --- |
+| DOC-05 | `registro-y-perfil.md` | `golden-dataset/<tu-usuario>.jsonl` | `registro_perfil` | A. Portada y B. Índice |
+| DOC-06 | `solicitudes-de-ayuda.md` | `golden-dataset/<tu-usuario>.jsonl` | `solicitudes` | C. Introducción |
+| DOC-07 | `calificaciones.md` | `golden-dataset/<tu-usuario>.jsonl` | `calificaciones` | F.2 Capturas de la interfaz |
+| DOC-08 | `preguntas-frecuentes.md` | `golden-dataset/<tu-usuario>.jsonl` | `problemas_comunes` | G. Conclusiones |
 
 **Commits**
 - [ ] `docs(kb): <tema>` → copia `knowledge-base/_plantilla.md` con el nombre de la tabla y escríbelo (400 a 900
@@ -218,13 +236,13 @@ Las cuatro tareas DOC son iguales; cambia el tema. Repo RedNexus-Platform, rama 
   `"behavior": "rechazar"`. Formato y consejos en `golden-dataset/README.md`.
 - [ ] `docs(informe): <sección>` → tu sección en `docs/informe/` (las instrucciones están dentro del archivo).
 - [ ] `docs(readme): aporte de <tu nombre>` → en el `README.md` principal de RedNexus-Platform, sección
-  "Asistente de soporte con RAG", reemplaza la línea de tu letra por tu nombre, tu usuario de GitHub y lo que
+  "Asistente de soporte con RAG", reemplaza tu línea por tu nombre completo, tu usuario de GitHub y lo que
   aportaste (solo tu línea, para no chocar con los demás).
 
 **Qué tiene que decir cada documento**
 - **Registro y perfil:** crear cuenta, iniciar y cerrar sesión, editar descripción y etiquetas, para qué sirve el
   perfil en el emparejamiento, errores comunes (correo ya registrado, contraseña incorrecta, sesión vencida).
-- **Solicitudes de ayuda:** crear una solicitud (10 a 1000 caracteres, también con nota de voz), los estados
+- **Solicitudes de ayuda:** crear una solicitud (10 a 1000 caracteres; la nota de voz solo si ya funciona de punta a punta), los estados
   Pendiente, Con candidatos, Aceptada y Cerrada, ver el detalle, cerrar una solicitud.
 - **Calificaciones:** cuándo se puede calificar (solicitud aceptada o cerrada), de 1 a 5 estrellas, solo una vez y
   solo el autor, cómo influyen en el emparejamiento, qué pasa si no hay calificaciones.
