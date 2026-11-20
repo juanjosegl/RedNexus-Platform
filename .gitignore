@@ -13,3 +13,6 @@
 .venv/
 __pycache__/
 *.pyc
+
+# ml/: caché de embeddings y respuestas del LLM (se regenera con Ollama)
+ml/.cache/
