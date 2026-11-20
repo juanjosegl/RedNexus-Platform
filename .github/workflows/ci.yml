@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [developer, test, main]
+  push:
+    branches: [developer, test, main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Cada overlay debe renderizar y cumplir el esquema de Kubernetes
+      - name: Kustomize + kubeconform
+        run: |
+          for overlay in deploy/overlays/*/; do
+            echo "::group::$overlay"
+            kubectl kustomize "$overlay" \
+              | docker run -i --rm ghcr.io/yannh/kubeconform:latest -strict -summary -
+            echo "::endgroup::"
+          done
+
+      - name: Docker Compose
+        run: docker compose config --quiet
+
+      - name: Scripts
+        run: shellcheck scripts/*.sh
+
+      # Asistente RAG: formato del golden dataset, sintaxis de los scripts y compose de Open WebUI
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Asistente RAG
+        run: |
+          python asistente-rag/scripts/validate_dataset.py
+          python -m py_compile asistente-rag/evaluate_rag.py asistente-rag/scripts/*.py
+          docker compose -f asistente-rag/docker-compose.yml config --quiet
+      - name: ML (dataset sintético y experimentos)
+        run: |
+          # el dataset en JSON debe ser exactamente el que genera el script
+          python ml/data/build_dataset.py
+          git diff --exit-code ml/data
+          python -m py_compile ml/rednexus_ml.py ml/run_experiments.py ml/scripts/*.py

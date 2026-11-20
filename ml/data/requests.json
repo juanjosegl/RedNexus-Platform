@@ -1,0 +1,928 @@
+[
+  {
+    "id": "r001",
+    "text": "No entiendo cómo unir tres tablas cuando hay una tabla intermedia entre estudiantes y cursos",
+    "area": "bases-de-datos",
+    "level": "intermedio",
+    "relevant": [
+      "ana",
+      "julian"
+    ]
+  },
+  {
+    "id": "r002",
+    "text": "Mi consulta en PostgreSQL tarda 40 segundos con una tabla de un millón de filas, ¿cómo la acelero?",
+    "area": "bases-de-datos",
+    "level": "avanzado",
+    "relevant": [
+      "carlos"
+    ]
+  },
+  {
+    "id": "r003",
+    "text": "¿Qué diferencia hay entre WHERE y HAVING cuando agrupo resultados?",
+    "area": "bases-de-datos",
+    "level": "basico",
+    "relevant": [
+      "julian",
+      "ana"
+    ]
+  },
+  {
+    "id": "r004",
+    "text": "Tengo que pasar una tabla con datos repetidos a tercera forma normal y no sé por dónde empezar",
+    "area": "bases-de-datos",
+    "level": "intermedio",
+    "relevant": [
+      "natalia",
+      "ana"
+    ]
+  },
+  {
+    "id": "r005",
+    "text": "Cómo diseño el diagrama entidad relación de una biblioteca con préstamos de libros",
+    "area": "bases-de-datos",
+    "level": "intermedio",
+    "relevant": [
+      "natalia",
+      "ana"
+    ]
+  },
+  {
+    "id": "r006",
+    "text": "Necesito que cada vez que se actualice un registro en MySQL se guarde automáticamente un historial",
+    "area": "bases-de-datos",
+    "level": "intermedio",
+    "relevant": [
+      "esteban"
+    ]
+  },
+  {
+    "id": "r007",
+    "text": "¿Cuándo conviene una base de documentos en vez de una relacional para un catálogo de productos?",
+    "area": "bases-de-datos",
+    "level": "intermedio",
+    "relevant": [
+      "david"
+    ]
+  },
+  {
+    "id": "r008",
+    "text": "No sé armar un pipeline de agregación con $group y $lookup",
+    "area": "bases-de-datos",
+    "level": "avanzado",
+    "relevant": [
+      "david"
+    ]
+  },
+  {
+    "id": "r009",
+    "text": "¿Qué es un interbloqueo entre transacciones y cómo evito que pase en mi base de datos?",
+    "area": "bases-de-datos",
+    "level": "avanzado",
+    "relevant": [
+      "carlos",
+      "veronica"
+    ]
+  },
+  {
+    "id": "r010",
+    "text": "Subconsultas correlacionadas: no entiendo cuándo se ejecuta la consulta de adentro",
+    "area": "bases-de-datos",
+    "level": "intermedio",
+    "relevant": [
+      "julian"
+    ]
+  },
+  {
+    "id": "r011",
+    "text": "Empiezo a programar y no entiendo para qué sirven los ciclos for y while",
+    "area": "programacion",
+    "level": "basico",
+    "relevant": [
+      "laura"
+    ]
+  },
+  {
+    "id": "r012",
+    "text": "Mi función que se llama a sí misma para el factorial nunca termina y se desborda",
+    "area": "programacion",
+    "level": "basico",
+    "relevant": [
+      "laura",
+      "nicolas"
+    ]
+  },
+  {
+    "id": "r013",
+    "text": "¿Cómo leo un archivo CSV línea por línea y controlo el error si el archivo no existe?",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "gabriela"
+    ]
+  },
+  {
+    "id": "r014",
+    "text": "No entiendo la herencia ni el método __init__ en las clases de Python",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "gabriela"
+    ]
+  },
+  {
+    "id": "r015",
+    "text": "Diferencia entre lista, tupla y diccionario y cuándo usar cada uno",
+    "area": "programacion",
+    "level": "basico",
+    "relevant": [
+      "laura",
+      "gabriela"
+    ]
+  },
+  {
+    "id": "r016",
+    "text": "No entiendo la diferencia entre una clase abstracta y una interfaz en Java",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "andres"
+    ]
+  },
+  {
+    "id": "r017",
+    "text": "¿Qué es el polimorfismo? El profesor lo explicó con figuras geométricas y no me quedó claro",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "andres"
+    ]
+  },
+  {
+    "id": "r018",
+    "text": "Cómo hago una API REST con Spring Boot que guarde los datos con JPA",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "jhon"
+    ]
+  },
+  {
+    "id": "r019",
+    "text": "Me sale LazyInitializationException en Hibernate al traer una relación",
+    "area": "programacion",
+    "level": "avanzado",
+    "relevant": [
+      "jhon"
+    ]
+  },
+  {
+    "id": "r020",
+    "text": "Qué patrón uso para crear objetos sin acoplarme a la clase concreta",
+    "area": "programacion",
+    "level": "avanzado",
+    "relevant": [
+      "andres",
+      "fernando"
+    ]
+  },
+  {
+    "id": "r021",
+    "text": "Mi componente de Vue no se actualiza en pantalla cuando cambio un dato dentro de un objeto",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "valentina"
+    ]
+  },
+  {
+    "id": "r022",
+    "text": "No entiendo async await, mi función devuelve una promesa pendiente en vez del dato",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "manuela",
+      "valentina"
+    ]
+  },
+  {
+    "id": "r023",
+    "text": "Cómo pido datos a una API desde el navegador y los muestro en una tabla",
+    "area": "programacion",
+    "level": "basico",
+    "relevant": [
+      "valentina",
+      "manuela"
+    ]
+  },
+  {
+    "id": "r024",
+    "text": "Quiero que mi página se vea bien en el celular, los elementos se salen de la pantalla",
+    "area": "programacion",
+    "level": "basico",
+    "relevant": [
+      "luisa"
+    ]
+  },
+  {
+    "id": "r025",
+    "text": "No logro centrar un div vertical y horizontalmente",
+    "area": "programacion",
+    "level": "basico",
+    "relevant": [
+      "luisa"
+    ]
+  },
+  {
+    "id": "r026",
+    "text": "¿Qué significa que JavaScript tenga un solo hilo y cómo funciona el event loop?",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "manuela"
+    ]
+  },
+  {
+    "id": "r027",
+    "text": "Cómo protejo las rutas de mi API con tokens para que solo entren usuarios con sesión",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "juan"
+    ]
+  },
+  {
+    "id": "r028",
+    "text": "Estoy armando un backend con NestJS y no entiendo módulos, providers e inyección de dependencias",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "juan"
+    ]
+  },
+  {
+    "id": "r029",
+    "text": "Cómo pruebo un servicio que usa la base de datos sin conectarme a la base real",
+    "area": "ingenieria-de-software",
+    "level": "intermedio",
+    "relevant": [
+      "lina",
+      "juan"
+    ]
+  },
+  {
+    "id": "r030",
+    "text": "No entiendo los punteros: cuando paso un arreglo a una función se modifica el original",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "kevin"
+    ]
+  },
+  {
+    "id": "r031",
+    "text": "Mi programa en C da segmentation fault cuando reservo memoria",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "kevin"
+    ]
+  },
+  {
+    "id": "r032",
+    "text": "Quiero hacer mi primera aplicación para celular Android que muestre una lista",
+    "area": "programacion",
+    "level": "basico",
+    "relevant": [
+      "cristian"
+    ]
+  },
+  {
+    "id": "r033",
+    "text": "En Jetpack Compose el estado se pierde al girar el celular",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "cristian"
+    ]
+  },
+  {
+    "id": "r034",
+    "text": "Cómo calculo la complejidad de un algoritmo con dos ciclos anidados",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "nicolas"
+    ]
+  },
+  {
+    "id": "r035",
+    "text": "Implementar un árbol binario de búsqueda e insertar y eliminar nodos",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "nicolas"
+    ]
+  },
+  {
+    "id": "r036",
+    "text": "Qué método de ordenamiento es más rápido y por qué quicksort es n log n",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "nicolas"
+    ]
+  },
+  {
+    "id": "r037",
+    "text": "Encontrar el camino más corto entre dos ciudades en un mapa con distancias",
+    "area": "matematicas",
+    "level": "avanzado",
+    "relevant": [
+      "santiago",
+      "nicolas"
+    ]
+  },
+  {
+    "id": "r038",
+    "text": "Hice merge y me salieron marcas <<<<<<< HEAD en el código, no sé qué borrar",
+    "area": "programacion",
+    "level": "basico",
+    "relevant": [
+      "camila"
+    ]
+  },
+  {
+    "id": "r039",
+    "text": "¿Cuál es la diferencia entre rebase y merge? Mi equipo pide un historial limpio",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "camila"
+    ]
+  },
+  {
+    "id": "r040",
+    "text": "Subí por error un archivo con contraseñas al repositorio, cómo lo saco del historial",
+    "area": "programacion",
+    "level": "intermedio",
+    "relevant": [
+      "camila",
+      "tomas"
+    ]
+  },
+  {
+    "id": "r041",
+    "text": "No entiendo cómo derivar una función que está dentro de otra función",
+    "area": "matematicas",
+    "level": "basico",
+    "relevant": [
+      "sofia"
+    ]
+  },
+  {
+    "id": "r042",
+    "text": "Integración por partes: nunca sé qué escoger como u y qué como dv",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "sofia"
+    ]
+  },
+  {
+    "id": "r043",
+    "text": "Cómo calculo un límite que me da cero sobre cero",
+    "area": "matematicas",
+    "level": "basico",
+    "relevant": [
+      "sofia",
+      "valeria"
+    ]
+  },
+  {
+    "id": "r044",
+    "text": "Integrales dobles en coordenadas polares para calcular el área de una región",
+    "area": "matematicas",
+    "level": "avanzado",
+    "relevant": [
+      "ricardo"
+    ]
+  },
+  {
+    "id": "r045",
+    "text": "Qué representa el gradiente y la derivada direccional de una función de dos variables",
+    "area": "matematicas",
+    "level": "avanzado",
+    "relevant": [
+      "ricardo"
+    ]
+  },
+  {
+    "id": "r046",
+    "text": "Resolver la ecuación de un tanque que se vacía, me dijeron que es una ecuación diferencial de primer orden",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "diana"
+    ]
+  },
+  {
+    "id": "r047",
+    "text": "Usar la transformada de Laplace para resolver un circuito RC",
+    "area": "matematicas",
+    "level": "avanzado",
+    "relevant": [
+      "diana",
+      "lorena"
+    ]
+  },
+  {
+    "id": "r048",
+    "text": "No sé factorizar trinomios ni simplificar fracciones con letras",
+    "area": "matematicas",
+    "level": "basico",
+    "relevant": [
+      "valeria"
+    ]
+  },
+  {
+    "id": "r049",
+    "text": "Identidades trigonométricas para el examen de admisión",
+    "area": "matematicas",
+    "level": "basico",
+    "relevant": [
+      "valeria"
+    ]
+  },
+  {
+    "id": "r050",
+    "text": "Cómo saco los valores y vectores propios de una matriz de 3x3",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "mateo"
+    ]
+  },
+  {
+    "id": "r051",
+    "text": "Resolver un sistema de tres ecuaciones con el método de Gauss-Jordan",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "mateo"
+    ]
+  },
+  {
+    "id": "r052",
+    "text": "Qué significa que unos vectores sean linealmente independientes",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "mateo"
+    ]
+  },
+  {
+    "id": "r053",
+    "text": "Cómo hago una prueba de hipótesis para comparar las medias de dos grupos",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "isabella"
+    ]
+  },
+  {
+    "id": "r054",
+    "text": "Cómo interpreto el R cuadrado de una regresión",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "isabella",
+      "paula"
+    ]
+  },
+  {
+    "id": "r055",
+    "text": "Teorema de Bayes con el ejemplo de una prueba médica con falsos positivos",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "carolina",
+      "isabella"
+    ]
+  },
+  {
+    "id": "r056",
+    "text": "¿De cuántas formas escojo un comité de 3 personas entre 10? No sé si es permutación o combinación",
+    "area": "matematicas",
+    "level": "basico",
+    "relevant": [
+      "carolina",
+      "santiago"
+    ]
+  },
+  {
+    "id": "r057",
+    "text": "Distribución binomial o de Poisson: cuándo uso cada una",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "carolina",
+      "isabella"
+    ]
+  },
+  {
+    "id": "r058",
+    "text": "Demostrar por inducción que la suma de los primeros n impares es n al cuadrado",
+    "area": "matematicas",
+    "level": "intermedio",
+    "relevant": [
+      "santiago"
+    ]
+  },
+  {
+    "id": "r059",
+    "text": "Tablas de verdad y equivalencias lógicas para simplificar una proposición",
+    "area": "matematicas",
+    "level": "basico",
+    "relevant": [
+      "santiago",
+      "mauricio"
+    ]
+  },
+  {
+    "id": "r060",
+    "text": "Un resorte con amortiguamiento: cómo resuelvo la ecuación de segundo orden",
+    "area": "matematicas",
+    "level": "avanzado",
+    "relevant": [
+      "diana"
+    ]
+  },
+  {
+    "id": "r061",
+    "text": "Dividir una red /24 en 6 subredes y calcular las máscaras",
+    "area": "redes",
+    "level": "intermedio",
+    "relevant": [
+      "daniela"
+    ]
+  },
+  {
+    "id": "r062",
+    "text": "Qué capa del modelo OSI se encarga de enrutar los paquetes",
+    "area": "redes",
+    "level": "basico",
+    "relevant": [
+      "daniela"
+    ]
+  },
+  {
+    "id": "r063",
+    "text": "Configurar VLANs en un switch en Packet Tracer y que se comuniquen entre ellas",
+    "area": "redes",
+    "level": "intermedio",
+    "relevant": [
+      "andrea",
+      "daniela"
+    ]
+  },
+  {
+    "id": "r064",
+    "text": "La IP responde al ping pero la página no carga por el nombre, ¿será la resolución de nombres?",
+    "area": "redes",
+    "level": "intermedio",
+    "relevant": [
+      "daniela"
+    ]
+  },
+  {
+    "id": "r065",
+    "text": "Cómo configuro el firewall para dejar pasar solo el puerto 443",
+    "area": "redes",
+    "level": "intermedio",
+    "relevant": [
+      "andrea",
+      "oscar"
+    ]
+  },
+  {
+    "id": "r066",
+    "text": "Mi contenedor se detiene apenas arranca y no veo el error",
+    "area": "cloud-devops",
+    "level": "intermedio",
+    "relevant": [
+      "felipe"
+    ]
+  },
+  {
+    "id": "r067",
+    "text": "Qué diferencia hay entre un Deployment y un Service en Kubernetes",
+    "area": "cloud-devops",
+    "level": "intermedio",
+    "relevant": [
+      "felipe"
+    ]
+  },
+  {
+    "id": "r068",
+    "text": "Quiero que mis pruebas corran solas cada vez que hago push a GitHub",
+    "area": "cloud-devops",
+    "level": "intermedio",
+    "relevant": [
+      "brayan",
+      "felipe"
+    ]
+  },
+  {
+    "id": "r069",
+    "text": "Cómo escribo un script que haga copias de seguridad todas las noches en un servidor",
+    "area": "cloud-devops",
+    "level": "intermedio",
+    "relevant": [
+      "oscar"
+    ]
+  },
+  {
+    "id": "r070",
+    "text": "Me sale permission denied al ejecutar un archivo en la terminal de Ubuntu",
+    "area": "cloud-devops",
+    "level": "basico",
+    "relevant": [
+      "oscar"
+    ]
+  },
+  {
+    "id": "r071",
+    "text": "Subir mi aplicación a una máquina en Amazon y guardar los archivos subidos en un bucket",
+    "area": "cloud-devops",
+    "level": "intermedio",
+    "relevant": [
+      "melissa"
+    ]
+  },
+  {
+    "id": "r072",
+    "text": "Estoy creando la infraestructura con Terraform y no entiendo qué es el state",
+    "area": "cloud-devops",
+    "level": "avanzado",
+    "relevant": [
+      "melissa"
+    ]
+  },
+  {
+    "id": "r073",
+    "text": "Configurar un pipeline en Jenkins que construya y despliegue mi aplicación",
+    "area": "cloud-devops",
+    "level": "intermedio",
+    "relevant": [
+      "brayan"
+    ]
+  },
+  {
+    "id": "r074",
+    "text": "Cuándo uso present perfect y cuándo simple past",
+    "area": "ingles",
+    "level": "intermedio",
+    "relevant": [
+      "mariana"
+    ]
+  },
+  {
+    "id": "r075",
+    "text": "Tengo una entrevista de trabajo en inglés y me bloqueo al hablar",
+    "area": "ingles",
+    "level": "intermedio",
+    "relevant": [
+      "juliana"
+    ]
+  },
+  {
+    "id": "r076",
+    "text": "Me cuesta entender la documentación en inglés de las librerías que uso",
+    "area": "ingles",
+    "level": "intermedio",
+    "relevant": [
+      "alexander"
+    ]
+  },
+  {
+    "id": "r077",
+    "text": "Pronunciación de la th y de los verbos que terminan en ed",
+    "area": "ingles",
+    "level": "basico",
+    "relevant": [
+      "juliana"
+    ]
+  },
+  {
+    "id": "r078",
+    "text": "Un bloque baja por un plano inclinado con fricción, cómo saco la aceleración",
+    "area": "fisica",
+    "level": "intermedio",
+    "relevant": [
+      "sebastian"
+    ]
+  },
+  {
+    "id": "r079",
+    "text": "Calcular el campo eléctrico de una esfera cargada con la ley de Gauss",
+    "area": "fisica",
+    "level": "avanzado",
+    "relevant": [
+      "lorena"
+    ]
+  },
+  {
+    "id": "r080",
+    "text": "No entiendo la inducción en una espira cuando cambia el flujo magnético",
+    "area": "fisica",
+    "level": "avanzado",
+    "relevant": [
+      "lorena"
+    ]
+  },
+  {
+    "id": "r081",
+    "text": "Primera ley de la termodinámica en un gas que se expande",
+    "area": "fisica",
+    "level": "intermedio",
+    "relevant": [
+      "hector"
+    ]
+  },
+  {
+    "id": "r082",
+    "text": "Resistencias en serie y en paralelo con la ley de Ohm",
+    "area": "fisica",
+    "level": "basico",
+    "relevant": [
+      "sebastian",
+      "lorena",
+      "mauricio"
+    ]
+  },
+  {
+    "id": "r083",
+    "text": "Balancear una ecuación química por el método de óxido reducción",
+    "area": "quimica",
+    "level": "intermedio",
+    "relevant": [
+      "ximena"
+    ]
+  },
+  {
+    "id": "r084",
+    "text": "Cómo encuentro el reactivo límite en una reacción",
+    "area": "quimica",
+    "level": "basico",
+    "relevant": [
+      "ximena"
+    ]
+  },
+  {
+    "id": "r085",
+    "text": "Simplificar una función lógica con mapas de Karnaugh",
+    "area": "electronica",
+    "level": "intermedio",
+    "relevant": [
+      "mauricio"
+    ]
+  },
+  {
+    "id": "r086",
+    "text": "Que un Arduino lea un sensor de temperatura y prenda un LED",
+    "area": "electronica",
+    "level": "basico",
+    "relevant": [
+      "mauricio"
+    ]
+  },
+  {
+    "id": "r087",
+    "text": "Diferencia entre proceso e hilo y cuándo usar varios hilos",
+    "area": "sistemas-operativos",
+    "level": "intermedio",
+    "relevant": [
+      "veronica"
+    ]
+  },
+  {
+    "id": "r088",
+    "text": "Problema del productor y el consumidor con semáforos",
+    "area": "sistemas-operativos",
+    "level": "avanzado",
+    "relevant": [
+      "veronica"
+    ]
+  },
+  {
+    "id": "r089",
+    "text": "Cómo escribo historias de usuario con criterios de aceptación para mi proyecto",
+    "area": "ingenieria-de-software",
+    "level": "basico",
+    "relevant": [
+      "alejandra"
+    ]
+  },
+  {
+    "id": "r090",
+    "text": "Mi código tiene una clase gigante que hace de todo, cómo lo organizo mejor",
+    "area": "ingenieria-de-software",
+    "level": "intermedio",
+    "relevant": [
+      "fernando"
+    ]
+  },
+  {
+    "id": "r091",
+    "text": "Cómo se hace TDD: escribo la prueba antes, falla, ¿y luego qué?",
+    "area": "ingenieria-de-software",
+    "level": "intermedio",
+    "relevant": [
+      "lina"
+    ]
+  },
+  {
+    "id": "r092",
+    "text": "Mi modelo de clasificación tiene 99 % en entrenamiento y 60 % en prueba",
+    "area": "ia",
+    "level": "intermedio",
+    "relevant": [
+      "paula",
+      "pablo"
+    ]
+  },
+  {
+    "id": "r093",
+    "text": "Cómo entreno una red neuronal convolucional para clasificar fotos",
+    "area": "ia",
+    "level": "avanzado",
+    "relevant": [
+      "pablo"
+    ]
+  },
+  {
+    "id": "r094",
+    "text": "Qué es un embedding y cómo lo uso para buscar documentos parecidos",
+    "area": "ia",
+    "level": "intermedio",
+    "relevant": [
+      "adriana"
+    ]
+  },
+  {
+    "id": "r095",
+    "text": "Cómo armo un chatbot que responda solo con mis propios documentos",
+    "area": "ia",
+    "level": "avanzado",
+    "relevant": [
+      "adriana"
+    ]
+  },
+  {
+    "id": "r096",
+    "text": "Cómo evito que me inyecten código en el formulario de inicio de sesión",
+    "area": "seguridad",
+    "level": "intermedio",
+    "relevant": [
+      "tomas"
+    ]
+  },
+  {
+    "id": "r097",
+    "text": "Qué es XSS y cómo limpio lo que escriben los usuarios",
+    "area": "seguridad",
+    "level": "intermedio",
+    "relevant": [
+      "tomas"
+    ]
+  },
+  {
+    "id": "r098",
+    "text": "Escanear los puertos abiertos de mi máquina virtual para la práctica de seguridad",
+    "area": "seguridad",
+    "level": "intermedio",
+    "relevant": [
+      "ivan"
+    ]
+  },
+  {
+    "id": "r099",
+    "text": "Cómo cito un artículo y una página web en normas APA séptima edición",
+    "area": "investigacion",
+    "level": "basico",
+    "relevant": [
+      "monica"
+    ]
+  },
+  {
+    "id": "r100",
+    "text": "Formular el planteamiento del problema y los objetivos del anteproyecto de grado",
+    "area": "investigacion",
+    "level": "intermedio",
+    "relevant": [
+      "monica"
+    ]
+  }
+]

@@ -1,0 +1,70 @@
+@startuml 05-despliegue-demo-cicd
+' Vista física (4+1) del ambiente de demo y del flujo de CI/CD (previsto: PL-01 a PL-07)
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+skinparam shadowing false
+skinparam LegendBackgroundColor #ffffff
+skinparam LegendBorderColor #999999
+skinparam ArrowColor #555555
+skinparam actor {
+  BackgroundColor #08427b
+  BorderColor #052e56
+}
+skinparam node {
+  BackgroundColor #f4f8fc
+  BorderColor #2e6295
+}
+skinparam artifact {
+  BackgroundColor #438dd5
+  FontColor white
+  BorderColor #2e6295
+}
+skinparam artifact<<previsto>> {
+  BackgroundColor #eef4fb
+  FontColor #1d3b5c
+  BorderColor #438dd5
+  BorderStyle dashed
+}
+skinparam database<<previsto>> {
+  BackgroundColor #eef4fb
+  FontColor #1d3b5c
+  BorderColor #438dd5
+  BorderStyle dashed
+}
+skinparam node<<previsto>> {
+  BorderStyle dashed
+}
+hide stereotype
+
+actor "Equipo\n(5 personas)" as devs
+
+node "GitHub" as gh {
+  artifact "Repos Backend, Frontend y Platform\nramas developer → test → main" as repos
+  artifact "GitHub Actions\nlint, typecheck, pruebas y build" as ci
+  artifact "Trivy (escaneo), Syft (SBOM)\ncosign keyless (firma)" <<previsto>> as sec
+  database "GHCR\nrednexus-backend\nrednexus-frontend" <<previsto>> as ghcr
+}
+
+node "Servidor de demo\n(Dokploy o clúster con Argo CD, por decidir)" <<previsto>> as demo {
+  artifact "Argo CD o Dokploy\nsincroniza deploy/overlays/demo" <<previsto>> as cd
+  artifact "Kyverno: solo imágenes firmadas\nSealed Secrets: secretos cifrados" <<previsto>> as pol
+  artifact "Pods de RedNexus\n(misma topología del diagrama de despliegue local)" <<previsto>> as app
+  artifact "OpenTelemetry → Grafana\nSLO: 95 % con candidatos en menos de 30 s" <<previsto>> as obs
+}
+
+devs --> repos : Pull Request
+repos --> ci : push / PR
+ci ..> sec : imagen multiarquitectura
+sec ..> ghcr : push con etiqueta sha
+ci ..> repos : actualiza la etiqueta del overlay
+cd ..> repos : GitOps: pull
+app ..> ghcr : pull de imágenes
+cd ..> app : despliega
+pol ..> app : controla
+app ..> obs : trazas y métricas
+
+legend right
+  Línea continua: construido
+  Línea y borde punteados: previsto
+endlegend
+@enduml
