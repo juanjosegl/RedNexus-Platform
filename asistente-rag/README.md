@@ -79,14 +79,17 @@ palabras clave y el juez le da al menos 3. Meta: **70 % o más**.
 
 ### Corridas
 
-Corridas parciales con los 18 casos difíciles (seguridad, fuera de alcance, normas, privacidad, PQRS y
-emparejamiento), mientras el equipo completa los documentos y los casos que faltan para llegar a 50.
+Las tres primeras son corridas parciales con los 18 casos difíciles (seguridad, fuera de alcance, normas,
+privacidad, PQRS y emparejamiento), usadas para ajustar el prompt. Las dos últimas son la evaluación final con los
+52 casos y la comparación de cortes; la configuración elegida es **400/60**.
 
 | Run | Prompt | Corte | Éxito | Fidelidad | Completitud | Latencia media |
 | --- | --- | --- | --- | --- | --- | --- |
 | `v1_chunk400_ov60_parcial18` | v1 | 400/60 | 83,3 % | 4,33 | 3,94 | 18,6 s |
 | `v2_prompt_chunk400_ov60_parcial18` | v2.1 | 400/60 | 66,7 % | 3,94 | 3,67 | 22,6 s |
-| `v2.2_prompt_chunk400_ov60_parcial18` | v2.2 | 400/60 | **88,9 %** | 4,83 | 4,33 | 19,3 s |
+| `v2.2_prompt_chunk400_ov60_parcial18` | v2.2 | 400/60 | 88,9 % | 4,83 | 4,33 | 19,3 s |
+| `v3_final_chunk400_ov60` (52 casos) | v2.2 | **400/60** | **88,5 %** | 4,67 | 4,44 | 18,7 s |
+| `v3_chunk300_ov30` (52 casos) | v2.2 | 300/30 | 80,8 % | 4,69 | 4,19 | 17,7 s |
 
 Detalle y análisis en [docs/informe/F-pruebas.md](docs/informe/F-pruebas.md#f4-resultados-con-el-golden-dataset).
 
