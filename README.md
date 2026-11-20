@@ -126,20 +126,25 @@ modelos locales de Ollama, integrado en la página `/ayuda` del frontend a trav�
 backend. Todo lo de la actividad (base de conocimiento, modelo, golden dataset, evaluación e informe) está en
 [asistente-rag/](asistente-rag), y las tareas en [asistente-rag/docs/tareas.md](asistente-rag/docs/tareas.md).
 
+- **Informe:** [Informe-modelo-rag-RedNexus.pdf](asistente-rag/docs/Informe-modelo-rag-RedNexus.pdf) (secciones A a G).
+- **Resultado:** 88,5 % de éxito en el golden dataset de 52 casos (meta 70 %), con fragmentos de 400 tokens y 60 de
+  solapamiento; detalle en [asistente-rag/runs/](asistente-rag/runs).
+
 ### Aportes del equipo
 
 <!-- Cada integrante reemplaza SOLO su propia línea, con su nombre completo y lo que aportó. -->
 
 - **Juan Jose Gutierrez Lasso** ([@juanjosegl](https://github.com/juanjosegl)): arquitectura e integración
   (módulo `support` del backend y página `/ayuda`), PQRS de punta a punta (endpoint y página `/pqrs`),
-  configuración del RAG y del modelo en Open WebUI, system prompt, scripts de configuración y evaluación,
-  documentos técnicos, casos de seguridad y fuera de alcance, secciones D, E y F del informe.
+  configuración del RAG y del modelo en Open WebUI, system prompt, scripts de configuración, evaluación y armado
+  del PDF, documentos de emparejamiento, normas, privacidad, PQRS, calificaciones y preguntas frecuentes, 44 casos
+  del golden dataset, corridas de evaluación y secciones C a G del informe.
 
-- **Daniel** ([@daniel200231](https://github.com/daniel200231)): _pendiente (FE-11, DOC-05)_
+- **Victor Daniel Fernandez** ([@daniel200231](https://github.com/daniel200231)): _pendiente (FE-11)_
 
-- **Josefa** ([@josesfa](https://github.com/josesfa)): _pendiente (FE-10)_
+- **Jose Sebastian Fernandez** ([@josesfa](https://github.com/josesfa)): _pendiente (FE-10)_
 
-- **Maria Paula** ([@MariPau-dev](https://github.com/MariPau-dev)): _pendiente_
+- **Maria Paula Andrade** ([@MariPau-dev](https://github.com/MariPau-dev)): _pendiente (FE-12)_
 
 - **Maria Alejandra Guzman** ([@alejandraguzman12](https://github.com/alejandraguzman12)): documento de la base de
   conocimiento "Registro y perfil", 8 casos del golden dataset (registro_perfil), portada e índice del informe.

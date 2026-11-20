@@ -10,4 +10,4 @@
   - Victor Daniel Fernandez
   - Maria Paula Andrade
   - Jose Sebastian Fernandez
-- Ciudad y fecha: Popayán, Cauca — 19/11/2026
+- Ciudad y fecha: Popayán, Cauca — 20/11/2026

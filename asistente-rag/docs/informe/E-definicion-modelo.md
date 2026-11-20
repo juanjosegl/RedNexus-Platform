@@ -4,7 +4,9 @@ Todas las decisiones de esta sección están versionadas en `asistente-rag/model
 (`python scripts/setup_openwebui.py`), de modo que el modelo se puede reconstruir igual en cualquier equipo.
 
 ![Arquitectura del asistente](img/e-arquitectura.png)
-<!-- Captura pendiente: diagrama frontend /ayuda → backend /api/support/chat → Open WebUI → Ollama. -->
+
+*Arquitectura del asistente: la página `/ayuda` pregunta al backend, que reenvía a Open WebUI; Open WebUI busca los
+fragmentos en la base vectorial y genera la respuesta con Ollama. El script de evaluación usa la misma API.*
 
 ## E.1 Modelo base
 
@@ -30,10 +32,16 @@ de RedNexus.
 | `normas.md` | Normas de la comunidad y cómo reportar | 892 | Juanjo |
 | `privacidad.md` | Datos que se guardan, quién los ve, derechos (Ley 1581) | 892 | Juanjo |
 | `pqrs.md` | Cómo radicar y hacer seguimiento a una PQRS | 966 | Juanjo |
-| `registro-y-perfil.md` | Registro, sesión y perfil | _pendiente_ | Daniel |
-| `solicitudes-de-ayuda.md` | Crear y seguir solicitudes | _pendiente_ | _por asignar_ |
-| `calificaciones.md` | Cuándo y cómo calificar | _pendiente_ | _por asignar_ |
-| `preguntas-frecuentes.md` | Preguntas frecuentes y problemas comunes | _pendiente_ | _por asignar_ |
+| `registro-y-perfil.md` | Registro, inicio y cierre de sesión, perfil | 1 270 | Maria Alejandra Guzman |
+| `calificaciones.md` | Cuándo y cómo calificar, efecto en el emparejamiento | 928 | Juanjo |
+| `preguntas-frecuentes.md` | Preguntas generales y problemas comunes | 1 099 | Juanjo |
+| **Total** | 7 documentos | **7 201** | |
+
+Con fragmentos de 400 tokens, la base queda en unos 24 fragmentos (entre 3 y 4 por documento) indexados en la colección **Base RedNexus**.
+
+![Colección Base RedNexus en Open WebUI](img/e-base-de-conocimiento.jpg)
+
+*La colección de conocimiento de Open WebUI con los 7 documentos cargados por `setup_openwebui.py`.*
 
 ## E.3 Estrategia de corte (chunking)
 
@@ -48,8 +56,10 @@ de RedNexus.
 
 Configuración alternativa comparada: **300 tokens con 30 de solapamiento** (ver sección F.4).
 
-![Configuración de documentos en Open WebUI](img/e-documents-settings.png)
-<!-- Captura pendiente: Admin Panel → Settings → Documents. -->
+![Configuración de documentos en Open WebUI](img/e-documents-settings.jpg)
+
+*Admin Panel → Settings → Documents: separador por tokens (tiktoken), 400 de tamaño, 60 de solapamiento,
+embeddings `nomic-embed-text` en Ollama, Top K 4 y la plantilla RAG en español.*
 
 ## E.4 System prompt y políticas
 
@@ -81,8 +91,10 @@ respuesta literal que una instrucción abstracta. El prompt pasó por cuatro ver
 Además se reemplazó la **plantilla RAG** de Open WebUI (en inglés, con citas `[1]`) por una en español que refuerza
 las políticas 1 a 4 y separa el contexto y la consulta en etiquetas (`model/rag-template.md`).
 
-![Modelo personalizado en Open WebUI](img/e-modelo-personalizado.png)
-<!-- Captura pendiente: Workspace → Models → asistente-rednexus. -->
+![Modelo personalizado en Open WebUI](img/e-modelo-personalizado.jpg)
+
+*Workspace → Models → Asistente RedNexus: modelo base `qwen2.5:3b` y el inicio del system prompt con las reglas de
+seguridad.*
 
 ## E.5 Hiperparámetros
 
