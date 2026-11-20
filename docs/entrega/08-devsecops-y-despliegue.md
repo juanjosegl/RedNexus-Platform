@@ -46,7 +46,8 @@ rama feature/* ──PR──► developer ──PR──► test ──PR──
 
 | Fecha | Hallazgo | Fuente | Tratamiento |
 | --- | --- | --- | --- |
-| 2026-11-20 | Primer escaneo con Trivy de las imágenes de backend y frontend | Workflow "Imagen" | Ver el resumen del job en el PR de PL-01/PL-02; registrar aquí las críticas o altas que aparezcan y si se corrigieron (actualizar la imagen base) o se aceptaron |
+| 2026-11-20 | Backend (`node:24-alpine`): sin vulnerabilidades críticas con arreglo | Trivy, workflow "Imagen" (RedNexus-Backend#41) | Pasa |
+| 2026-11-20 | Frontend (`nginx-unprivileged:1.29-alpine`): vulnerabilidades **críticas** con arreglo en paquetes de Alpine; el pipeline se detuvo | Trivy, workflow "Imagen" (RedNexus-Frontend#37) | Corregido: `apk upgrade --no-cache` en la etapa final del `Dockerfile`, sin dejar de correr como usuario 101. El escaneo siguiente pasa |
 | 2026-11-20 | `qwen2.5:3b` tiene licencia de investigación (no comercial) | Ficha de modelos | Aceptado para el uso académico; documentado cómo cambiarlo |
 | 2026-11-20 | El JWT no se puede revocar antes de expirar | Revisión de diseño | Aceptado (ADR-008); al eliminar la cuenta, las rutas responden 401/404 |
 
