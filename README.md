@@ -6,7 +6,7 @@ Plataforma de **RedNexus**: todo lo necesario para construir, desplegar y operar
 | --- | --- |
 | [RedNexus-Backend](https://github.com/juanjosegl/RedNexus-Backend) | API NestJS y worker de IA |
 | [RedNexus-Frontend](https://github.com/juanjosegl/RedNexus-Frontend) | Interfaz Vue 3 |
-| **RedNexus-Platform** (este) | Docker Compose, Kubernetes, y más adelante GitOps, IaC, observabilidad y documentación |
+| **RedNexus-Platform** (este) | Docker Compose, Kubernetes, documentación, el asistente de soporte con RAG, y más adelante GitOps, IaC y observabilidad |
 
 ## Empieza aquí
 
@@ -101,6 +101,7 @@ deploy/
     └── minikube/         # Ingress NGINX, Ollama en host.minikube.internal
 scripts/k8s-up.sh         # construir + cargar imágenes + desplegar (k3d o minikube)
 docs/                     # guías de entorno (más adelante: ADRs, privacidad, runbooks)
+asistente-rag/            # asistente de soporte: base de conocimiento, modelo, golden dataset y evaluación
 ```
 
 ### Arquitectura en Kubernetes
@@ -116,6 +117,30 @@ navegador ──► Ingress (Traefik) ──► web (Nginx) ──/api──► 
 - **worker:** usa la misma imagen que la API, pero corre otro proceso (`node dist/worker`).
 - **Seguridad:** los contenedores corren sin root, sin escalada de privilegios y con *capabilities* eliminadas, y la API tiene el sistema de archivos en solo lectura. Todos los pods tienen límites de memoria pensados para equipos de 8 GB.
 - **Secretos:** los de `components/dev` son valores de prueba, solo para desarrollo. El ambiente de demo usará Sealed Secrets.
+
+## Asistente de soporte con RAG (actividad 2 del módulo 6)
+
+Chat de ayuda que responde cómo usar RedNexus con **solo** la documentación del proyecto: RAG en Open WebUI con
+modelos locales de Ollama, integrado en la página `/ayuda` del frontend a través de `POST /api/support/chat` del
+backend. Todo lo de la actividad (base de conocimiento, modelo, golden dataset, evaluación e informe) está en
+[asistente-rag/](asistente-rag), y las tareas en [asistente-rag/docs/tareas.md](asistente-rag/docs/tareas.md).
+
+### Aportes del equipo
+
+<!-- Cada integrante reemplaza SOLO la línea de su letra (DOC-05 a DOC-08). -->
+
+- **Juan Jose Gutierrez Lasso** ([@juanjosegl](https://github.com/juanjosegl)): arquitectura e integración
+  (módulo `support` del backend y página `/ayuda`), configuración del RAG y del modelo en Open WebUI, system
+  prompt, script de evaluación, documentos técnicos, casos de seguridad y fuera de alcance, secciones D, E y F del
+  informe.
+
+- **Integrante A**: _pendiente (DOC-05, BE-09, FE-09)_
+
+- **Integrante B**: _pendiente (DOC-06, BE-08, FE-10)_
+
+- **Integrante C**: _pendiente (DOC-07, BE-10, FE-11)_
+
+- **Integrante D**: _pendiente (DOC-08, BE-11, FE-12)_
 
 ## Flujo de trabajo
 

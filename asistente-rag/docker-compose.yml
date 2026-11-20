@@ -1,0 +1,36 @@
+# Open WebUI para el asistente de RedNexus.
+#
+# Ollama corre NATIVO en la máquina (en el Mac así usa la GPU; en Windows, el instalador oficial):
+#   ollama pull qwen2.5:3b && ollama pull nomic-embed-text && ollama pull qwen2.5:7b
+#
+# Luego: docker compose up -d  →  http://localhost:3001
+# El puerto 3000 lo usa la API de RedNexus, por eso Open WebUI va en el 3001.
+#
+# Las variables RAG_* y CHUNK_* solo se aplican en el PRIMER arranque (después manda lo que se guarde en
+# Admin Panel → Settings → Documents). Verifica ahí los valores y toma la captura para el informe.
+
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:v0.5.20
+    restart: unless-stopped
+    ports:
+      - '3001:8080'
+    environment:
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      WEBUI_AUTH: 'true'
+      # RAG: ver model/configuracion.md
+      RAG_EMBEDDING_ENGINE: ollama
+      RAG_EMBEDDING_MODEL: nomic-embed-text
+      RAG_TEXT_SPLITTER: token
+      CHUNK_SIZE: '400'
+      CHUNK_OVERLAP: '60'
+      RAG_TOP_K: '4'
+      # API keys para el backend de RedNexus y para evaluate_rag.py
+      ENABLE_API_KEY: 'true'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    volumes:
+      - open-webui-data:/app/backend/data
+
+volumes:
+  open-webui-data:
