@@ -145,7 +145,7 @@ backend. Todo lo de la actividad (base de conocimiento, modelo, golden dataset, 
 
 - **Jose Sebastian Fernandez** ([@josesfa](https://github.com/josesfa)): _pendiente (FE-10)_
 
-- **Maria Paula Andrade** ([@MariPau-dev](https://github.com/MariPau-dev)): _pendiente (FE-12)_
+- **Maria Paula Andrade** ([@MariPau-dev](https://github.com/MariPau-dev)): preguntas frecuentes en la página de ayuda y acceso a la ayuda desde el inicio (FE-12), con sus pruebas.
 
 - **Maria Alejandra Guzman** ([@alejandraguzman12](https://github.com/alejandraguzman12)): documento de la base de
   conocimiento "Registro y perfil", 8 casos del golden dataset (registro_perfil), portada e índice del informe.
