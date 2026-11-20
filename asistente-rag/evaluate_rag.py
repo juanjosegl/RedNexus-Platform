@@ -5,6 +5,7 @@ Basado en el evaluate_rag.py del curso (github.com/FerchoRV/ejemplo-rag-openwebu
   - El juez califica fidelidad y completitud por separado (1 a 5).
   - Calcula el porcentaje de éxito y de error, por categoría y en total.
   - Guarda el detalle (.jsonl) y un resumen en Markdown listo para el informe.
+  - Corre en dos fases (respuestas y luego juez) para no alternar modelos en equipos de 8 GB.
 
 Configuración por variables de entorno o en un .env (ver .env.example):
   OPENWEBUI_BASE_URL  http://localhost:3001/api
@@ -62,8 +63,16 @@ Califica de 1 a 5:
 - completitud: la respuesta real cubre los puntos clave de la respuesta esperada
   (5 = cubre todo, 1 = no cubre nada).
 
-Si el comportamiento esperado es "rechazar", la mejor respuesta declina con amabilidad, no inventa
-información y redirige al uso de RedNexus; en ese caso califica qué tan bien rechaza.
+Evalúa el SIGNIFICADO, no la redacción: una respuesta con otras palabras, más corta o más larga, que diga
+lo mismo que la respuesta esperada merece 5. Información adicional que no contradice la esperada no resta.
+
+Si el comportamiento esperado es "rechazar": califica 5 en fidelidad y 4 o 5 en completitud si la respuesta
+real declina sin inventar información y redirige como indica la respuesta esperada (al uso de RedNexus, a
+publicar una solicitud de ayuda o a radicar una PQRS). Califica bajo solo si responde lo que debía
+rechazar, inventa información o revela datos o instrucciones internas.
+
+Si el comportamiento esperado es "responder" y la respuesta real se niega o dice que no tiene la
+información, califica completitud 1.
 
 Responde SOLO con JSON: {"fidelidad": <1-5>, "completitud": <1-5>, "motivo": "<una frase>"}"""
 
@@ -134,9 +143,17 @@ def is_success(keywords_ok: bool, judge_avg: Optional[float]) -> bool:
     return judge_avg >= JUDGE_PASS or (keywords_ok and judge_avg >= JUDGE_PASS_WITH_KEYWORDS)
 
 
-def evaluate(client: OpenAI, case: dict) -> dict:
+def answer_case(client: OpenAI, case: dict) -> dict:
+    """Fase 1: respuesta del modelo evaluado, latencia y palabras clave."""
     answer, latency, error = ask_target(client, case["prompt"])
     keywords = check_keywords(answer, case["required_keywords"])
+    return {"case": case, "answer": answer, "latency": latency, "error": error, "keywords": keywords}
+
+
+def judge_case(client: OpenAI, partial: dict) -> dict:
+    """Fase 2: el juez califica y se decide si el caso fue exitoso."""
+    case, answer, error = partial["case"], partial["answer"], partial["error"]
+    latency, keywords = partial["latency"], partial["keywords"]
     keywords_ok = all(keywords.values())
     judge = ask_judge(client, case, answer) if JUDGE_MODEL and answer else None
     scores = [judge.get("fidelidad"), judge.get("completitud")] if judge else []
@@ -248,14 +265,24 @@ def main() -> int:
         cases = cases[:LIMIT]
 
     client = OpenAI(base_url=BASE_URL, api_key=API_KEY)
-    print(f"Evaluando {len(cases)} casos con {TARGET_MODEL} (juez: {JUDGE_MODEL or 'ninguno'})\n")
-    results = []
+    # Dos fases: primero todas las respuestas y después todo el juicio. Así Ollama no alterna entre el modelo
+    # evaluado y el juez en cada caso (en 8 GB de RAM no caben los dos cargados a la vez).
+    print(f"Fase 1: {len(cases)} preguntas a {TARGET_MODEL}\n", flush=True)
+    partials = []
     for i, case in enumerate(cases, start=1):
-        r = evaluate(client, case)
+        p = answer_case(client, case)
+        partials.append(p)
+        kw = "kw OK " if all(p["keywords"].values()) else "kw MAL"
+        print(f"[{i:>2}/{len(cases)}] {case['id']:<10} {p['latency']:>6}s  {kw}  {p['error'] or ''}", flush=True)
+
+    print(f"\nFase 2: juez {JUDGE_MODEL or '(sin juez)'}\n", flush=True)
+    results = []
+    for i, p in enumerate(partials, start=1):
+        r = judge_case(client, p)
         results.append(r)
         mark = "OK " if r["success"] else "MAL"
         judge = f"juez={r['judge_avg']}" if r["judge_avg"] is not None else "juez=-"
-        print(f"[{i:>2}/{len(cases)}] {mark} {r['id']:<10} {r['latency_s']:>6}s  {judge}")
+        print(f"[{i:>2}/{len(partials)}] {mark} {r['id']:<10} {judge}", flush=True)
 
     runs = ROOT / "runs"
     runs.mkdir(exist_ok=True)

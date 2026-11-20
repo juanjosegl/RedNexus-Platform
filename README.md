@@ -127,20 +127,20 @@ backend. Todo lo de la actividad (base de conocimiento, modelo, golden dataset, 
 
 ### Aportes del equipo
 
-<!-- Cada integrante reemplaza SOLO la línea de su letra (DOC-05 a DOC-08). -->
+<!-- Cada integrante reemplaza SOLO su propia línea, con su nombre completo y lo que aportó. -->
 
 - **Juan Jose Gutierrez Lasso** ([@juanjosegl](https://github.com/juanjosegl)): arquitectura e integración
-  (módulo `support` del backend y página `/ayuda`), configuración del RAG y del modelo en Open WebUI, system
-  prompt, script de evaluación, documentos técnicos, casos de seguridad y fuera de alcance, secciones D, E y F del
-  informe.
+  (módulo `support` del backend y página `/ayuda`), PQRS de punta a punta (endpoint y página `/pqrs`),
+  configuración del RAG y del modelo en Open WebUI, system prompt, scripts de configuración y evaluación,
+  documentos técnicos, casos de seguridad y fuera de alcance, secciones D, E y F del informe.
 
-- **Integrante A**: _pendiente (DOC-05, BE-09, FE-09)_
+- **Daniel** ([@daniel200231](https://github.com/daniel200231)): _pendiente (FE-11, DOC-05)_
 
-- **Integrante B**: _pendiente (DOC-06, BE-08, FE-10)_
+- **Josefa** ([@josesfa](https://github.com/josesfa)): _pendiente (FE-10)_
 
-- **Integrante C**: _pendiente (DOC-07, BE-10, FE-11)_
+- **Maria Paula** ([@MariPau-dev](https://github.com/MariPau-dev)): _pendiente_
 
-- **Integrante D**: _pendiente (DOC-08, BE-11, FE-12)_
+- **Integrante 5**: _pendiente_
 
 ## Flujo de trabajo
 
