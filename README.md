@@ -141,7 +141,8 @@ backend. Todo lo de la actividad (base de conocimiento, modelo, golden dataset, 
 
 - **Maria Paula** ([@MariPau-dev](https://github.com/MariPau-dev)): _pendiente_
 
-- **Integrante 5**: _pendiente_
+- **Maria Alejandra Guzman** ([@alejandraguzman12](https://github.com/alejandraguzman12)): documento de la base de
+  conocimiento "Registro y perfil", 8 casos del golden dataset (registro_perfil), portada e índice del informe.
 
 ## Flujo de trabajo
 
