@@ -126,6 +126,7 @@ modelos locales de Ollama, integrado en la página `/ayuda` del frontend a trav�
 backend. Todo lo de la actividad (base de conocimiento, modelo, golden dataset, evaluación e informe) está en
 [asistente-rag/](asistente-rag), y las tareas en [asistente-rag/docs/tareas.md](asistente-rag/docs/tareas.md).
 
+- **Entrega:** [asistente-rag/ENTREGA.md](asistente-rag/ENTREGA.md) (resultado y dónde está cada requisito).
 - **Informe:** [Informe-modelo-rag-RedNexus.pdf](asistente-rag/docs/Informe-modelo-rag-RedNexus.pdf) (secciones A a G).
 - **Resultado:** 88,5 % de éxito en el golden dataset de 52 casos (meta 70 %), con fragmentos de 400 tokens y 60 de
   solapamiento; detalle en [asistente-rag/runs/](asistente-rag/runs).
