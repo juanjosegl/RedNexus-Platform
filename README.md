@@ -16,6 +16,7 @@ Plataforma de **RedNexus**: todo lo necesario para construir, desplegar y operar
 | [Tareas](docs/tareas.md) | Qué hay que hacer, con ramas y commits por tarea |
 | [CONTRIBUTING](CONTRIBUTING.md) | Resumen de las reglas de ramas, commits y PR |
 | [Entorno en Mac](docs/entorno-mac.md) | Instalación en macOS (Apple Silicon) |
+| **[Entrega final](docs/entrega/README.md)** | Documento del diplomado por capítulos: problema, requisitos, ADR, privacidad, MLOps, pruebas, DevSecOps, runbook, sostenibilidad y guion de la demo |
 
 Los tres repos deben quedar **en la misma carpeta**:
 

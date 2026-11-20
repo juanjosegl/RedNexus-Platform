@@ -20,7 +20,7 @@ Los **plazos de conservación** son una propuesta: el equipo debe aprobarlos y l
 | name | text | No | – | Nombre visible | Personal | Visible solo para usuarios con sesión | Mientras exista la cuenta |
 | bio | text | Sí | – | Habilidades y experiencia en texto libre | Personal | Se procesa solo con IA local (Ollama), sin enviarla a terceros | Mientras exista la cuenta |
 | tags | text[] | No | – | Materias y nivel | Personal (perfil académico) | Igual que bio | Mientras exista la cuenta |
-| embedding | vector(768) | Sí | – | Vector de bio + tags (nomic-embed-text) | Personal derivado | Se recalcula al editar el perfil; no se expone por la API | Se borra con la cuenta |
+| embedding | vector(768) | Sí | – | Vector de bio + tags (paraphrase-multilingual, IA-07) | Personal derivado | Se recalcula al editar el perfil; no se expone por la API | Se borra con la cuenta |
 | createdAt | timestamp | No | default now() | Fecha de registro | Personal (metadato) | – | Mientras exista la cuenta |
 
 ## HelpRequest (solicitud de ayuda)
@@ -65,8 +65,8 @@ Los **plazos de conservación** son una propuesta: el equipo debe aprobarlos y l
 
 - **Qué se vectoriza:** el perfil (`bio` + `tags`) y el texto de cada solicitud. No hay documentos aparte: los "documentos" del RAG son los perfiles de los ayudantes.
 - **Dónde se guarda:** en la misma tabla, columna `embedding vector(768)` de pgvector, así se borran junto con el dato de origen.
-- **Modelo:** `nomic-embed-text` en Ollama, local. Ningún dato sale a una API externa.
-- **Búsqueda:** distancia coseno (`<=>`), los 10 más cercanos, y luego `ranking.ts` deja el top 3. El texto de esos 3 perfiles es el contexto que recibe `llama3.2:3b` para escribir la explicación.
+- **Modelo:** `paraphrase-multilingual` en Ollama, local (elegido en IA-07 frente a `nomic-embed-text` y `all-minilm`). Ningún dato sale a una API externa.
+- **Búsqueda:** distancia coseno (`<=>`), los 10 más cercanos, y luego `ranking.ts` deja el top 3. El texto de esos 3 perfiles es el contexto que recibe `qwen2.5:3b` para escribir la explicación. Desde IA-07 la similitud es híbrida: 0,6 · coseno + 0,4 · coincidencia de palabras, con umbral 0,25.
 - **Índice:** hoy **no hay índice vectorial** (búsqueda secuencial), suficiente para el volumen del MVP (cientos de perfiles). Con más volumen se agrega `CREATE INDEX ... USING hnsw (embedding vector_cosine_ops)`.
 
 ## Brechas frente a la Ley 1581 (para DOC-02)

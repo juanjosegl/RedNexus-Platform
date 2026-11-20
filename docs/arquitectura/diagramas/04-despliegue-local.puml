@@ -33,8 +33,8 @@ actor "Usuario" as user
 
 node "Equipo de desarrollo\n<<Mac M1 8 GB + Colima | Windows + WSL2 + Docker>>" as host {
   node "Ollama\n<<proceso nativo, puerto 11434>>" as ollama {
-    artifact "llama3.2:3b" as llm
-    artifact "nomic-embed-text" as emb
+    artifact "qwen2.5:3b" as llm
+    artifact "paraphrase-multilingual" as emb
   }
   node "Clúster Kubernetes de un nodo\n<<k3d 'rednexus' | minikube perfil 'rednexus'>>" as k8s {
     node "Ingress\n<<Traefik en k3d | ingress-nginx en minikube>>" as ing
