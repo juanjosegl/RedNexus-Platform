@@ -30,7 +30,8 @@ y anota el resultado en la tabla de corridas del README.
 | RAG Template | [rag-template.md](rag-template.md) | En español, sin citas `[1]` y con las políticas 1 a 4 reforzadas |
 | Retrieval query generation | Encendido (valor de Open WebUI) | El modelo reescribe la pregunta antes de buscar; cuesta una llamada extra al LLM, así que se compara apagado (`RETRIEVAL_QUERY_GENERATION=false`) |
 
-Configuración alternativa para comparar en el informe: **300 tokens con 30 de solapamiento** (`RUN_TAG=v2_chunk300_ov30`).
+Configuración alternativa comparada: **300 tokens con 30 de solapamiento**. Con los 52 casos dio 80,8 % de éxito
+frente al 88,5 % de 400/60, así que se mantiene 400/60 (análisis en la sección F.4 del informe).
 
 Todo esto lo aplica `python scripts/setup_openwebui.py`; las variables `CHUNK_SIZE`, `CHUNK_OVERLAP`, `TOP_K`,
 `BASE_MODEL` y `RETRIEVAL_QUERY_GENERATION` permiten probar otras configuraciones sin tocar la interfaz.
