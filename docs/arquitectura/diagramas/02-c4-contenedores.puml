@@ -23,7 +23,7 @@ Boundary(rn, "RedNexus", "sistema") {
   Container(whisper, "Transcripción", "whisper.cpp", "Voz a texto (previsto)", $tags="previsto")
 }
 
-System_Ext(ollama, "Ollama", "En el equipo anfitrión: llama3.2:3b y nomic-embed-text")
+System_Ext(ollama, "Ollama", "En el equipo anfitrión: qwen2.5:3b y paraphrase-multilingual")
 
 Rel(sol, web, "Usa", "HTTPS")
 Rel(ayu, web, "Usa", "HTTPS")
