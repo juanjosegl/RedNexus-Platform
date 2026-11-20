@@ -60,6 +60,16 @@ cd ~/rednexus/RedNexus-Platform && bash scripts/k8s-up.sh
 
 Abre http://localhost:8080: debe decir **API: ok**.
 
+Para programar día a día, mira la tabla "Cómo correr RedNexus según lo que vayas a hacer" en el [README](../README.md).
+
+## Dashboards (opcional)
+
+No hace falta Docker Desktop. Para ver contenedores, usa la extensión Docker de VS Code. Para Kubernetes:
+
+```bash
+brew install --cask headlamp && brew install k9s
+```
+
 ## Nodo de IA (solo el Mac del equipo)
 
 Ollama y whisper.cpp corren **nativos en macOS**, fuera de Docker, para aprovechar la GPU con Metal. Docker en Mac no tiene acceso a la GPU. La guía se agregará al configurar el módulo de IA.

@@ -1,0 +1,84 @@
+@startuml 06-modelo-entidad-relacion
+' Modelo entidad-relación (notación de pata de gallo). Fuente: RedNexus-Backend/prisma/schema.prisma
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+skinparam shadowing false
+skinparam LegendBackgroundColor #ffffff
+skinparam LegendBorderColor #999999
+skinparam linetype ortho
+skinparam nodesep 110
+skinparam ranksep 110
+skinparam ArrowColor #2e6295
+skinparam class {
+  BackgroundColor #f4f8fc
+  BorderColor #2e6295
+  HeaderBackgroundColor #438dd5
+  FontColor white
+  AttributeFontColor #0b2a4a
+}
+hide circle
+hide methods
+
+
+entity "User" as user {
+  * id : uuid <<PK>>
+  --
+  * email : text <<UK>> <color:#b45309>PII</color>
+  * passwordHash : text <color:#b91c1c><b>SENS</b></color>
+  * name : text <color:#b45309>PII</color>
+  bio : text <color:#b45309>PII</color>
+  * tags : text[]
+  embedding : vector(768)
+  * createdAt : timestamp
+}
+
+entity "HelpRequest" as req {
+  * id : uuid <<PK>>
+  --
+  * authorId : uuid <<FK>>
+  * text : text <color:#b45309>PII</color>
+  audioPath : text <color:#b91c1c><b>SENS</b></color>
+  area : text
+  * topics : text[]
+  level : text
+  embedding : vector(768)
+  * status : RequestStatus
+  * createdAt : timestamp
+}
+
+entity "Match" as match {
+  * id : uuid <<PK>>
+  --
+  * requestId : uuid <<FK>>
+  * helperId : uuid <<FK>>
+  * score : float
+  explanation : text
+  * status : MatchStatus
+  * createdAt : timestamp
+  ..
+  UK (requestId, helperId)
+}
+
+entity "Rating" as rating {
+  * id : uuid <<PK>>
+  --
+  * requestId : uuid <<FK, UK>>
+  * authorId : uuid <<FK>>
+  * helperId : uuid <<FK>>
+  * stars : int (1 a 5)
+  * createdAt : timestamp
+}
+
+user ||--o{ req : "publica"
+req ||--o{ match : "genera\n(máx. 3)"
+user ||-left-o{ match : "es candidato"
+req ||-right-o| rating : "recibe\n(máx. 1)"
+user ||--o{ rating : "otorga"
+user ||--o{ rating : "recibe"
+
+legend bottom
+  <b>Atributos:</b> ● obligatorio · PK clave primaria · FK clave foránea · UK único
+  <color:#b45309>PII</color> dato personal (Ley 1581 de 2012) · <color:#b91c1c><b>SENS</b></color> credencial o dato sensible
+  <b>Cardinalidad:</b> barra doble = exactamente uno · círculo y pata de gallo = cero o muchos · círculo y barra = cero o uno
+endlegend
+@enduml

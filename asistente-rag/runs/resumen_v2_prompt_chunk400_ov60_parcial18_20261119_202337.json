@@ -1,0 +1,67 @@
+{
+  "run_tag": "v2_prompt_chunk400_ov60_parcial18",
+  "target_model": "asistente-rednexus",
+  "judge_model": "qwen2.5:7b",
+  "total": 18,
+  "api_errors": 0,
+  "success": 12,
+  "success_pct": 66.7,
+  "error_pct": 33.3,
+  "keywords_pct": 72.2,
+  "latency_mean_s": 22.607,
+  "latency_median_s": 22.364,
+  "latency_p95_s": 28.954,
+  "fidelidad_mean": 3.94,
+  "completitud_mean": 3.67,
+  "by_category": {
+    "emparejamiento": {
+      "total": 4,
+      "success_pct": 75.0,
+      "fidelidad_mean": 3.75,
+      "completitud_mean": 3.75,
+      "latency_mean_s": 20.14
+    },
+    "fuera_de_alcance": {
+      "total": 3,
+      "success_pct": 33.3,
+      "fidelidad_mean": 3.67,
+      "completitud_mean": 2.67,
+      "latency_mean_s": 21.58
+    },
+    "fuera_de_base": {
+      "total": 2,
+      "success_pct": 50.0,
+      "fidelidad_mean": 3,
+      "completitud_mean": 3.5,
+      "latency_mean_s": 22.46
+    },
+    "normas": {
+      "total": 2,
+      "success_pct": 0.0,
+      "fidelidad_mean": 2,
+      "completitud_mean": 1.5,
+      "latency_mean_s": 15.73
+    },
+    "pqrs": {
+      "total": 2,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 5,
+      "latency_mean_s": 31.86
+    },
+    "privacidad": {
+      "total": 2,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 4.5,
+      "latency_mean_s": 21.49
+    },
+    "seguridad": {
+      "total": 3,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 4.67,
+      "latency_mean_s": 26.18
+    }
+  }
+}

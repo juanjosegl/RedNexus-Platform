@@ -1,0 +1,55 @@
+@startuml 10-actividades-emparejamiento
+' Algoritmo de MatchingService.matchRequest en el worker
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+skinparam shadowing false
+skinparam LegendBackgroundColor #ffffff
+skinparam LegendBorderColor #999999
+skinparam ActivityBackgroundColor #dbeafe
+skinparam ActivityBorderColor #1168bd
+skinparam ActivityDiamondBackgroundColor #fff7e0
+skinparam ActivityDiamondBorderColor #c9a227
+skinparam ArrowColor #555555
+
+|Worker de IA|
+start
+:Leer la solicitud;
+if (¿Sigue en PENDING?) then (no)
+  :Terminar sin cambios
+  (reintento idempotente);
+  stop
+else (sí)
+endif
+|Ollama|
+:Clasificar con el LLM
+(área, temas y nivel);
+:Calcular el embedding
+de la solicitud;
+|PostgreSQL + pgvector|
+if (¿Hay embedding?) then (sí)
+  :Buscar los 10 perfiles más cercanos
+  por distancia coseno;
+else (no: Ollama no responde)
+endif
+|Worker de IA|
+if (¿Hay candidatos?) then (no)
+  :Respaldo: % de palabras de la solicitud
+  presentes en bio y etiquetas;
+else (sí)
+endif
+:Ordenar: 0,8 × similitud + 0,2 × calificación
+(sin calificaciones cuenta como 3/5);
+:Descartar similitud < 0,15, excluir al autor
+y tomar el top 3;
+|Ollama|
+:Escribir una explicación por candidato;
+|Worker de IA|
+if (¿El LLM respondió?) then (no)
+  :Usar explicación de plantilla;
+else (sí)
+endif
+|PostgreSQL + pgvector|
+:Guardar candidatos y pasar a MATCHED
+en una sola transacción;
+stop
+@enduml

@@ -33,7 +33,8 @@ spec:
           type: RuntimeDefault
       initContainers:
         - name: migrate
-          image: rednexus-api-migrate
+          image: rednexus-api
+          command: ['prisma', 'migrate', 'deploy']
           envFrom:
             - secretRef:
                 name: api-secrets

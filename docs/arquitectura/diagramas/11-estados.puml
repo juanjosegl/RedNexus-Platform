@@ -1,0 +1,41 @@
+@startuml 11-estados
+' Estados de la solicitud (HelpRequest) y del candidato (Match)
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+skinparam shadowing false
+skinparam LegendBackgroundColor #ffffff
+skinparam LegendBorderColor #999999
+hide empty description
+skinparam state {
+  BackgroundColor #dbeafe
+  BorderColor #1168bd
+  ArrowColor #555555
+}
+
+state "Solicitud (HelpRequest)" as Sol {
+  state PENDING
+  state MATCHED
+  state ACCEPTED
+  state CLOSED
+  [*] --> PENDING : el estudiante la publica
+  PENDING --> MATCHED : el worker guarda el top 3
+  MATCHED --> ACCEPTED : un ayudante acepta
+  PENDING --> CLOSED : el autor la cierra
+  MATCHED --> CLOSED : el autor la cierra
+  ACCEPTED --> CLOSED : el autor la cierra
+  CLOSED --> [*]
+}
+
+state "Candidato (Match)" as Mat {
+  state PROPOSED
+  state "ACCEPTED" as MACC
+  state REJECTED
+  [*] --> PROPOSED : creado por el worker
+  PROPOSED --> MACC : el ayudante acepta
+  PROPOSED --> REJECTED : el ayudante rechaza
+  MACC --> [*]
+  REJECTED --> [*]
+}
+
+Sol -[hidden]right-> Mat
+@enduml

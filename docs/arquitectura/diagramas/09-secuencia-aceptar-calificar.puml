@@ -1,0 +1,44 @@
+@startuml 09-secuencia-aceptar-calificar
+' Aceptar la ayuda (solo uno acepta) y calificarla
+skinparam dpi 200
+skinparam defaultFontName "Helvetica"
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam ParticipantBackgroundColor #dbeafe
+skinparam ParticipantBorderColor #1168bd
+skinparam DatabaseBackgroundColor #dbeafe
+skinparam ActorBackgroundColor #08427b
+autonumber
+
+actor "Ayudante" as H
+actor "Estudiante" as S
+box "RedNexus" #f4f8fc
+  participant "Aplicación web" as W
+  participant "API" as A
+  database "PostgreSQL" as DB
+end box
+
+H -> W : Abre "Solicitudes para ayudar"
+W -> A : GET /api/matches/incoming
+A -> DB : Matches donde helperId = yo
+A --> W : Solicitudes con score y explicación
+H -> W : Acepta una solicitud
+W -> A : POST /api/matches/:id/accept
+A -> DB : Transacción: solicitud MATCHED → ACCEPTED
+alt Otro ayudante ya aceptó
+  A --> W : 409 La solicitud ya fue aceptada o cerrada
+else Es el primero en aceptar
+  A -> DB : Match PROPOSED → ACCEPTED
+  A --> W : 200 { authorEmail }
+  W --> H : Correo del estudiante para contactarlo
+end
+
+... La ayuda ocurre fuera de la plataforma (correo, reunión) ...
+
+S -> W : Califica con estrellas
+W -> A : POST /api/ratings { requestId, stars }
+A -> A : Valida: es el autor, la solicitud fue aceptada, 1 ≤ stars ≤ 5
+A -> DB : INSERT Rating (único por solicitud)
+A --> W : 201
+note over DB : El promedio de estrellas pesa 20 %\nen los próximos emparejamientos
+@enduml

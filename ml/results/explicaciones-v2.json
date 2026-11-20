@@ -1,0 +1,272 @@
+[
+  {
+    "request": "No entiendo cómo unir tres tablas cuando hay una tabla intermedia entre estudiantes y cursos",
+    "helper": "Ana Gómez",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Mi consulta en PostgreSQL tarda 40 segundos con una tabla de un millón de filas, ¿cómo la acelero?",
+    "helper": "Carlos Muñoz",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "¿Qué diferencia hay entre WHERE y HAVING cuando agrupo resultados?",
+    "helper": "Julián Ceballos",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Tengo que pasar una tabla con datos repetidos a tercera forma normal y no sé por dónde empezar",
+    "helper": "Natalia Quintero",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Cómo diseño el diagrama entidad relación de una biblioteca con préstamos de libros",
+    "helper": "Alejandra Rivera",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Necesito que cada vez que se actualice un registro en MySQL se guarde automáticamente un historial",
+    "helper": "Esteban Muñoz",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "¿Cuándo conviene una base de documentos en vez de una relacional para un catálogo de productos?",
+    "helper": "Ana Gómez",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "No sé armar un pipeline de agregación con $group y $lookup",
+    "helper": "David Imbachí",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "¿Qué es un interbloqueo entre transacciones y cómo evito que pase en mi base de datos?",
+    "helper": "Ana Gómez",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Subconsultas correlacionadas: no entiendo cuándo se ejecuta la consulta de adentro",
+    "helper": "Julián Ceballos",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Empiezo a programar y no entiendo para qué sirven los ciclos for y while",
+    "helper": "Laura Ordóñez",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Mi función que se llama a sí misma para el factorial nunca termina y se desborda",
+    "helper": "Laura Ordóñez",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "No entiendo la herencia ni el método __init__ en las clases de Python",
+    "helper": "Andrés Caicedo",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Diferencia entre lista, tupla y diccionario y cuándo usar cada uno",
+    "helper": "Laura Ordóñez",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "No entiendo la diferencia entre una clase abstracta y una interfaz en Java",
+    "helper": "Andrés Caicedo",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "¿Qué es el polimorfismo? El profesor lo explicó con figuras geométricas y no me quedó claro",
+    "helper": "Valeria Muñoz",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Cómo hago una API REST con Spring Boot que guarde los datos con JPA",
+    "helper": "Jhon Fredy Palechor",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Me sale LazyInitializationException en Hibernate al traer una relación",
+    "helper": "Jhon Fredy Palechor",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Qué patrón uso para crear objetos sin acoplarme a la clase concreta",
+    "helper": "Fernando Ordóñez",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Mi componente de Vue no se actualiza en pantalla cuando cambio un dato dentro de un objeto",
+    "helper": "Valentina Ruiz",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "No entiendo async await, mi función devuelve una promesa pendiente en vez del dato",
+    "helper": "Manuela Arboleda",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Cómo pido datos a una API desde el navegador y los muestro en una tabla",
+    "helper": "Valentina Ruiz",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Quiero que mi página se vea bien en el celular, los elementos se salen de la pantalla",
+    "helper": "Cristian Yalanda",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "No logro centrar un div vertical y horizontalmente",
+    "helper": "Verónica Paredes",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "¿Qué significa que JavaScript tenga un solo hilo y cómo funciona el event loop?",
+    "helper": "Manuela Arboleda",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Cómo protejo las rutas de mi API con tokens para que solo entren usuarios con sesión",
+    "helper": "Tomás Guerrero",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Estoy armando un backend con NestJS y no entiendo módulos, providers e inyección de dependencias",
+    "helper": "Juan Pablo Torres",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Cómo pruebo un servicio que usa la base de datos sin conectarme a la base real",
+    "helper": "Julián Ceballos",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "No entiendo los punteros: cuando paso un arreglo a una función se modifica el original",
+    "helper": "Laura Ordóñez",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  },
+  {
+    "request": "Mi programa en C da segmentation fault cuando reservo memoria",
+    "helper": "Verónica Paredes",
+    "explicacion": "Su perfil no menciona este tema, pero es el más cercano disponible.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "Su perfil no menciona este tema, pero es el más cercano disponible."
+    ]
+  }
+]

@@ -1,0 +1,1046 @@
+[
+  {
+    "request": "r001",
+    "text": "No entiendo c\u00f3mo unir tres tablas cuando hay una tabla intermedia entre estudiantes y cursos",
+    "relevant": [
+      "ana",
+      "julian"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r002",
+    "text": "Mi consulta en PostgreSQL tarda 40 segundos con una tabla de un mill\u00f3n de filas, \u00bfc\u00f3mo la acelero?",
+    "relevant": [
+      "carlos"
+    ],
+    "top3": [
+      "carlos"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r003",
+    "text": "\u00bfQu\u00e9 diferencia hay entre WHERE y HAVING cuando agrupo resultados?",
+    "relevant": [
+      "julian",
+      "ana"
+    ],
+    "top3": [
+      "julian"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r004",
+    "text": "Tengo que pasar una tabla con datos repetidos a tercera forma normal y no s\u00e9 por d\u00f3nde empezar",
+    "relevant": [
+      "natalia",
+      "ana"
+    ],
+    "top3": [
+      "natalia"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r005",
+    "text": "C\u00f3mo dise\u00f1o el diagrama entidad relaci\u00f3n de una biblioteca con pr\u00e9stamos de libros",
+    "relevant": [
+      "natalia",
+      "ana"
+    ],
+    "top3": [
+      "alejandra"
+    ],
+    "hit": false
+  },
+  {
+    "request": "r006",
+    "text": "Necesito que cada vez que se actualice un registro en MySQL se guarde autom\u00e1ticamente un historial",
+    "relevant": [
+      "esteban"
+    ],
+    "top3": [
+      "esteban"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r007",
+    "text": "\u00bfCu\u00e1ndo conviene una base de documentos en vez de una relacional para un cat\u00e1logo de productos?",
+    "relevant": [
+      "david"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r008",
+    "text": "No s\u00e9 armar un pipeline de agregaci\u00f3n con $group y $lookup",
+    "relevant": [
+      "david"
+    ],
+    "top3": [
+      "david"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r009",
+    "text": "\u00bfQu\u00e9 es un interbloqueo entre transacciones y c\u00f3mo evito que pase en mi base de datos?",
+    "relevant": [
+      "carlos",
+      "veronica"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r010",
+    "text": "Subconsultas correlacionadas: no entiendo cu\u00e1ndo se ejecuta la consulta de adentro",
+    "relevant": [
+      "julian"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r011",
+    "text": "Empiezo a programar y no entiendo para qu\u00e9 sirven los ciclos for y while",
+    "relevant": [
+      "laura"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r012",
+    "text": "Mi funci\u00f3n que se llama a s\u00ed misma para el factorial nunca termina y se desborda",
+    "relevant": [
+      "laura",
+      "nicolas"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r013",
+    "text": "\u00bfC\u00f3mo leo un archivo CSV l\u00ednea por l\u00ednea y controlo el error si el archivo no existe?",
+    "relevant": [
+      "gabriela"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r014",
+    "text": "No entiendo la herencia ni el m\u00e9todo __init__ en las clases de Python",
+    "relevant": [
+      "gabriela"
+    ],
+    "top3": [
+      "andres",
+      "gabriela"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r015",
+    "text": "Diferencia entre lista, tupla y diccionario y cu\u00e1ndo usar cada uno",
+    "relevant": [
+      "laura",
+      "gabriela"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r016",
+    "text": "No entiendo la diferencia entre una clase abstracta y una interfaz en Java",
+    "relevant": [
+      "andres"
+    ],
+    "top3": [
+      "andres"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r017",
+    "text": "\u00bfQu\u00e9 es el polimorfismo? El profesor lo explic\u00f3 con figuras geom\u00e9tricas y no me qued\u00f3 claro",
+    "relevant": [
+      "andres"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r018",
+    "text": "C\u00f3mo hago una API REST con Spring Boot que guarde los datos con JPA",
+    "relevant": [
+      "jhon"
+    ],
+    "top3": [
+      "jhon"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r019",
+    "text": "Me sale LazyInitializationException en Hibernate al traer una relaci\u00f3n",
+    "relevant": [
+      "jhon"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r020",
+    "text": "Qu\u00e9 patr\u00f3n uso para crear objetos sin acoplarme a la clase concreta",
+    "relevant": [
+      "andres",
+      "fernando"
+    ],
+    "top3": [
+      "fernando",
+      "andres"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r021",
+    "text": "Mi componente de Vue no se actualiza en pantalla cuando cambio un dato dentro de un objeto",
+    "relevant": [
+      "valentina"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r022",
+    "text": "No entiendo async await, mi funci\u00f3n devuelve una promesa pendiente en vez del dato",
+    "relevant": [
+      "manuela",
+      "valentina"
+    ],
+    "top3": [
+      "manuela"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r023",
+    "text": "C\u00f3mo pido datos a una API desde el navegador y los muestro en una tabla",
+    "relevant": [
+      "valentina",
+      "manuela"
+    ],
+    "top3": [
+      "valentina"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r024",
+    "text": "Quiero que mi p\u00e1gina se vea bien en el celular, los elementos se salen de la pantalla",
+    "relevant": [
+      "luisa"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r025",
+    "text": "No logro centrar un div vertical y horizontalmente",
+    "relevant": [
+      "luisa"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r026",
+    "text": "\u00bfQu\u00e9 significa que JavaScript tenga un solo hilo y c\u00f3mo funciona el event loop?",
+    "relevant": [
+      "manuela"
+    ],
+    "top3": [
+      "manuela"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r027",
+    "text": "C\u00f3mo protejo las rutas de mi API con tokens para que solo entren usuarios con sesi\u00f3n",
+    "relevant": [
+      "juan"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r028",
+    "text": "Estoy armando un backend con NestJS y no entiendo m\u00f3dulos, providers e inyecci\u00f3n de dependencias",
+    "relevant": [
+      "juan"
+    ],
+    "top3": [
+      "juan"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r029",
+    "text": "C\u00f3mo pruebo un servicio que usa la base de datos sin conectarme a la base real",
+    "relevant": [
+      "lina",
+      "juan"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r030",
+    "text": "No entiendo los punteros: cuando paso un arreglo a una funci\u00f3n se modifica el original",
+    "relevant": [
+      "kevin"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r031",
+    "text": "Mi programa en C da segmentation fault cuando reservo memoria",
+    "relevant": [
+      "kevin"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r032",
+    "text": "Quiero hacer mi primera aplicaci\u00f3n para celular Android que muestre una lista",
+    "relevant": [
+      "cristian"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r033",
+    "text": "En Jetpack Compose el estado se pierde al girar el celular",
+    "relevant": [
+      "cristian"
+    ],
+    "top3": [
+      "cristian"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r034",
+    "text": "C\u00f3mo calculo la complejidad de un algoritmo con dos ciclos anidados",
+    "relevant": [
+      "nicolas"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r035",
+    "text": "Implementar un \u00e1rbol binario de b\u00fasqueda e insertar y eliminar nodos",
+    "relevant": [
+      "nicolas"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r036",
+    "text": "Qu\u00e9 m\u00e9todo de ordenamiento es m\u00e1s r\u00e1pido y por qu\u00e9 quicksort es n log n",
+    "relevant": [
+      "nicolas"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r037",
+    "text": "Encontrar el camino m\u00e1s corto entre dos ciudades en un mapa con distancias",
+    "relevant": [
+      "santiago",
+      "nicolas"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r038",
+    "text": "Hice merge y me salieron marcas <<<<<<< HEAD en el c\u00f3digo, no s\u00e9 qu\u00e9 borrar",
+    "relevant": [
+      "camila"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r039",
+    "text": "\u00bfCu\u00e1l es la diferencia entre rebase y merge? Mi equipo pide un historial limpio",
+    "relevant": [
+      "camila"
+    ],
+    "top3": [
+      "camila"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r040",
+    "text": "Sub\u00ed por error un archivo con contrase\u00f1as al repositorio, c\u00f3mo lo saco del historial",
+    "relevant": [
+      "camila",
+      "tomas"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r041",
+    "text": "No entiendo c\u00f3mo derivar una funci\u00f3n que est\u00e1 dentro de otra funci\u00f3n",
+    "relevant": [
+      "sofia"
+    ],
+    "top3": [
+      "sofia"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r042",
+    "text": "Integraci\u00f3n por partes: nunca s\u00e9 qu\u00e9 escoger como u y qu\u00e9 como dv",
+    "relevant": [
+      "sofia"
+    ],
+    "top3": [
+      "sofia"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r043",
+    "text": "C\u00f3mo calculo un l\u00edmite que me da cero sobre cero",
+    "relevant": [
+      "sofia",
+      "valeria"
+    ],
+    "top3": [
+      "sofia"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r044",
+    "text": "Integrales dobles en coordenadas polares para calcular el \u00e1rea de una regi\u00f3n",
+    "relevant": [
+      "ricardo"
+    ],
+    "top3": [
+      "ricardo",
+      "sofia"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r045",
+    "text": "Qu\u00e9 representa el gradiente y la derivada direccional de una funci\u00f3n de dos variables",
+    "relevant": [
+      "ricardo"
+    ],
+    "top3": [
+      "ricardo"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r046",
+    "text": "Resolver la ecuaci\u00f3n de un tanque que se vac\u00eda, me dijeron que es una ecuaci\u00f3n diferencial de primer orden",
+    "relevant": [
+      "diana"
+    ],
+    "top3": [
+      "diana"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r047",
+    "text": "Usar la transformada de Laplace para resolver un circuito RC",
+    "relevant": [
+      "diana",
+      "lorena"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r048",
+    "text": "No s\u00e9 factorizar trinomios ni simplificar fracciones con letras",
+    "relevant": [
+      "valeria"
+    ],
+    "top3": [
+      "valeria"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r049",
+    "text": "Identidades trigonom\u00e9tricas para el examen de admisi\u00f3n",
+    "relevant": [
+      "valeria"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r050",
+    "text": "C\u00f3mo saco los valores y vectores propios de una matriz de 3x3",
+    "relevant": [
+      "mateo"
+    ],
+    "top3": [
+      "mateo"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r051",
+    "text": "Resolver un sistema de tres ecuaciones con el m\u00e9todo de Gauss-Jordan",
+    "relevant": [
+      "mateo"
+    ],
+    "top3": [
+      "mateo",
+      "diana"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r052",
+    "text": "Qu\u00e9 significa que unos vectores sean linealmente independientes",
+    "relevant": [
+      "mateo"
+    ],
+    "top3": [
+      "mateo",
+      "diana",
+      "ricardo"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r053",
+    "text": "C\u00f3mo hago una prueba de hip\u00f3tesis para comparar las medias de dos grupos",
+    "relevant": [
+      "isabella"
+    ],
+    "top3": [
+      "isabella"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r054",
+    "text": "C\u00f3mo interpreto el R cuadrado de una regresi\u00f3n",
+    "relevant": [
+      "isabella",
+      "paula"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r055",
+    "text": "Teorema de Bayes con el ejemplo de una prueba m\u00e9dica con falsos positivos",
+    "relevant": [
+      "carolina",
+      "isabella"
+    ],
+    "top3": [
+      "carolina"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r056",
+    "text": "\u00bfDe cu\u00e1ntas formas escojo un comit\u00e9 de 3 personas entre 10? No s\u00e9 si es permutaci\u00f3n o combinaci\u00f3n",
+    "relevant": [
+      "carolina",
+      "santiago"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r057",
+    "text": "Distribuci\u00f3n binomial o de Poisson: cu\u00e1ndo uso cada una",
+    "relevant": [
+      "carolina",
+      "isabella"
+    ],
+    "top3": [
+      "isabella"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r058",
+    "text": "Demostrar por inducci\u00f3n que la suma de los primeros n impares es n al cuadrado",
+    "relevant": [
+      "santiago"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r059",
+    "text": "Tablas de verdad y equivalencias l\u00f3gicas para simplificar una proposici\u00f3n",
+    "relevant": [
+      "santiago",
+      "mauricio"
+    ],
+    "top3": [
+      "santiago"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r060",
+    "text": "Un resorte con amortiguamiento: c\u00f3mo resuelvo la ecuaci\u00f3n de segundo orden",
+    "relevant": [
+      "diana"
+    ],
+    "top3": [
+      "diana",
+      "sofia"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r061",
+    "text": "Dividir una red /24 en 6 subredes y calcular las m\u00e1scaras",
+    "relevant": [
+      "daniela"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r062",
+    "text": "Qu\u00e9 capa del modelo OSI se encarga de enrutar los paquetes",
+    "relevant": [
+      "daniela"
+    ],
+    "top3": [
+      "daniela"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r063",
+    "text": "Configurar VLANs en un switch en Packet Tracer y que se comuniquen entre ellas",
+    "relevant": [
+      "andrea",
+      "daniela"
+    ],
+    "top3": [
+      "andrea",
+      "daniela"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r064",
+    "text": "La IP responde al ping pero la p\u00e1gina no carga por el nombre, \u00bfser\u00e1 la resoluci\u00f3n de nombres?",
+    "relevant": [
+      "daniela"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r065",
+    "text": "C\u00f3mo configuro el firewall para dejar pasar solo el puerto 443",
+    "relevant": [
+      "andrea",
+      "oscar"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r066",
+    "text": "Mi contenedor se detiene apenas arranca y no veo el error",
+    "relevant": [
+      "felipe"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r067",
+    "text": "Qu\u00e9 diferencia hay entre un Deployment y un Service en Kubernetes",
+    "relevant": [
+      "felipe"
+    ],
+    "top3": [
+      "felipe"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r068",
+    "text": "Quiero que mis pruebas corran solas cada vez que hago push a GitHub",
+    "relevant": [
+      "brayan",
+      "felipe"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r069",
+    "text": "C\u00f3mo escribo un script que haga copias de seguridad todas las noches en un servidor",
+    "relevant": [
+      "oscar"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r070",
+    "text": "Me sale permission denied al ejecutar un archivo en la terminal de Ubuntu",
+    "relevant": [
+      "oscar"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r071",
+    "text": "Subir mi aplicaci\u00f3n a una m\u00e1quina en Amazon y guardar los archivos subidos en un bucket",
+    "relevant": [
+      "melissa"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r072",
+    "text": "Estoy creando la infraestructura con Terraform y no entiendo qu\u00e9 es el state",
+    "relevant": [
+      "melissa"
+    ],
+    "top3": [
+      "melissa"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r073",
+    "text": "Configurar un pipeline en Jenkins que construya y despliegue mi aplicaci\u00f3n",
+    "relevant": [
+      "brayan"
+    ],
+    "top3": [
+      "brayan",
+      "felipe",
+      "melissa"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r074",
+    "text": "Cu\u00e1ndo uso present perfect y cu\u00e1ndo simple past",
+    "relevant": [
+      "mariana"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r075",
+    "text": "Tengo una entrevista de trabajo en ingl\u00e9s y me bloqueo al hablar",
+    "relevant": [
+      "juliana"
+    ],
+    "top3": [
+      "juliana"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r076",
+    "text": "Me cuesta entender la documentaci\u00f3n en ingl\u00e9s de las librer\u00edas que uso",
+    "relevant": [
+      "alexander"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r077",
+    "text": "Pronunciaci\u00f3n de la th y de los verbos que terminan en ed",
+    "relevant": [
+      "juliana"
+    ],
+    "top3": [
+      "juliana"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r078",
+    "text": "Un bloque baja por un plano inclinado con fricci\u00f3n, c\u00f3mo saco la aceleraci\u00f3n",
+    "relevant": [
+      "sebastian"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r079",
+    "text": "Calcular el campo el\u00e9ctrico de una esfera cargada con la ley de Gauss",
+    "relevant": [
+      "lorena"
+    ],
+    "top3": [
+      "lorena"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r080",
+    "text": "No entiendo la inducci\u00f3n en una espira cuando cambia el flujo magn\u00e9tico",
+    "relevant": [
+      "lorena"
+    ],
+    "top3": [
+      "lorena"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r081",
+    "text": "Primera ley de la termodin\u00e1mica en un gas que se expande",
+    "relevant": [
+      "hector"
+    ],
+    "top3": [
+      "hector"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r082",
+    "text": "Resistencias en serie y en paralelo con la ley de Ohm",
+    "relevant": [
+      "sebastian",
+      "lorena",
+      "mauricio"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r083",
+    "text": "Balancear una ecuaci\u00f3n qu\u00edmica por el m\u00e9todo de \u00f3xido reducci\u00f3n",
+    "relevant": [
+      "ximena"
+    ],
+    "top3": [
+      "ximena"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r084",
+    "text": "C\u00f3mo encuentro el reactivo l\u00edmite en una reacci\u00f3n",
+    "relevant": [
+      "ximena"
+    ],
+    "top3": [
+      "ximena"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r085",
+    "text": "Simplificar una funci\u00f3n l\u00f3gica con mapas de Karnaugh",
+    "relevant": [
+      "mauricio"
+    ],
+    "top3": [
+      "mauricio"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r086",
+    "text": "Que un Arduino lea un sensor de temperatura y prenda un LED",
+    "relevant": [
+      "mauricio"
+    ],
+    "top3": [
+      "mauricio"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r087",
+    "text": "Diferencia entre proceso e hilo y cu\u00e1ndo usar varios hilos",
+    "relevant": [
+      "veronica"
+    ],
+    "top3": [
+      "veronica"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r088",
+    "text": "Problema del productor y el consumidor con sem\u00e1foros",
+    "relevant": [
+      "veronica"
+    ],
+    "top3": [
+      "veronica"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r089",
+    "text": "C\u00f3mo escribo historias de usuario con criterios de aceptaci\u00f3n para mi proyecto",
+    "relevant": [
+      "alejandra"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r090",
+    "text": "Mi c\u00f3digo tiene una clase gigante que hace de todo, c\u00f3mo lo organizo mejor",
+    "relevant": [
+      "fernando"
+    ],
+    "top3": [
+      "fernando"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r091",
+    "text": "C\u00f3mo se hace TDD: escribo la prueba antes, falla, \u00bfy luego qu\u00e9?",
+    "relevant": [
+      "lina"
+    ],
+    "top3": [
+      "lina"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r092",
+    "text": "Mi modelo de clasificaci\u00f3n tiene 99 % en entrenamiento y 60 % en prueba",
+    "relevant": [
+      "paula",
+      "pablo"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r093",
+    "text": "C\u00f3mo entreno una red neuronal convolucional para clasificar fotos",
+    "relevant": [
+      "pablo"
+    ],
+    "top3": [
+      "pablo"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r094",
+    "text": "Qu\u00e9 es un embedding y c\u00f3mo lo uso para buscar documentos parecidos",
+    "relevant": [
+      "adriana"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r095",
+    "text": "C\u00f3mo armo un chatbot que responda solo con mis propios documentos",
+    "relevant": [
+      "adriana"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r096",
+    "text": "C\u00f3mo evito que me inyecten c\u00f3digo en el formulario de inicio de sesi\u00f3n",
+    "relevant": [
+      "tomas"
+    ],
+    "top3": [],
+    "hit": false
+  },
+  {
+    "request": "r097",
+    "text": "Qu\u00e9 es XSS y c\u00f3mo limpio lo que escriben los usuarios",
+    "relevant": [
+      "tomas"
+    ],
+    "top3": [
+      "tomas"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r098",
+    "text": "Escanear los puertos abiertos de mi m\u00e1quina virtual para la pr\u00e1ctica de seguridad",
+    "relevant": [
+      "ivan"
+    ],
+    "top3": [
+      "ivan"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r099",
+    "text": "C\u00f3mo cito un art\u00edculo y una p\u00e1gina web en normas APA s\u00e9ptima edici\u00f3n",
+    "relevant": [
+      "monica"
+    ],
+    "top3": [
+      "monica"
+    ],
+    "hit": true
+  },
+  {
+    "request": "r100",
+    "text": "Formular el planteamiento del problema y los objetivos del anteproyecto de grado",
+    "relevant": [
+      "monica"
+    ],
+    "top3": [
+      "monica"
+    ],
+    "hit": true
+  }
+]

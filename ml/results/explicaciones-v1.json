@@ -1,0 +1,230 @@
+[
+  {
+    "request": "No entiendo cómo unir tres tablas cuando hay una tabla intermedia entre estudiantes y cursos",
+    "helper": "Ana Gómez",
+    "explicacion": "Ana Gómez, como experta en SQL y relaciones entre tablas, puede ayudarte a unir tres tablas cuando hay una tabla intermedia.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "experta en SQL y relaciones entre tablas"
+    ]
+  },
+  {
+    "request": "Mi consulta en PostgreSQL tarda 40 segundos con una tabla de un millón de filas, ¿cómo la acelero?",
+    "helper": "Carlos Muñoz",
+    "explicacion": "Carlos Muñoz puede ayudarte a optimizar tus consultas en PostgreSQL para acelerar consultas con grandes tablas.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "¿Qué diferencia hay entre WHERE y HAVING cuando agrupo resultados?",
+    "helper": "Julián Ceballos",
+    "explicacion": "Julián puede ayudarte a entender la diferencia entre WHERE y HAVING en SQL.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Tengo que pasar una tabla con datos repetidos a tercera forma normal y no sé por dónde empezar",
+    "helper": "Natalia Quintero",
+    "explicacion": "Natalia Quintero puede ayudarte a pasar la tabla a tercera forma normal.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Cómo diseño el diagrama entidad relación de una biblioteca con préstamos de libros",
+    "helper": "Alejandra Rivera",
+    "explicacion": "Alejandra puede ayudarte a diseñar el diagrama ER de una biblioteca con préstamos de libros utilizando UML.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "diseñar el diagrama ER de una biblioteca con préstamos de libros utilizando UML"
+    ]
+  },
+  {
+    "request": "Necesito que cada vez que se actualice un registro en MySQL se guarde automáticamente un historial",
+    "helper": "Esteban Muñoz",
+    "explicacion": "Esteban Muñoz puede ayudarte a crear un trigger en MySQL que guarde automáticamente un historial cada vez que se actualice un registro.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "¿Cuándo conviene una base de documentos en vez de una relacional para un catálogo de productos?",
+    "helper": "Ana Gómez",
+    "explicacion": "Ana Gómez puede ayudarte a decidir cuándo usar una base de datos no relacional para un catálogo de productos.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "puede ayudarte a decidir cuándo usar una base de datos no relacional para un catálogo de productos"
+    ]
+  },
+  {
+    "request": "No sé armar un pipeline de agregación con $group y $lookup",
+    "helper": "David Imbachí",
+    "explicacion": "David Imbachí puede ayudar con tu duda sobre armar un pipeline de agregación con $group y $lookup en MongoDB.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "¿Qué es un interbloqueo entre transacciones y cómo evito que pase en mi base de datos?",
+    "helper": "Ana Gómez",
+    "explicacion": "Ana Gómez, como monitora de Bases de Datos I, puede ayudarte explicando qué es un interbloqueo entre transacciones y cómo prevenirlo en tu base de datos utilizando SQL.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Subconsultas correlacionadas: no entiendo cuándo se ejecuta la consulta de adentro",
+    "helper": "Julián Ceballos",
+    "explicacion": "Julián puede ayudarte con tu duda sobre cuando se ejecutan las subconsultas en SQL.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Empiezo a programar y no entiendo para qué sirven los ciclos for y while",
+    "helper": "Laura Ordóñez",
+    "explicacion": "Laura Ordóñez, programadora en Python, puede explicar qué son y cómo usar correctamente los ciclos for y while.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Mi función que se llama a sí misma para el factorial nunca termina y se desborda",
+    "helper": "Laura Ordóñez",
+    "explicacion": "Laura Ordóñez puede ayudar con la función factorial que no termina en Python.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "puede ayudar con la función factorial que no termina en Python"
+    ]
+  },
+  {
+    "request": "No entiendo la herencia ni el método __init__ en las clases de Python",
+    "helper": "Andrés Caicedo",
+    "explicacion": "Andrés Caicedo puede ayudarte con la herencia en Python, pero no con el método __init__ ya que ese es un concepto de POO en Java.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Diferencia entre lista, tupla y diccionario y cuándo usar cada uno",
+    "helper": "Laura Ordóñez",
+    "explicacion": "Laura Ordóñez puede ayudarte a diferenciar entre una lista, una tupla y un diccionario y cuándo usar cada uno en Python.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "No entiendo la diferencia entre una clase abstracta y una interfaz en Java",
+    "helper": "Andrés Caicedo",
+    "explicacion": "Andrés Caicedo puede ayudarte con la diferencia entre una clase abstracta y una interfaz en Java.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "¿Qué es el polimorfismo? El profesor lo explicó con figuras geométricas y no me quedó claro",
+    "helper": "Valeria Muñoz",
+    "explicacion": "Valeria Muñoz puede ayudarte a entender el concepto de polimorfismo explicándolo con ejemplos matemáticos.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "puede ayudarte a entender el concepto de polimorfismo explicándolo con ejemplos matemáticos"
+    ]
+  },
+  {
+    "request": "Cómo hago una API REST con Spring Boot que guarde los datos con JPA",
+    "helper": "Jhon Fredy Palechor",
+    "explicacion": "Jhon Fredy Palechor puede ayudarte a crear una API REST con Spring Boot que use JPA para guardar datos en la base de datos.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Me sale LazyInitializationException en Hibernate al traer una relación",
+    "helper": "Jhon Fredy Palechor",
+    "explicacion": "Jhon Fredy Palechor puede ayudarte con tu LazyInitializationException en Hibernate.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Qué patrón uso para crear objetos sin acoplarme a la clase concreta",
+    "helper": "Fernando Ordóñez",
+    "explicacion": "Fernando Ordóñez puede ayudarte a crear objetos sin acoplarte a la clase concreta utilizando patrones de diseño como el Patrón de Diseño Abstract Factory.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Mi componente de Vue no se actualiza en pantalla cuando cambio un dato dentro de un objeto",
+    "helper": "Valentina Ruiz",
+    "explicacion": "Valentina Ruiz, una desarrolladora de web con experiencia en Vue 3, puede ayudarte a resolver el problema de actualización de componente en Vue.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "No entiendo async await, mi función devuelve una promesa pendiente en vez del dato",
+    "helper": "Manuela Arboleda",
+    "explicacion": "Manuela Arboleda puede ayudarte con tu duda sobre async/await en JavaScript.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Cómo pido datos a una API desde el navegador y los muestro en una tabla",
+    "helper": "Valentina Ruiz",
+    "explicacion": "Valentina puede ayudarte a consumir una API desde el navegador y mostrar los datos en una tabla con JavaScript y Vue 3.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Quiero que mi página se vea bien en el celular, los elementos se salen de la pantalla",
+    "helper": "Cristian Yalanda",
+    "explicacion": "Cristian puede ayudarte a optimizar tu página para que se vea bien en dispositivos móviles.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "optimizar tu página para que se vea bien en dispositivos móviles"
+    ]
+  },
+  {
+    "request": "No logro centrar un div vertical y horizontalmente",
+    "helper": "Verónica Paredes",
+    "explicacion": "Verónica Paredes no puede ayudar con tu duda de centrar un div, ya que sus habilidades están relacionadas con sistemas operativos y concurrencia, no con CSS y HTML.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "¿Qué significa que JavaScript tenga un solo hilo y cómo funciona el event loop?",
+    "helper": "Manuela Arboleda",
+    "explicacion": "Manuela Arboleda puede ayudarte con tu pregunta sobre JavaScript y el event loop.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Cómo protejo las rutas de mi API con tokens para que solo entren usuarios con sesión",
+    "helper": "Tomás Guerrero",
+    "explicacion": "Tomás Guerrero puede ayudarte a proteger tus rutas API con tokens para que solo entren usuarios con sesión.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "proteger tus rutas API con tokens"
+    ]
+  },
+  {
+    "request": "Estoy armando un backend con NestJS y no entiendo módulos, providers e inyección de dependencias",
+    "helper": "Juan Pablo Torres",
+    "explicacion": "Juan Pablo Torres, experto en NestJS, puede ayudarte con módulos, providers e inyección de dependencias en tu backend con NestJS.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  },
+  {
+    "request": "Cómo pruebo un servicio que usa la base de datos sin conectarme a la base real",
+    "helper": "Julián Ceballos",
+    "explicacion": "Julián puede ayudarte a probar un servicio que usa la base de datos sin conectarte a la base real mediante consultas SQL.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "puede ayudarte a probar un servicio que usa la base de datos sin conectarte a la base real mediante consultas SQL"
+    ]
+  },
+  {
+    "request": "No entiendo los punteros: cuando paso un arreglo a una función se modifica el original",
+    "helper": "Laura Ordóñez",
+    "explicacion": "Laura Ordóñez puede ayudarte explicando cómo funcionan los punteros en Python, que es un tema relacionado con funciones y arreglos.",
+    "inventa": true,
+    "afirmaciones_no_soportadas": [
+      "punteros en Python"
+    ]
+  },
+  {
+    "request": "Mi programa en C da segmentation fault cuando reservo memoria",
+    "helper": "Verónica Paredes",
+    "explicacion": "Verónica puede ayudarte a entender mejor cómo reservar memoria sin causar un segmentation fault en tu programa en C.",
+    "inventa": false,
+    "afirmaciones_no_soportadas": []
+  }
+]
