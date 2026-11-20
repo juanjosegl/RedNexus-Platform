@@ -1,0 +1,32 @@
+{
+  "version": "20261120",
+  "embedding_model": "paraphrase-multilingual",
+  "embedding_prefixes": false,
+  "similarity_weight": 0.8,
+  "min_similarity": 0.25,
+  "classification": "enriquecer",
+  "classification_prompt": "v2",
+  "hybrid_alpha": 0.6,
+  "explain_prompt": "v3",
+  "llm": "qwen2.5:3b",
+  "metrics": {
+    "precision_at_3": 0.94,
+    "hit_at_1": 0.79,
+    "mrr": 0.86,
+    "recall_at_3": 0.8883,
+    "coverage": 0.98,
+    "off_topic_rejected": 0.9,
+    "explanations_unsupported_rate": 0.1667,
+    "explanations_judged": 30.0,
+    "explain_ms_median": 2047.8554
+  },
+  "baseline_backend": {
+    "precision_at_3": 0.81,
+    "hit_at_1": 0.67,
+    "mrr": 0.7333,
+    "recall_at_3": 0.7617,
+    "coverage": 1.0,
+    "off_topic_rejected": 0.1
+  },
+  "mlflow_model": "models:/rednexus-matching/1"
+}

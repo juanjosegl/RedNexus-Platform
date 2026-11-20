@@ -16,7 +16,7 @@ Person(ops, "Equipo de desarrollo y operación", "Construye, despliega y monitor
 
 System(rn, "RedNexus", "Red de apoyo académico que empareja solicitudes con ayudantes usando IA local")
 
-System_Ext(ia, "Modelos de IA locales (Ollama)", "llama3.2:3b para clasificar y explicar; nomic-embed-text para embeddings")
+System_Ext(ia, "Modelos de IA locales (Ollama)", "qwen2.5:3b para clasificar y explicar; paraphrase-multilingual para embeddings; whisper.cpp para notas de voz")
 System_Ext(gh, "GitHub", "Repositorios, GitHub Actions y registro de imágenes GHCR")
 
 Rel(sol, rn, "Publica solicitudes, ve candidatos y califica", "HTTPS")

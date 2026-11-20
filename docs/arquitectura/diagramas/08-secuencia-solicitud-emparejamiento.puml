@@ -35,9 +35,9 @@ W --> S : "Buscando ayudantes..."
 Q -> K : Entrega el trabajo (3 intentos, backoff exponencial)
 K -> DB : Lee la solicitud
 note right of K : Si ya no está PENDING,\ntermina (reintento idempotente)
-K -> O : classify(text) con llama3.2:3b
+K -> O : classify(text) con qwen2.5:3b
 O --> K : { area, topics, level }
-K -> O : embed(text) con nomic-embed-text
+K -> O : embed(texto + área y temas) con paraphrase-multilingual
 O --> K : vector de 768 dimensiones
 K -> DB : Top 10 perfiles por distancia coseno
 alt Sin IA o sin perfiles indexados
