@@ -141,7 +141,7 @@ backend. Todo lo de la actividad (base de conocimiento, modelo, golden dataset, 
   del PDF, documentos de emparejamiento, normas, privacidad, PQRS, calificaciones y preguntas frecuentes, 44 casos
   del golden dataset, corridas de evaluación y secciones C a G del informe.
 
-- **Victor Daniel Fernandez** ([@daniel200231](https://github.com/daniel200231)):componente de mensaje del chat de la página de ayuda (FE-11), con sus pruebas.
+- **Victor Daniel Fernandez** ([@daniel200231](https://github.com/daniel200231)): componente de mensaje del chat de la página de ayuda (FE-11), con sus pruebas.
 
 - **Jose Sebastian Fernandez** ([@josesfa](https://github.com/josesfa)): _pendiente (FE-10)_
 
