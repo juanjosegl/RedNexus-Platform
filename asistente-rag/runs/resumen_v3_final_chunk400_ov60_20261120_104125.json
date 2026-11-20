@@ -1,0 +1,88 @@
+{
+  "run_tag": "v3_final_chunk400_ov60",
+  "target_model": "asistente-rednexus",
+  "judge_model": "qwen2.5:7b",
+  "total": 52,
+  "api_errors": 0,
+  "success": 46,
+  "success_pct": 88.5,
+  "error_pct": 11.5,
+  "keywords_pct": 63.5,
+  "latency_mean_s": 18.703,
+  "latency_median_s": 18.464,
+  "latency_p95_s": 24.316,
+  "fidelidad_mean": 4.67,
+  "completitud_mean": 4.44,
+  "by_category": {
+    "calificaciones": {
+      "total": 8,
+      "success_pct": 87.5,
+      "fidelidad_mean": 4.25,
+      "completitud_mean": 4.5,
+      "latency_mean_s": 18.2
+    },
+    "emparejamiento": {
+      "total": 6,
+      "success_pct": 66.7,
+      "fidelidad_mean": 4.83,
+      "completitud_mean": 4,
+      "latency_mean_s": 19.22
+    },
+    "fuera_de_alcance": {
+      "total": 3,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 5,
+      "latency_mean_s": 18.03
+    },
+    "fuera_de_base": {
+      "total": 3,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 4.33,
+      "latency_mean_s": 18.18
+    },
+    "normas": {
+      "total": 4,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 5,
+      "latency_mean_s": 17.88
+    },
+    "pqrs": {
+      "total": 4,
+      "success_pct": 50.0,
+      "fidelidad_mean": 3.75,
+      "completitud_mean": 3,
+      "latency_mean_s": 21.96
+    },
+    "privacidad": {
+      "total": 4,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 5,
+      "latency_mean_s": 18.18
+    },
+    "problemas_comunes": {
+      "total": 8,
+      "success_pct": 87.5,
+      "fidelidad_mean": 4.88,
+      "completitud_mean": 4.38,
+      "latency_mean_s": 18.09
+    },
+    "registro_perfil": {
+      "total": 8,
+      "success_pct": 100.0,
+      "fidelidad_mean": 4.5,
+      "completitud_mean": 4.75,
+      "latency_mean_s": 19.18
+    },
+    "seguridad": {
+      "total": 4,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 4.5,
+      "latency_mean_s": 18.18
+    }
+  }
+}

@@ -14,20 +14,20 @@ PR a `developer` con `Closes #N`. Las tareas DOC y la IA-08 son en RedNexus-Plat
 | --- | --- | --- | --- |
 | [#30](https://github.com/juanjosegl/RedNexus-Backend/issues/30) | BE-07 Módulo `support` | Backend | Juanjo · hecho |
 | [#25](https://github.com/juanjosegl/RedNexus-Frontend/issues/25) | FE-08 Página de ayuda | Frontend | Juanjo · hecho |
-| [#21](https://github.com/juanjosegl/RedNexus-Platform/issues/21) | IA-08 RAG, modelo y evaluación | Platform | Juanjo |
+| [#21](https://github.com/juanjosegl/RedNexus-Platform/issues/21) | IA-08 RAG, modelo y evaluación | Platform | Juanjo · hecho |
 | — | BE-12 / FE-13 PQRS (endpoint y página) | Backend y Frontend | Juanjo |
-| [#28](https://github.com/juanjosegl/RedNexus-Frontend/issues/28) | FE-11 Burbuja de mensaje | Frontend | Daniel |
-| [#22](https://github.com/juanjosegl/RedNexus-Platform/issues/22) | DOC-05 Registro y perfil | Platform | Daniel |
-| [#27](https://github.com/juanjosegl/RedNexus-Frontend/issues/27) | FE-10 Preguntas sugeridas | Frontend | Josefa |
-| [#31](https://github.com/juanjosegl/RedNexus-Backend/issues/31) | BE-08 Respuestas del mock | Backend | Por asignar |
-| [#32](https://github.com/juanjosegl/RedNexus-Backend/issues/32) | BE-09 Variables de entorno | Backend | Por asignar |
-| [#33](https://github.com/juanjosegl/RedNexus-Backend/issues/33) | BE-10 Pruebas e2e | Backend | Por asignar |
-| [#34](https://github.com/juanjosegl/RedNexus-Backend/issues/34) | BE-11 Documentación Swagger | Backend | Por asignar |
-| [#26](https://github.com/juanjosegl/RedNexus-Frontend/issues/26) | FE-09 Enlace "Ayuda" en el menú | Frontend | Por asignar |
-| [#29](https://github.com/juanjosegl/RedNexus-Frontend/issues/29) | FE-12 Preguntas frecuentes | Frontend | Por asignar |
-| [#23](https://github.com/juanjosegl/RedNexus-Platform/issues/23) | DOC-06 Solicitudes de ayuda | Platform | Por asignar |
-| [#24](https://github.com/juanjosegl/RedNexus-Platform/issues/24) | DOC-07 Calificaciones | Platform | Por asignar |
-| [#25](https://github.com/juanjosegl/RedNexus-Platform/issues/25) | DOC-08 Preguntas frecuentes | Platform | Por asignar |
+| [#28](https://github.com/juanjosegl/RedNexus-Frontend/issues/28) | FE-11 Burbuja de mensaje | Frontend | Victor Daniel Fernandez · hecho |
+| [#22](https://github.com/juanjosegl/RedNexus-Platform/issues/22) | DOC-05 Registro y perfil | Platform | Maria Alejandra Guzman · hecho |
+| [#27](https://github.com/juanjosegl/RedNexus-Frontend/issues/27) | FE-10 Preguntas sugeridas | Frontend | Jose Sebastian Fernandez · hecho |
+| [#31](https://github.com/juanjosegl/RedNexus-Backend/issues/31) | BE-08 Respuestas del mock | Backend | Juanjo · hecho |
+| [#32](https://github.com/juanjosegl/RedNexus-Backend/issues/32) | BE-09 Variables de entorno | Backend | Juanjo · hecho |
+| [#33](https://github.com/juanjosegl/RedNexus-Backend/issues/33) | BE-10 Pruebas e2e | Backend | Juanjo · hecho |
+| [#34](https://github.com/juanjosegl/RedNexus-Backend/issues/34) | BE-11 Documentación Swagger | Backend | Juanjo · hecho |
+| [#26](https://github.com/juanjosegl/RedNexus-Frontend/issues/26) | FE-09 Enlace "Ayuda" en el menú | Frontend | Jose Sebastian Fernandez · hecho |
+| [#29](https://github.com/juanjosegl/RedNexus-Frontend/issues/29) | FE-12 Preguntas frecuentes | Frontend | Maria Paula Andrade · hecho |
+| [#23](https://github.com/juanjosegl/RedNexus-Platform/issues/23) | DOC-06 Solicitudes de ayuda | Platform | Maria Alejandra Guzman |
+| [#24](https://github.com/juanjosegl/RedNexus-Platform/issues/24) | DOC-07 Calificaciones | Platform | Juanjo · hecho |
+| [#25](https://github.com/juanjosegl/RedNexus-Platform/issues/25) | DOC-08 Preguntas frecuentes | Platform | Juanjo · hecho |
 
 Las tareas de los integrantes son de tamaño **S** y dependen de BE-07, FE-08 e IA-08, que ya están en `developer`.
 
