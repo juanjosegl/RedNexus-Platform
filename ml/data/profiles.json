@@ -1,0 +1,620 @@
+[
+  {
+    "id": "ana",
+    "email": "ana.demo@rednexus.dev",
+    "name": "Ana Gómez",
+    "bio": "Sé SQL, joins entre tablas, relaciones muchos a muchos y modelado entidad-relación. Fui monitora de Bases de Datos I.",
+    "tags": [
+      "bases-de-datos",
+      "sql",
+      "modelado",
+      "intermedio"
+    ],
+    "avgRating": 4.8
+  },
+  {
+    "id": "carlos",
+    "email": "carlos.demo@rednexus.dev",
+    "name": "Carlos Muñoz",
+    "bio": "PostgreSQL avanzado: índices, optimización de consultas lentas, transacciones y procedimientos almacenados.",
+    "tags": [
+      "bases-de-datos",
+      "postgresql",
+      "optimizacion",
+      "avanzado"
+    ],
+    "avgRating": 4.5
+  },
+  {
+    "id": "laura",
+    "email": "laura.demo@rednexus.dev",
+    "name": "Laura Ordóñez",
+    "bio": "Programo en Python desde el colegio. Puedo explicar funciones, bucles, listas, diccionarios y recursión desde cero.",
+    "tags": [
+      "programacion",
+      "python",
+      "basico"
+    ],
+    "avgRating": 4.9
+  },
+  {
+    "id": "andres",
+    "email": "andres.demo@rednexus.dev",
+    "name": "Andrés Caicedo",
+    "bio": "Programación orientada a objetos en Java: clases, herencia, interfaces, polimorfismo y patrones de diseño.",
+    "tags": [
+      "programacion",
+      "java",
+      "poo",
+      "intermedio"
+    ],
+    "avgRating": 4.2
+  },
+  {
+    "id": "valentina",
+    "email": "valentina.demo@rednexus.dev",
+    "name": "Valentina Ruiz",
+    "bio": "Desarrollo web con JavaScript, TypeScript y Vue 3. También ayudo con HTML, CSS y consumo de APIs REST.",
+    "tags": [
+      "programacion",
+      "javascript",
+      "vue",
+      "web"
+    ],
+    "avgRating": 4.6
+  },
+  {
+    "id": "juan",
+    "email": "juan.demo@rednexus.dev",
+    "name": "Juan Pablo Torres",
+    "bio": "Backend con Node.js y NestJS, APIs REST, autenticación con JWT y pruebas unitarias.",
+    "tags": [
+      "programacion",
+      "nestjs",
+      "backend",
+      "avanzado"
+    ],
+    "avgRating": 4.4
+  },
+  {
+    "id": "sofia",
+    "email": "sofia.demo@rednexus.dev",
+    "name": "Sofía Paz",
+    "bio": "Cálculo diferencial e integral: límites, derivadas, regla de la cadena e integrales por partes.",
+    "tags": [
+      "matematicas",
+      "calculo",
+      "derivadas",
+      "integrales"
+    ],
+    "avgRating": 4.7
+  },
+  {
+    "id": "mateo",
+    "email": "mateo.demo@rednexus.dev",
+    "name": "Mateo Hurtado",
+    "bio": "Álgebra lineal: matrices, determinantes, sistemas de ecuaciones, vectores y valores propios.",
+    "tags": [
+      "matematicas",
+      "algebra-lineal",
+      "matrices"
+    ],
+    "avgRating": 4.1
+  },
+  {
+    "id": "isabella",
+    "email": "isabella.demo@rednexus.dev",
+    "name": "Isabella Castro",
+    "bio": "Estadística y probabilidad: distribuciones, pruebas de hipótesis, regresión lineal. Uso Excel y R.",
+    "tags": [
+      "matematicas",
+      "estadistica",
+      "probabilidad"
+    ],
+    "avgRating": 4.6
+  },
+  {
+    "id": "santiago",
+    "email": "santiago.demo@rednexus.dev",
+    "name": "Santiago Bolaños",
+    "bio": "Matemáticas discretas y lógica: conjuntos, grafos, inducción matemática y combinatoria.",
+    "tags": [
+      "matematicas",
+      "discretas",
+      "grafos",
+      "logica"
+    ],
+    "avgRating": 3.9
+  },
+  {
+    "id": "daniela",
+    "email": "daniela.demo@rednexus.dev",
+    "name": "Daniela Velasco",
+    "bio": "Redes de computadores: modelo OSI, TCP/IP, subredes, máscaras, DNS y configuración de routers Cisco.",
+    "tags": [
+      "redes",
+      "tcp-ip",
+      "subredes",
+      "cisco"
+    ],
+    "avgRating": 4.8
+  },
+  {
+    "id": "felipe",
+    "email": "felipe.demo@rednexus.dev",
+    "name": "Felipe Rengifo",
+    "bio": "Docker, contenedores, Kubernetes y despliegue continuo con GitHub Actions. Administro servidores Linux.",
+    "tags": [
+      "cloud-devops",
+      "docker",
+      "kubernetes",
+      "linux"
+    ],
+    "avgRating": 4.5
+  },
+  {
+    "id": "camila",
+    "email": "camila.demo@rednexus.dev",
+    "name": "Camila Mosquera",
+    "bio": "Git y GitHub: ramas, merge, rebase, resolver conflictos y flujo de pull requests en equipo.",
+    "tags": [
+      "programacion",
+      "git",
+      "colaboracion"
+    ],
+    "avgRating": 4.3
+  },
+  {
+    "id": "nicolas",
+    "email": "nicolas.demo@rednexus.dev",
+    "name": "Nicolás Erazo",
+    "bio": "Estructuras de datos y algoritmos: listas enlazadas, árboles, pilas, colas, ordenamiento y complejidad Big O.",
+    "tags": [
+      "programacion",
+      "algoritmos",
+      "estructuras-de-datos"
+    ],
+    "avgRating": 4.0
+  },
+  {
+    "id": "mariana",
+    "email": "mariana.demo@rednexus.dev",
+    "name": "Mariana López",
+    "bio": "Inglés nivel B2: gramática, tiempos verbales, redacción de ensayos y preparación para exámenes de inglés.",
+    "tags": [
+      "ingles",
+      "gramatica",
+      "writing"
+    ],
+    "avgRating": 4.7
+  },
+  {
+    "id": "sebastian",
+    "email": "sebastian.demo@rednexus.dev",
+    "name": "Sebastián Chicangana",
+    "bio": "Física mecánica: cinemática, leyes de Newton, fuerza, trabajo y energía. También circuitos eléctricos básicos.",
+    "tags": [
+      "fisica",
+      "mecanica",
+      "circuitos"
+    ],
+    "avgRating": 4.2
+  },
+  {
+    "id": "paula",
+    "email": "paula.demo@rednexus.dev",
+    "name": "Paula Fernández",
+    "bio": "Machine learning con Python: pandas, scikit-learn, regresión, clasificación y evaluación de modelos.",
+    "tags": [
+      "programacion",
+      "python",
+      "machine-learning",
+      "datos"
+    ],
+    "avgRating": 4.8
+  },
+  {
+    "id": "david",
+    "email": "david.demo@rednexus.dev",
+    "name": "David Imbachí",
+    "bio": "Bases de datos NoSQL con MongoDB, diseño de documentos y consultas de agregación.",
+    "tags": [
+      "bases-de-datos",
+      "mongodb",
+      "nosql"
+    ],
+    "avgRating": null
+  },
+  {
+    "id": "alejandra",
+    "email": "alejandra.demo@rednexus.dev",
+    "name": "Alejandra Rivera",
+    "bio": "Ingeniería de software: requisitos, historias de usuario, diagramas UML, casos de uso y Scrum.",
+    "tags": [
+      "ingenieria-de-software",
+      "uml",
+      "requisitos",
+      "scrum"
+    ],
+    "avgRating": 4.4
+  },
+  {
+    "id": "tomas",
+    "email": "tomas.demo@rednexus.dev",
+    "name": "Tomás Guerrero",
+    "bio": "Seguridad informática: OWASP Top 10, inyección SQL, XSS, cifrado y buenas prácticas de contraseñas.",
+    "tags": [
+      "seguridad",
+      "owasp",
+      "cifrado"
+    ],
+    "avgRating": 4.1
+  },
+  {
+    "id": "julian",
+    "email": "julian.demo@rednexus.dev",
+    "name": "Julián Ceballos",
+    "bio": "Consultas SQL desde lo básico: SELECT, filtros con WHERE, GROUP BY, HAVING y subconsultas. Monitor de Bases de Datos.",
+    "tags": [
+      "bases-de-datos",
+      "sql",
+      "basico"
+    ],
+    "avgRating": 4.3
+  },
+  {
+    "id": "natalia",
+    "email": "natalia.demo@rednexus.dev",
+    "name": "Natalia Quintero",
+    "bio": "Modelado de datos: diagramas entidad-relación, cardinalidades y normalización hasta tercera forma normal.",
+    "tags": [
+      "bases-de-datos",
+      "modelado",
+      "normalizacion"
+    ],
+    "avgRating": 4.6
+  },
+  {
+    "id": "esteban",
+    "email": "esteban.demo@rednexus.dev",
+    "name": "Esteban Muñoz",
+    "bio": "MySQL en producción: procedimientos almacenados, triggers, vistas, usuarios y copias de seguridad.",
+    "tags": [
+      "bases-de-datos",
+      "mysql",
+      "administracion"
+    ],
+    "avgRating": 3.8
+  },
+  {
+    "id": "gabriela",
+    "email": "gabriela.demo@rednexus.dev",
+    "name": "Gabriela Ospina",
+    "bio": "Python intermedio: clases y objetos en Python, manejo de excepciones, lectura de archivos, módulos y entornos virtuales con venv.",
+    "tags": [
+      "programacion",
+      "python",
+      "intermedio"
+    ],
+    "avgRating": 4.5
+  },
+  {
+    "id": "kevin",
+    "email": "kevin.demo@rednexus.dev",
+    "name": "Kevin Anacona",
+    "bio": "C y C++: punteros, memoria dinámica con malloc y new, structs, compilación con gcc y make.",
+    "tags": [
+      "programacion",
+      "c",
+      "cpp"
+    ],
+    "avgRating": 4.0
+  },
+  {
+    "id": "luisa",
+    "email": "luisa.demo@rednexus.dev",
+    "name": "Luisa Fernanda Rojas",
+    "bio": "Maquetación web: HTML semántico, CSS, Flexbox, Grid, diseño responsive y accesibilidad.",
+    "tags": [
+      "programacion",
+      "web",
+      "css",
+      "frontend"
+    ],
+    "avgRating": 4.7
+  },
+  {
+    "id": "cristian",
+    "email": "cristian.demo@rednexus.dev",
+    "name": "Cristian Yalanda",
+    "bio": "Desarrollo móvil Android con Kotlin y Jetpack Compose: pantallas, listas, navegación y ciclo de vida.",
+    "tags": [
+      "programacion",
+      "kotlin",
+      "android",
+      "movil"
+    ],
+    "avgRating": 4.2
+  },
+  {
+    "id": "manuela",
+    "email": "manuela.demo@rednexus.dev",
+    "name": "Manuela Arboleda",
+    "bio": "JavaScript asíncrono: callbacks, promesas, async/await, fetch y el event loop del navegador.",
+    "tags": [
+      "programacion",
+      "javascript",
+      "asincronia"
+    ],
+    "avgRating": 4.4
+  },
+  {
+    "id": "jhon",
+    "email": "jhon.demo@rednexus.dev",
+    "name": "Jhon Fredy Palechor",
+    "bio": "Backend en Java con Spring Boot: controladores REST, JPA, Hibernate y conexión a bases de datos.",
+    "tags": [
+      "programacion",
+      "java",
+      "spring-boot",
+      "backend"
+    ],
+    "avgRating": 4.1
+  },
+  {
+    "id": "diana",
+    "email": "diana.demo@rednexus.dev",
+    "name": "Diana Marcela Solarte",
+    "bio": "Ecuaciones diferenciales ordinarias: separables, lineales, de segundo orden y transformada de Laplace.",
+    "tags": [
+      "matematicas",
+      "ecuaciones-diferenciales",
+      "laplace"
+    ],
+    "avgRating": 4.5
+  },
+  {
+    "id": "ricardo",
+    "email": "ricardo.demo@rednexus.dev",
+    "name": "Ricardo Benavides",
+    "bio": "Cálculo multivariable: derivadas parciales, gradiente, integrales dobles y triples, coordenadas polares y esféricas.",
+    "tags": [
+      "matematicas",
+      "calculo-vectorial",
+      "multivariable"
+    ],
+    "avgRating": 3.9
+  },
+  {
+    "id": "valeria",
+    "email": "valeria.demo@rednexus.dev",
+    "name": "Valeria Muñoz",
+    "bio": "Precálculo y álgebra básica: factorización, fracciones algebraicas, funciones, trigonometría y logaritmos.",
+    "tags": [
+      "matematicas",
+      "precalculo",
+      "algebra",
+      "basico"
+    ],
+    "avgRating": 4.9
+  },
+  {
+    "id": "carolina",
+    "email": "carolina.demo@rednexus.dev",
+    "name": "Carolina Idrobo",
+    "bio": "Probabilidad: técnicas de conteo, permutaciones, combinaciones, teorema de Bayes y variables aleatorias.",
+    "tags": [
+      "matematicas",
+      "probabilidad",
+      "conteo"
+    ],
+    "avgRating": 4.3
+  },
+  {
+    "id": "andrea",
+    "email": "andrea.demo@rednexus.dev",
+    "name": "Andrea Collazos",
+    "bio": "Redes conmutadas e inalámbricas: VLAN, enrutamiento entre VLAN, firewalls, WiFi y prácticas en Packet Tracer.",
+    "tags": [
+      "redes",
+      "vlan",
+      "packet-tracer",
+      "firewall"
+    ],
+    "avgRating": 4.0
+  },
+  {
+    "id": "oscar",
+    "email": "oscar.demo@rednexus.dev",
+    "name": "Óscar Mosquera",
+    "bio": "Administración de Linux: terminal, scripts en bash, permisos, procesos, ssh, cron y firewall con ufw.",
+    "tags": [
+      "cloud-devops",
+      "linux",
+      "bash"
+    ],
+    "avgRating": 4.6
+  },
+  {
+    "id": "melissa",
+    "email": "melissa.demo@rednexus.dev",
+    "name": "Melissa Burbano",
+    "bio": "Nube en AWS: EC2, S3, IAM, redes VPC e infraestructura como código con Terraform.",
+    "tags": [
+      "cloud-devops",
+      "aws",
+      "terraform"
+    ],
+    "avgRating": 4.2
+  },
+  {
+    "id": "brayan",
+    "email": "brayan.demo@rednexus.dev",
+    "name": "Brayan Ijají",
+    "bio": "Integración y entrega continua: pipelines en GitHub Actions y Jenkins, pruebas automáticas y despliegues.",
+    "tags": [
+      "cloud-devops",
+      "ci-cd",
+      "github-actions",
+      "jenkins"
+    ],
+    "avgRating": 3.7
+  },
+  {
+    "id": "juliana",
+    "email": "juliana.demo@rednexus.dev",
+    "name": "Juliana Cerón",
+    "bio": "Inglés conversacional: speaking, pronunciación, listening y preparación de entrevistas de trabajo en inglés.",
+    "tags": [
+      "ingles",
+      "speaking",
+      "pronunciacion"
+    ],
+    "avgRating": 4.8
+  },
+  {
+    "id": "alexander",
+    "email": "alexander.demo@rednexus.dev",
+    "name": "Alexander Lasso",
+    "bio": "Inglés técnico para ingeniería: leer documentación, artículos científicos y vocabulario de software en inglés.",
+    "tags": [
+      "ingles",
+      "ingles-tecnico",
+      "lectura"
+    ],
+    "avgRating": 4.0
+  },
+  {
+    "id": "lorena",
+    "email": "lorena.demo@rednexus.dev",
+    "name": "Lorena Calambás",
+    "bio": "Física de electricidad y magnetismo: ley de Coulomb, campo eléctrico, ley de Gauss, ley de Ohm, inducción y ley de Faraday.",
+    "tags": [
+      "fisica",
+      "electromagnetismo",
+      "electricidad"
+    ],
+    "avgRating": 4.4
+  },
+  {
+    "id": "hector",
+    "email": "hector.demo@rednexus.dev",
+    "name": "Héctor Mueses",
+    "bio": "Física de ondas, óptica y termodinámica: interferencia, calor, gases ideales y leyes de la termodinámica.",
+    "tags": [
+      "fisica",
+      "ondas",
+      "termodinamica"
+    ],
+    "avgRating": 3.6
+  },
+  {
+    "id": "ximena",
+    "email": "ximena.demo@rednexus.dev",
+    "name": "Ximena Vidal",
+    "bio": "Química general: estequiometría, balanceo de ecuaciones, óxido-reducción, reactivo límite y tabla periódica.",
+    "tags": [
+      "quimica",
+      "estequiometria"
+    ],
+    "avgRating": 4.5
+  },
+  {
+    "id": "mauricio",
+    "email": "mauricio.demo@rednexus.dev",
+    "name": "Mauricio Dorado",
+    "bio": "Electrónica digital: compuertas lógicas, álgebra de Boole, mapas de Karnaugh, flip-flops y proyectos con Arduino.",
+    "tags": [
+      "electronica",
+      "digital",
+      "arduino"
+    ],
+    "avgRating": 4.3
+  },
+  {
+    "id": "veronica",
+    "email": "veronica.demo@rednexus.dev",
+    "name": "Verónica Paredes",
+    "bio": "Sistemas operativos: procesos e hilos, planificación de CPU, concurrencia, semáforos, interbloqueos y memoria virtual.",
+    "tags": [
+      "sistemas-operativos",
+      "concurrencia",
+      "hilos"
+    ],
+    "avgRating": 4.1
+  },
+  {
+    "id": "fernando",
+    "email": "fernando.demo@rednexus.dev",
+    "name": "Fernando Ordóñez",
+    "bio": "Arquitectura y diseño de software: principios SOLID, código limpio, patrones de diseño, MVC y microservicios.",
+    "tags": [
+      "ingenieria-de-software",
+      "arquitectura",
+      "solid",
+      "patrones"
+    ],
+    "avgRating": 4.6
+  },
+  {
+    "id": "lina",
+    "email": "lina.demo@rednexus.dev",
+    "name": "Lina Marcela Gaviria",
+    "bio": "Pruebas de software: pruebas unitarias, mocks, TDD, pruebas de integración con Jest y JUnit.",
+    "tags": [
+      "ingenieria-de-software",
+      "testing",
+      "tdd"
+    ],
+    "avgRating": 4.2
+  },
+  {
+    "id": "pablo",
+    "email": "pablo.demo@rednexus.dev",
+    "name": "Pablo Andrés Chávez",
+    "bio": "Deep learning con PyTorch y TensorFlow: redes neuronales, redes convolucionales y visión por computador.",
+    "tags": [
+      "ia",
+      "deep-learning",
+      "vision"
+    ],
+    "avgRating": 4.7
+  },
+  {
+    "id": "adriana",
+    "email": "adriana.demo@rednexus.dev",
+    "name": "Adriana Montenegro",
+    "bio": "Procesamiento de lenguaje natural y LLM: embeddings, búsqueda semántica, RAG, prompts y Hugging Face.",
+    "tags": [
+      "ia",
+      "nlp",
+      "llm",
+      "rag"
+    ],
+    "avgRating": 4.9
+  },
+  {
+    "id": "ivan",
+    "email": "ivan.demo@rednexus.dev",
+    "name": "Iván Darío Pino",
+    "bio": "Hacking ético: pentesting, Kali Linux, escaneo con nmap, análisis de vulnerabilidades y retos CTF.",
+    "tags": [
+      "seguridad",
+      "pentesting",
+      "kali"
+    ],
+    "avgRating": 3.9
+  },
+  {
+    "id": "monica",
+    "email": "monica.demo@rednexus.dev",
+    "name": "Mónica Sandoval",
+    "bio": "Redacción académica y metodología de investigación: normas APA 7, anteproyectos, planteamiento del problema y objetivos.",
+    "tags": [
+      "investigacion",
+      "apa",
+      "redaccion"
+    ],
+    "avgRating": 4.8
+  }
+]
