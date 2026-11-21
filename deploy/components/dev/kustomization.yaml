@@ -2,6 +2,9 @@
 # y secretos de prueba.
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
+# Job que carga los perfiles sinteticos (scripts/k8s-up.sh lo vuelve a correr cada vez)
+resources:
+  - seed-job.yaml
 images:
   - name: rednexus-api
     newTag: dev

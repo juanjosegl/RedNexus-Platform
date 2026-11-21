@@ -1,0 +1,63 @@
+# SOLO para clústeres locales: carga los perfiles sinteticos (Ley 1581: nunca datos reales).
+# Misma imagen que la API: primero migra (idempotente, con lock) y luego corre el seed (upsert),
+# asi que se puede repetir. scripts/k8s-up.sh borra el Job anterior para que vuelva a correr.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: seed
+spec:
+  backoffLimit: 4
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: seed
+    spec:
+      restartPolicy: OnFailure
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000 # usuario node de la imagen
+        seccompProfile:
+          type: RuntimeDefault
+      initContainers:
+        - name: migrate
+          image: rednexus-api
+          command: ['prisma', 'migrate', 'deploy']
+          envFrom:
+            - secretRef:
+                name: api-secrets
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              memory: 384Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ['ALL']
+      containers:
+        - name: seed
+          image: rednexus-api
+          command: ['prisma', 'db', 'seed']
+          envFrom:
+            - secretRef:
+                name: api-secrets
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              memory: 384Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ['ALL']
+          volumeMounts:
+            # tsx (con el que corre prisma/seed.ts) necesita escribir en /tmp
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
