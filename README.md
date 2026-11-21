@@ -6,7 +6,7 @@ Plataforma de **RedNexus**: todo lo necesario para construir, desplegar y operar
 | --- | --- |
 | [RedNexus-Backend](https://github.com/juanjosegl/RedNexus-Backend) | API NestJS y worker de IA |
 | [RedNexus-Frontend](https://github.com/juanjosegl/RedNexus-Frontend) | Interfaz Vue 3 |
-| **RedNexus-Platform** (este) | Docker Compose, Kubernetes, documentación, el asistente de soporte con RAG, y más adelante GitOps, IaC y observabilidad |
+| **RedNexus-Platform** (este) | Docker Compose, Kubernetes, GitOps con Argo CD, IaC con OpenTofu, políticas de Kyverno, observabilidad, ML, el asistente de soporte con RAG y la documentación |
 
 ## Empieza aquí
 
@@ -16,6 +16,9 @@ Plataforma de **RedNexus**: todo lo necesario para construir, desplegar y operar
 | [Tareas](docs/tareas.md) | Qué hay que hacer, con ramas y commits por tarea |
 | [CONTRIBUTING](CONTRIBUTING.md) | Resumen de las reglas de ramas, commits y PR |
 | [Entorno en Mac](docs/entorno-mac.md) | Instalación en macOS (Apple Silicon) |
+| [GitOps](docs/gitops.md) | Demo con Argo CD, Sealed Secrets e imágenes firmadas (Kyverno): desplegar, *drift*, rollback y secretos |
+| [OpenTofu](iac/README.md) | Clúster de la demo y reglas de ramas de GitHub como código |
+| [Observabilidad](observabilidad/README.md) | OpenTelemetry, Grafana y el SLO de 30 s |
 | **[Entrega final](docs/entrega/README.md)** | Documento del diplomado por capítulos: problema, requisitos, ADR, privacidad, MLOps, pruebas, DevSecOps, runbook, sostenibilidad y guion de la demo |
 
 Los tres repos deben quedar **en la misma carpeta**:
@@ -35,6 +38,8 @@ rednexus/
 | **Programar el frontend** | RedNexus-Platform, y luego RedNexus-Frontend | `docker compose up -d --build api worker`, y luego `npm run dev` en el frontend | Backend listo en Docker, con datos de prueba; tu frontend en http://localhost:5173 con recarga automática |
 | **Programar el backend** | RedNexus-Backend | `docker compose up -d` (Postgres y Redis) y `npm run start:dev` (ver su README para la primera vez) | Tu API en http://localhost:3000 con recarga automática |
 | **Probar en Kubernetes** | RedNexus-Platform | `bash scripts/k8s-up.sh` (k3d) o `bash scripts/k8s-up.sh minikube` | App en http://localhost:8080 |
+| **Demo GitOps** (Argo CD, Kyverno, Sealed Secrets) | RedNexus-Platform | `bash scripts/gitops-up.sh` (ver [GitOps](docs/gitops.md)) | App en http://localhost:8090, desplegada por Argo CD con las imágenes firmadas de GHCR |
+| **Ver trazas, métricas y el SLO** | RedNexus-Platform | `docker compose -f observabilidad/compose.yaml up -d` | Grafana en http://localhost:3002 |
 | **Apagar** | Donde lo levantaste | `docker compose down` | Libera memoria; los datos se conservan (con `-v` se borran) |
 
 - **Contrato de la API (Swagger):** http://localhost:3000/api/docs cuando el backend corre en Docker o con `npm run start:dev`. Ahí ves cada endpoint, qué recibe y qué responde.
@@ -91,18 +96,32 @@ kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 8080:80
 ## Estructura
 
 ```text
-compose.yaml              # sistema completo o solo backend con Docker Compose
-.github/workflows/ci.yml  # valida manifiestos (kubeconform), compose y scripts en cada PR
-k3d/cluster.yaml          # clúster local declarado como código (1 nodo, Ingress en :8080)
+compose.yaml                  # sistema completo o solo backend con Docker Compose
+catalog-info.yaml, mkdocs.yml # catálogo de servicios y TechDocs (PL-08)
+.github/workflows/
+├── ci.yml                    # kubeconform (con CRD), OpenTofu, compose, scripts, RAG y ML en cada PR
+├── gitops-e2e.yml            # demo GitOps completa en kind: Argo CD, Kyverno, app y SLO (PL-03 a PL-07)
+└── promover.yml              # PR que despliega las últimas imágenes firmadas en la demo
+k3d/cluster.yaml, demo.yaml   # clústeres locales como código: desarrollo (:8080) y demo GitOps (:8090)
 deploy/
-├── base/                 # manifiestos comunes: postgres, redis, api, worker, web, ingress
-├── components/dev/       # común a clústeres locales: imágenes :dev y secretos de prueba
-└── overlays/
-    ├── k3d/              # Ingress Traefik, Ollama en host.k3d.internal
-    └── minikube/         # Ingress NGINX, Ollama en host.minikube.internal
-scripts/k8s-up.sh         # construir + cargar imágenes + desplegar (k3d o minikube)
-docs/                     # guías de entorno (más adelante: ADRs, privacidad, runbooks)
-asistente-rag/            # asistente de soporte: base de conocimiento, modelo, golden dataset y evaluación
+├── base/                     # manifiestos comunes: postgres, redis, api, worker, web, ingress
+├── components/dev/           # común a clústeres locales: imágenes :dev y secretos de prueba
+├── overlays/
+│   ├── k3d/                  # Ingress Traefik, Ollama en host.k3d.internal
+│   ├── minikube/             # Ingress NGINX, Ollama en host.minikube.internal
+│   └── demo/                 # imágenes de GHCR por commit, Sealed Secrets y seed (Argo CD)
+├── policies/                 # Kyverno: solo imágenes firmadas y registros permitidos
+├── sealed-secrets/           # certificado público para cifrar secretos
+└── observabilidad/           # Grafana + Tempo + Prometheus y el tablero del SLO
+iac/                          # OpenTofu: clúster de la demo y reglas de ramas de GitHub
+observabilidad/               # stack de observabilidad local con Docker
+scripts/
+├── k8s-up.sh                 # construir + cargar imágenes + desplegar (k3d o minikube)
+├── gitops-up.sh              # demo GitOps desde cero, cronometrada
+└── seal-secrets.sh           # cifrar los secretos de la demo con kubeseal
+docs/                         # guías del equipo, arquitectura, GitOps y la entrega por capítulos
+ml/                           # experimentos de emparejamiento con MLflow
+asistente-rag/                # asistente de soporte: base de conocimiento, modelo, golden dataset y evaluación
 ```
 
 ### Arquitectura en Kubernetes
@@ -117,7 +136,7 @@ navegador ──► Ingress (Traefik) ──► web (Nginx) ──/api──► 
 - **api:** antes de arrancar, su `initContainer` (con la misma imagen) aplica las migraciones de Prisma.
 - **worker:** usa la misma imagen que la API, pero corre otro proceso (`node dist/worker`).
 - **Seguridad:** los contenedores corren sin root, sin escalada de privilegios y con *capabilities* eliminadas, y la API tiene el sistema de archivos en solo lectura. Todos los pods tienen límites de memoria pensados para equipos de 8 GB.
-- **Secretos:** los de `components/dev` son valores de prueba, solo para desarrollo. El ambiente de demo usará Sealed Secrets.
+- **Secretos:** los de `components/dev` son valores de prueba, solo para desarrollo. La demo GitOps los lleva cifrados con Sealed Secrets (`deploy/overlays/demo/sealed-secrets.yaml`).
 
 ## Asistente de soporte con RAG (actividad 2 del módulo 6)
 
