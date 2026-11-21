@@ -68,7 +68,7 @@ resource "kubernetes_secret_v1" "sealed_secrets_key" {
 
 resource "helm_release" "sealed_secrets" {
   name       = "sealed-secrets"
-  repository = "https://bitnami-labs.github.io/sealed-secrets"
+  repository = "https://bitnami.github.io/sealed-secrets"
   chart      = "sealed-secrets"
   version    = local.charts.sealed_secrets
   namespace  = "kube-system"
