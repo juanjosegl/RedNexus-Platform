@@ -1,0 +1,138 @@
+# PL-08: catálogo de servicios (formato de Backstage). Cada repo describe sus componentes en
+# su propio catalog-info.yaml; este declara el sistema, el equipo y la infraestructura.
+# Para registrarlo en un Backstage: Create → Register existing component → URL de este archivo.
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: rednexus
+  title: RedNexus
+  description: Red de apoyo académico con emparejamiento por IA local (Diplomado CloudForge AI 5.0, Unicomfacauca)
+  links:
+    - url: https://github.com/users/juanjosegl/projects/1
+      title: Tablero del equipo
+spec:
+  owner: group:rednexus-equipo
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: rednexus-equipo
+  title: Equipo RedNexus
+spec:
+  type: team
+  children: []
+  members: [juanjosegl, daniel200231, josesfa, maripau-dev, alejandraguzman12]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: juanjosegl
+spec:
+  memberOf: [rednexus-equipo]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: daniel200231
+spec:
+  memberOf: [rednexus-equipo]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: josesfa
+spec:
+  memberOf: [rednexus-equipo]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: maripau-dev
+  title: MariPau-dev
+spec:
+  memberOf: [rednexus-equipo]
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: alejandraguzman12
+spec:
+  memberOf: [rednexus-equipo]
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: rednexus-platform
+  title: RedNexus Platform
+  description: Despliegue (Compose, Kubernetes, Argo CD), IaC con OpenTofu, políticas, observabilidad, ML y asistente RAG
+  annotations:
+    github.com/project-slug: juanjosegl/RedNexus-Platform
+    backstage.io/techdocs-ref: dir:.
+spec:
+  type: infrastructure
+  lifecycle: production
+  owner: group:rednexus-equipo
+  system: rednexus
+  dependsOn:
+    - component:rednexus-backend
+    - component:rednexus-frontend
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: asistente-rag
+  title: Asistente de soporte (RAG)
+  description: Modelo asistente-rednexus en Open WebUI con la base de conocimiento de RedNexus y su evaluación
+  annotations:
+    github.com/project-slug: juanjosegl/RedNexus-Platform
+spec:
+  type: ai-model
+  lifecycle: production
+  owner: group:rednexus-equipo
+  system: rednexus
+  dependsOn:
+    - resource:ollama
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: postgres
+  title: PostgreSQL 17 + pgvector
+  description: Usuarios, solicitudes, candidatos, calificaciones y embeddings (índice HNSW)
+spec:
+  type: database
+  owner: group:rednexus-equipo
+  system: rednexus
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: redis
+  title: Redis (BullMQ)
+  description: Cola de trabajos de IA entre la API y el worker
+spec:
+  type: queue
+  owner: group:rednexus-equipo
+  system: rednexus
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: ollama
+  title: Nodo de IA (Ollama y whisper.cpp)
+  description: qwen2.5:3b, paraphrase-multilingual y whisper base, fuera del clúster en el Mac M1
+spec:
+  type: ai-node
+  owner: group:rednexus-equipo
+  system: rednexus
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: ghcr
+  title: GitHub Container Registry
+  description: Imágenes multiarquitectura firmadas con Cosign y con SBOM
+spec:
+  type: container-registry
+  owner: group:rednexus-equipo
+  system: rednexus
