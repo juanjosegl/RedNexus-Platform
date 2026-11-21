@@ -1,0 +1,33 @@
+# PL-05: en el namespace rednexus solo se aceptan imágenes de nuestro registro (GHCR) y las
+# dos imágenes oficiales de terceros que usa la app. Así nadie puede colar una imagen
+# cualquiera (por ejemplo "nginx" o una de Docker Hub sin revisar) que se salte la firma.
+apiVersion: policies.kyverno.io/v1
+kind: ValidatingPolicy
+metadata:
+  name: rednexus-registros-permitidos
+  annotations:
+    policies.kyverno.io/title: Registros de imágenes permitidos
+spec:
+  validationActions: [Deny]
+  matchConstraints:
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: rednexus
+    resourceRules:
+      - apiGroups: ['']
+        apiVersions: ['v1']
+        operations: ['CREATE', 'UPDATE']
+        resources: ['pods']
+  variables:
+    - name: images
+      expression: >-
+        object.spec.containers.map(c, c.image) +
+        (has(object.spec.initContainers) ? object.spec.initContainers.map(c, c.image) : [])
+  validations:
+    - expression: >-
+        variables.images.all(i,
+          i.startsWith('ghcr.io/juanjosegl/rednexus-') ||
+          i.startsWith('pgvector/pgvector:') ||
+          i.startsWith('redis:'))
+      message: >-
+        Imagen no permitida en rednexus. Solo ghcr.io/juanjosegl/rednexus-*, pgvector/pgvector y redis

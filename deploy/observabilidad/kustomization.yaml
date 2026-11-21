@@ -1,0 +1,20 @@
+# PL-07: Grafana + Tempo (trazas) + Prometheus (métricas) + collector OTLP en un solo pod
+# (imagen grafana/otel-lgtm), con el tablero del SLO ya cargado. Es opcional en la demo
+# (observabilidad = true en iac/cluster) porque usa unos 700 MB de RAM.
+# Para la nube sin gastar RAM: Grafana Cloud (ver observabilidad/README.md).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: observabilidad
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: rednexus
+resources:
+  - namespace.yaml
+  - lgtm.yaml
+configMapGenerator:
+  - name: grafana-dashboards
+    files:
+      - dashboards/rednexus-slo.json
+  - name: grafana-dashboards-provider
+    files:
+      - rednexus-dashboards.yaml

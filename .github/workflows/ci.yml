@@ -12,18 +12,37 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Cada overlay debe renderizar y cumplir el esquema de Kubernetes
+      # Cada overlay, las políticas y la observabilidad deben renderizar y cumplir el esquema de
+      # Kubernetes y de los CRD (SealedSecret, políticas de Kyverno) del catálogo de datree
       - name: Kustomize + kubeconform
         run: |
-          for overlay in deploy/overlays/*/; do
-            echo "::group::$overlay"
-            kubectl kustomize "$overlay" \
-              | docker run -i --rm ghcr.io/yannh/kubeconform:latest -strict -summary -
+          catalog='https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json'
+          for dir in deploy/overlays/*/ deploy/policies/ deploy/observabilidad/; do
+            echo "::group::$dir"
+            kubectl kustomize "$dir" \
+              | docker run -i --rm ghcr.io/yannh/kubeconform:v0.8.0 -strict -summary \
+                  -schema-location default -schema-location "$catalog" -
             echo "::endgroup::"
           done
 
+      # PL-06: formato y validación de OpenTofu (sin conectarse al clúster ni a GitHub)
+      - uses: opentofu/setup-opentofu@v2
+        with:
+          tofu_version: 1.13.x
+          tofu_wrapper: false
+      - name: OpenTofu
+        run: |
+          tofu fmt -check -recursive iac
+          for root in iac/cluster iac/github; do
+            tofu -chdir="$root" init -backend=false -input=false >/dev/null
+            tofu -chdir="$root" validate
+          done
+
       - name: Docker Compose
-        run: docker compose config --quiet
+        run: |
+          docker compose config --quiet
+          docker compose -f observabilidad/compose.yaml config --quiet
+          python3 -m json.tool deploy/observabilidad/dashboards/rednexus-slo.json >/dev/null
 
       - name: Scripts
         run: shellcheck scripts/*.sh

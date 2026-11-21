@@ -1,0 +1,7 @@
+# PL-05: políticas de admisión con Kyverno. Las sincroniza Argo CD (app rednexus-politicas)
+# en cuanto Kyverno está instalado (iac/cluster). Solo aplican al namespace rednexus.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - imagenes-firmadas.yaml
+  - registros-permitidos.yaml
