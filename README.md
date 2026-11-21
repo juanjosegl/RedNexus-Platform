@@ -143,7 +143,7 @@ backend. Todo lo de la actividad (base de conocimiento, modelo, golden dataset, 
 
 - **Victor Daniel Fernandez** ([@daniel200231](https://github.com/daniel200231)): componente de mensaje del chat de la página de ayuda (FE-11), con sus pruebas.
 
-- **Jose Sebastian Fernandez** ([@josesfa](https://github.com/josesfa)): _pendiente (FE-10)_
+- **Jose Sebastian Fernandez** ([@josesfa](https://github.com/josesfa)): enlace "Ayuda" en el menú (FE-09) y preguntas sugeridas en la página de ayuda (FE-10), con sus pruebas.
 
 - **Maria Paula Andrade** ([@MariPau-dev](https://github.com/MariPau-dev)): preguntas frecuentes en la página de ayuda y acceso a la ayuda desde el inicio (FE-12), con sus pruebas.
 
