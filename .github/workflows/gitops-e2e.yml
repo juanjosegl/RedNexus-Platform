@@ -1,0 +1,204 @@
+# PL-03 a PL-07: prueba de punta a punta de la demo GitOps en un clúster kind desechable.
+#
+# Hace lo mismo que scripts/gitops-up.sh en el Mac, pero en un runner de GitHub (más RAM y red):
+#   1. OpenTofu (iac/cluster) instala Sealed Secrets con la llave del equipo, Kyverno, Argo CD,
+#      la observabilidad y las aplicaciones de Argo CD apuntando al commit de este run.
+#   2. Argo CD sincroniza las políticas y la app desde GitHub, sin kubectl apply.
+#   3. Comprueba que Kyverno rechaza imágenes ajenas o sin firma, que la app funciona de punta a
+#      punta (login, solicitud, candidatos) dentro del SLO de 30 s y que la métrica y la traza
+#      llegan a Prometheus y Tempo.
+#
+# Necesita el secreto SEALED_SECRETS_KEY (contenido de ~/.config/rednexus/sealed-secrets/tls.key).
+# El resultado queda en el resumen del run: sirve de evidencia para el informe.
+name: GitOps (kind)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [developer, test, main]
+    paths:
+      - 'deploy/**'
+      - 'iac/cluster/**'
+      - '.github/workflows/gitops-e2e.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'deploy/**'
+      - 'iac/cluster/**'
+
+concurrency:
+  group: gitops-e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      REVISION: ${{ github.event.pull_request.head.sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clúster kind
+        uses: helm/kind-action@v1.15.2
+        with:
+          cluster_name: rednexus-demo
+
+      - uses: opentofu/setup-opentofu@v2
+        with:
+          tofu_version: 1.13.x
+          tofu_wrapper: false
+
+      - uses: sigstore/cosign-installer@v4.1.3
+
+      - name: Llave de Sealed Secrets
+        env:
+          KEY: ${{ secrets.SEALED_SECRETS_KEY }}
+        run: |
+          if [ -z "$KEY" ]; then
+            echo "::error::Falta el secreto SEALED_SECRETS_KEY (ver docs/gitops.md)"
+            exit 1
+          fi
+          printf '%s\n' "$KEY" > "$RUNNER_TEMP/tls.key"
+          # la llave debe corresponder al certificado público del repo
+          diff <(openssl x509 -in deploy/sealed-secrets/pub-cert.pem -noout -pubkey) \
+               <(openssl pkey -in "$RUNNER_TEMP/tls.key" -pubout) >/dev/null \
+            || { echo "::error::SEALED_SECRETS_KEY no corresponde a deploy/sealed-secrets/pub-cert.pem"; exit 1; }
+
+      - name: OpenTofu apply (PL-06)
+        run: |
+          start=$(date +%s)
+          tofu -chdir=iac/cluster init -input=false
+          tofu -chdir=iac/cluster apply -input=false -auto-approve \
+            -var kube_context=kind-rednexus-demo \
+            -var "sealed_secrets_key=$RUNNER_TEMP/tls.key" \
+            -var "git_revision=$REVISION" \
+            -var observabilidad=true
+          echo "TOFU_S=$(( $(date +%s) - start ))" >> "$GITHUB_ENV"
+
+      - name: Argo CD sincroniza desde Git (PL-03)
+        run: |
+          start=$(date +%s)
+          # kind no trae balanceador: en k3d Traefik llena el estado del Ingress y Argo CD lo ve
+          # Healthy. Aquí se simula ese estado; si no, la app queda en Progressing y el hook
+          # PostSync (seed) nunca corre.
+          for _ in $(seq 1 60); do
+            kubectl -n rednexus get ingress rednexus >/dev/null 2>&1 && break
+            sleep 5
+          done
+          kubectl -n rednexus patch ingress rednexus --subresource=status --type=merge \
+            -p '{"status":{"loadBalancer":{"ingress":[{"ip":"127.0.0.1"}]}}}'
+          for app in rednexus-politicas rednexus rednexus-observabilidad; do
+            for i in $(seq 1 90); do
+              status=$(kubectl -n argocd get application "$app" \
+                -o jsonpath='{.status.sync.status}/{.status.health.status}' 2>/dev/null || true)
+              [ "$status" = "Synced/Healthy" ] && break
+              [ "$i" = 90 ] && { kubectl -n argocd get application "$app" -o yaml; exit 1; }
+              sleep 10
+            done
+            echo "$app: $status"
+          done
+          # el seed (hook PostSync) termina después de que la app queda Healthy
+          for _ in $(seq 1 60); do
+            kubectl -n rednexus get job seed-demo >/dev/null 2>&1 && break
+            sleep 5
+          done
+          kubectl -n rednexus wait --for=condition=complete job/seed-demo --timeout=300s
+          echo "ARGO_S=$(( $(date +%s) - start ))" >> "$GITHUB_ENV"
+          kubectl -n rednexus get pods -o wide
+
+      - name: Kyverno rechaza imágenes ajenas o sin firma (PL-05)
+        run: |
+          deny() {
+            local name=$1 image=$2 expected=$3 out
+            if out=$(kubectl -n rednexus run "$name" --image="$image" --restart=Never 2>&1); then
+              echo "::error::Kyverno dejó pasar $image"; exit 1
+            fi
+            echo "$out"
+            grep -qiE "$expected" <<<"$out" || { echo "::error::Rechazo inesperado para $image"; exit 1; }
+          }
+          deny intruso nginx:alpine "Imagen no permitida"
+          deny sin-firma ghcr.io/juanjosegl/rednexus-backend:sha-0000000 "rednexus-imagenes-firmadas|denied the request"
+          echo "Las imágenes firmadas de la app sí corren (pods arriba en el paso anterior)"
+
+      - name: Firmas de las imágenes desplegadas (PL-02)
+        run: |
+          for image in $(kubectl -n rednexus get deploy -o jsonpath='{.items[*].spec.template.spec.containers[*].image}' | tr ' ' '\n' | grep rednexus- | sort -u); do
+            repo=$([[ $image == *frontend* ]] && echo RedNexus-Frontend || echo RedNexus-Backend)
+            cosign verify "$image" \
+              --certificate-identity-regexp "^https://github.com/juanjosegl/$repo/.github/workflows/image.yml@refs/heads/(developer|test|main)$" \
+              --certificate-oidc-issuer https://token.actions.githubusercontent.com >/dev/null
+            echo "$image: firma válida"
+            echo "- \`$image\`: firma de Cosign válida" >> "$RUNNER_TEMP/firmas.md"
+          done
+
+      - name: La app funciona de punta a punta y dentro del SLO
+        run: |
+          kubectl -n rednexus port-forward svc/api 3000:3000 >/dev/null 2>&1 &
+          kubectl -n observabilidad port-forward svc/lgtm 3002:3000 >/dev/null 2>&1 &
+          sleep 5
+          curl -fsS localhost:3000/api/health
+          token=$(curl -fsS -X POST localhost:3000/api/auth/login -H 'Content-Type: application/json' \
+            -d '{"email":"ana.demo@rednexus.dev","password":"demo12345"}' | jq -r .accessToken)
+          id=$(curl -fsS -X POST localhost:3000/api/help-requests -H "Authorization: Bearer $token" \
+            -H 'Content-Type: application/json' \
+            -d '{"text":"No entiendo cómo hacer joins en SQL entre tablas con relaciones muchos a muchos"}' | jq -r .id)
+          start=$(date +%s)
+          for _ in $(seq 1 60); do
+            status=$(curl -fsS "localhost:3000/api/help-requests/$id" -H "Authorization: Bearer $token" | jq -r .status)
+            [ "$status" != PENDING ] && break
+            sleep 1
+          done
+          took=$(( $(date +%s) - start ))
+          curl -fsS "localhost:3000/api/help-requests/$id" -H "Authorization: Bearer $token" \
+            | jq '{status, area, candidatos: [.matches[] | {nombre: .helper.name, score}]}'
+          [ "$status" = MATCHED ] || { echo "::error::La solicitud quedó en $status"; exit 1; }
+          echo "MATCH_S=$took" >> "$GITHUB_ENV"
+          (( took < 30 )) || { echo "::error::Tardó $took s (SLO: 30 s)"; exit 1; }
+
+          # PL-07: la métrica del SLO llega a Prometheus y la traza a Tempo (vía Grafana)
+          prom='localhost:3002/api/datasources/proxy/uid/prometheus/api/v1/query'
+          for _ in $(seq 1 24); do
+            count=$(curl -fsS -G "$prom" --data-urlencode 'query=sum(rednexus_match_latency_seconds_count)' \
+              | jq -r '.data.result[0].value[1] // "0"')
+            [ "$count" != 0 ] && break
+            sleep 5
+          done
+          [ "$count" != 0 ] || { echo "::error::La métrica rednexus_match_latency no llegó a Prometheus"; exit 1; }
+          echo "SLI_COUNT=$count" >> "$GITHUB_ENV"
+          for _ in $(seq 1 24); do
+            traces=$(curl -fsS -G localhost:3002/api/datasources/proxy/uid/tempo/api/search \
+              --data-urlencode 'q={resource.service.name="rednexus-worker" && name="match process"}' \
+              | jq '.traces | length')
+            [ "$traces" -gt 0 ] && break
+            sleep 5
+          done
+          [ "$traces" -gt 0 ] || { echo "::error::La traza del worker no llegó a Tempo"; exit 1; }
+          echo "TRACES=$traces" >> "$GITHUB_ENV"
+
+      - name: Resumen
+        if: always()
+        run: |
+          {
+            echo "### Demo GitOps en kind (commit \`${REVISION:0:7}\`)"
+            echo
+            echo "| Paso | Resultado |"
+            echo "| --- | --- |"
+            echo "| OpenTofu: Sealed Secrets, Kyverno, Argo CD y apps | ${TOFU_S:-?} s |"
+            echo "| Argo CD: rednexus-politicas, rednexus y observabilidad Synced/Healthy | ${ARGO_S:-?} s |"
+            echo "| Kyverno rechaza \`nginx\` (registro no permitido) y una imagen de rednexus sin firma | ver log |"
+            echo "| Solicitud de ayuda con candidatos (SLO: < 30 s) | ${MATCH_S:-?} s |"
+            echo "| Métrica \`rednexus_match_latency\` en Prometheus | ${SLI_COUNT:-0} muestras |"
+            echo "| Trazas API → worker en Tempo | ${TRACES:-0} |"
+            echo
+            cat "$RUNNER_TEMP/firmas.md" 2>/dev/null || true
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Diagnóstico si algo falló
+        if: failure()
+        run: |
+          kubectl get applications -A -o wide || true
+          kubectl get pods -A || true
+          kubectl -n rednexus get events --sort-by=.lastTimestamp | tail -40 || true
+          kubectl -n rednexus logs deploy/worker --tail=50 || true
+          kubectl -n kyverno logs deploy/kyverno-admission-controller --tail=50 || true

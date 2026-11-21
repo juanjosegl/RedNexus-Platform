@@ -1,0 +1,100 @@
+# PL-03: abre un PR que cambia las imágenes del overlay demo por las últimas publicadas.
+# Al fusionarlo (y promoverlo a main), Argo CD despliega la versión nueva sin kubectl.
+#
+# Se dispara:
+#   - a mano (Actions → Promover imágenes → Run workflow), opcionalmente con etiquetas;
+#   - desde el workflow "Imagen" de Backend o Frontend al publicar en main, si esos repos
+#     tienen el secreto PLATFORM_DISPATCH_TOKEN (ver docs/gitops.md).
+#
+# Antes de abrir el PR verifica con Cosign que cada imagen esté firmada por su workflow.
+name: Promover imágenes
+
+on:
+  workflow_dispatch:
+    inputs:
+      backend:
+        description: Etiqueta del backend (vacío = último commit de main, sha-xxxxxxx)
+        required: false
+      frontend:
+        description: Etiqueta del frontend (vacío = último commit de main, sha-xxxxxxx)
+        required: false
+  repository_dispatch:
+    types: [imagen-publicada]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: promover-imagenes
+  cancel-in-progress: false
+
+jobs:
+  promover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: developer
+
+      - uses: sigstore/cosign-installer@v4.1.3
+
+      - name: Etiquetas a desplegar
+        id: tags
+        env:
+          GH_TOKEN: ${{ github.token }}
+          IN_BACKEND: ${{ inputs.backend || (github.event.client_payload.image == 'rednexus-backend' && github.event.client_payload.tag) || '' }}
+          IN_FRONTEND: ${{ inputs.frontend || (github.event.client_payload.image == 'rednexus-frontend' && github.event.client_payload.tag) || '' }}
+        run: |
+          latest() { echo "sha-$(gh api "repos/juanjosegl/$1/commits/main" -q .sha | cut -c1-7)"; }
+          echo "backend=${IN_BACKEND:-$(latest RedNexus-Backend)}" >> "$GITHUB_OUTPUT"
+          echo "frontend=${IN_FRONTEND:-$(latest RedNexus-Frontend)}" >> "$GITHUB_OUTPUT"
+
+      - name: Verificar firmas
+        env:
+          BACKEND: ${{ steps.tags.outputs.backend }}
+          FRONTEND: ${{ steps.tags.outputs.frontend }}
+        run: |
+          verify() {
+            cosign verify "ghcr.io/juanjosegl/$1:$2" \
+              --certificate-identity-regexp "^https://github.com/juanjosegl/$3/.github/workflows/image.yml@refs/heads/(developer|test|main)$" \
+              --certificate-oidc-issuer https://token.actions.githubusercontent.com >/dev/null
+            echo "ghcr.io/juanjosegl/$1:$2 firmada"
+          }
+          verify rednexus-backend "$BACKEND" RedNexus-Backend
+          verify rednexus-frontend "$FRONTEND" RedNexus-Frontend
+
+      - name: Cambiar el overlay demo
+        id: edit
+        env:
+          BACKEND: ${{ steps.tags.outputs.backend }}
+          FRONTEND: ${{ steps.tags.outputs.frontend }}
+        run: |
+          file=deploy/overlays/demo/kustomization.yaml
+          sed -i -E "s|(newTag: )[^ ]+( # backend)|\1${BACKEND}\2|; s|(newTag: )[^ ]+( # frontend)|\1${FRONTEND}\2|" "$file"
+          kubectl kustomize deploy/overlays/demo | grep 'image: ghcr.io' | sort -u
+          if git diff --quiet; then
+            echo "Las imágenes del overlay demo ya son las últimas"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Abrir el PR
+        if: steps.edit.outputs.changed == 'true'
+        env:
+          # Con un token personal el PR dispara el CI; con el de Actions no (hay que fusionar como admin)
+          GH_TOKEN: ${{ secrets.PLATFORM_PR_TOKEN || github.token }}
+          BACKEND: ${{ steps.tags.outputs.backend }}
+          FRONTEND: ${{ steps.tags.outputs.frontend }}
+        run: |
+          branch="chore/promover-${BACKEND}-${FRONTEND}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git commit -am "chore(demo): desplegar backend ${BACKEND} y frontend ${FRONTEND}"
+          git push -f origin "$branch"
+          gh pr create --base developer --head "$branch" \
+            --title "chore(demo): desplegar backend ${BACKEND} y frontend ${FRONTEND}" \
+            --body "Cambia las imágenes del overlay \`deploy/overlays/demo\` (firmas verificadas con Cosign). Al llegar a \`main\`, Argo CD las despliega." \
+            || echo "::warning::No se pudo abrir el PR (¿Actions puede crear PR en Settings → Actions?). La rama $branch quedó publicada."

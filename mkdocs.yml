@@ -1,0 +1,32 @@
+# PL-08: TechDocs (Backstage) o un sitio local con: pip install mkdocs-techdocs-core && mkdocs serve
+site_name: RedNexus Platform
+site_description: Construir, desplegar y operar RedNexus
+repo_url: https://github.com/juanjosegl/RedNexus-Platform
+edit_uri: edit/developer/docs/
+docs_dir: docs
+plugins:
+  - techdocs-core
+nav:
+  - Inicio: index.md
+  - Equipo:
+      - Guía del equipo: guia-del-equipo.md
+      - Tareas: tareas.md
+      - Entorno en Mac: entorno-mac.md
+  - Arquitectura:
+      - Diagramas: arquitectura/diagramas.md
+      - Diccionario de datos: arquitectura/diccionario-de-datos.md
+  - Operación:
+      - GitOps, secretos y Kyverno: gitops.md
+  - Entrega:
+      - Índice: entrega/README.md
+      - 1. Contexto y problema: entrega/01-contexto-y-problema.md
+      - 2. Alcance: entrega/02-alcance-y-partes-interesadas.md
+      - 3. Requisitos: entrega/03-requisitos.md
+      - 4. Decisiones de arquitectura: entrega/04-decisiones-de-arquitectura.md
+      - 5. Privacidad y riesgos de IA: entrega/05-privacidad-y-riesgos-ia.md
+      - 6. MLOps: entrega/06-mlops.md
+      - 7. Pruebas y calidad: entrega/07-pruebas-y-calidad.md
+      - 8. DevSecOps y despliegue: entrega/08-devsecops-y-despliegue.md
+      - 9. Runbook: entrega/09-runbook.md
+      - 10. Sostenibilidad: entrega/10-sostenibilidad-e-impacto.md
+      - 11. Glosario: entrega/11-glosario-y-referencias.md
