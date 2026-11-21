@@ -1,0 +1,10 @@
+# Proveedor de tableros de Grafana: carga los JSON de la carpeta (montada desde un ConfigMap
+# en Kubernetes o desde deploy/observabilidad/dashboards en Docker Compose)
+apiVersion: 1
+providers:
+  - name: RedNexus
+    folder: RedNexus
+    type: file
+    allowUiUpdates: false
+    options:
+      path: /var/lib/rednexus-dashboards
