@@ -1,0 +1,42 @@
+# PL-03: ambiente de demo que sincroniza Argo CD desde Git (scripts/gitops-up.sh).
+#
+# A diferencia de k3d y minikube, aquí no se construye nada en el equipo: se usan las
+# imágenes publicadas y firmadas en GHCR (workflow "Imagen" de Backend y Frontend), fijadas
+# por la etiqueta del commit. Para desplegar una versión nueva basta con cambiar newTag y
+# fusionar el PR: Argo CD lo aplica solo. El workflow "Promover imágenes" abre ese PR.
+#
+# Los secretos van cifrados con Sealed Secrets (sealed-secrets.yaml, PL-04) y Kyverno solo
+# deja correr imágenes de rednexus firmadas por GitHub Actions (deploy/policies, PL-05).
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: rednexus
+resources:
+  - ../../base
+  - sealed-secrets.yaml
+  - seed-job.yaml
+images:
+  - name: rednexus-api
+    newName: ghcr.io/juanjosegl/rednexus-backend
+    newTag: sha-92e9135 # backend
+  - name: rednexus-web
+    newName: ghcr.io/juanjosegl/rednexus-frontend
+    newTag: sha-86b556a # frontend
+configMapGenerator:
+  - name: api-config
+    behavior: merge
+    literals:
+      # IA real con Ollama en el equipo anfitrión; si no responde, el emparejamiento
+      # sigue por etiquetas (degradación controlada, ADR-006)
+      - AI_PROVIDER=ollama
+      - OLLAMA_URL=http://host.k3d.internal:11434
+      # PL-07: trazas y métricas al stack de observabilidad del clúster (deploy/observabilidad).
+      # Si no está instalado, los envíos fallan en silencio y la app sigue igual.
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://lgtm.observabilidad:4318
+patches:
+  - target:
+      kind: Ingress
+      name: rednexus
+    patch: |
+      - op: add
+        path: /spec/ingressClassName
+        value: traefik
