@@ -79,22 +79,31 @@ jobs:
       - name: Argo CD sincroniza desde Git (PL-03)
         run: |
           start=$(date +%s)
-          # kind no trae controlador de Ingress, así que el Ingress se queda en Progressing:
-          # se exige Synced y que todo lo demás esté Healthy
-          ready() {
-            kubectl -n argocd get application "$1" -o json 2>/dev/null | jq -e '
-              .status.sync.status == "Synced" and
-              ([.status.resources[]? | select(.kind != "Ingress" and .health != null)
-                | .health.status] | length > 0 and all(. == "Healthy"))' >/dev/null
-          }
+          # kind no trae balanceador: en k3d Traefik llena el estado del Ingress y Argo CD lo ve
+          # Healthy. Aquí se simula ese estado; si no, la app queda en Progressing y el hook
+          # PostSync (seed) nunca corre.
+          for _ in $(seq 1 60); do
+            kubectl -n rednexus get ingress rednexus >/dev/null 2>&1 && break
+            sleep 5
+          done
+          kubectl -n rednexus patch ingress rednexus --subresource=status --type=merge \
+            -p '{"status":{"loadBalancer":{"ingress":[{"ip":"127.0.0.1"}]}}}'
           for app in rednexus-politicas rednexus rednexus-observabilidad; do
             for i in $(seq 1 90); do
-              ready "$app" && break
+              status=$(kubectl -n argocd get application "$app" \
+                -o jsonpath='{.status.sync.status}/{.status.health.status}' 2>/dev/null || true)
+              [ "$status" = "Synced/Healthy" ] && break
               [ "$i" = 90 ] && { kubectl -n argocd get application "$app" -o yaml; exit 1; }
               sleep 10
             done
-            echo "$app: Synced y Healthy"
+            echo "$app: $status"
           done
+          # el seed (hook PostSync) termina después de que la app queda Healthy
+          for _ in $(seq 1 60); do
+            kubectl -n rednexus get job seed-demo >/dev/null 2>&1 && break
+            sleep 5
+          done
+          kubectl -n rednexus wait --for=condition=complete job/seed-demo --timeout=300s
           echo "ARGO_S=$(( $(date +%s) - start ))" >> "$GITHUB_ENV"
           kubectl -n rednexus get pods -o wide
 
