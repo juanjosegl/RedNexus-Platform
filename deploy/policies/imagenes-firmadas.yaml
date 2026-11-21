@@ -1,0 +1,57 @@
+# PL-05: solo corren imágenes de RedNexus firmadas por nuestro workflow "Imagen".
+#
+# La firma es de Cosign keyless (PL-02): no hay llaves que guardar; el certificado lo emite
+# Sigstore para la identidad OIDC del workflow de GitHub Actions y queda en el registro de
+# transparencia (Rekor). Cosign v3 guarda la firma como "referrer" OCI junto a la imagen, y
+# en Kyverno 1.20 ese formato lo verifica ImageValidatingPolicy.
+#
+# Kyverno genera la misma regla para Deployments, StatefulSets y Jobs (autogen), así que una
+# imagen sin firma se rechaza al crear el Deployment y Argo CD muestra el error.
+apiVersion: policies.kyverno.io/v1
+kind: ImageValidatingPolicy
+metadata:
+  name: rednexus-imagenes-firmadas
+  annotations:
+    policies.kyverno.io/title: Imágenes de RedNexus firmadas con Cosign
+    policies.kyverno.io/description: >-
+      Exige que las imágenes ghcr.io/juanjosegl/rednexus-* estén firmadas por el workflow
+      image.yml de RedNexus-Backend o RedNexus-Frontend en developer, test o main.
+spec:
+  validationActions: [Deny]
+  failurePolicy: Fail
+  webhookConfiguration:
+    timeoutSeconds: 30
+  matchConstraints:
+    namespaceSelector:
+      matchLabels:
+        kubernetes.io/metadata.name: rednexus
+    resourceRules:
+      - apiGroups: ['']
+        apiVersions: ['v1']
+        operations: ['CREATE', 'UPDATE']
+        resources: ['pods']
+  matchImageReferences:
+    - glob: ghcr.io/juanjosegl/rednexus-*
+  validationConfigurations:
+    # sin mutar a digest: Argo CD compararía el Deployment con Git y lo vería distinto
+    mutateDigest: false
+    verifyDigest: false
+    required: true
+  attestors:
+    - name: github
+      cosign:
+        keyless:
+          identities:
+            - issuer: https://token.actions.githubusercontent.com
+              subjectRegExp: ^https://github\.com/juanjosegl/RedNexus-(Backend|Frontend)/\.github/workflows/image\.yml@refs/heads/(developer|test|main)$
+        ctlog:
+          url: https://rekor.sigstore.dev
+  # Solo se revisan las imágenes de rednexus (Postgres y Redis no las firmamos nosotros)
+  variables:
+    - name: propias
+      expression: >-
+        (images.containers + images.initContainers).filter(i, i.startsWith('ghcr.io/juanjosegl/rednexus-'))
+  validations:
+    - expression: >-
+        variables.propias.map(image, verifyImageSignatures(image, [attestors.github])).all(e, e > 0)
+      message: La imagen de RedNexus no tiene una firma válida de Cosign hecha por el workflow Imagen

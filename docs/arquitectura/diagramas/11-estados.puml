@@ -17,9 +17,9 @@ state "Solicitud (HelpRequest)" as Sol {
   state MATCHED
   state ACCEPTED
   state CLOSED
-  [*] --> PENDING : el estudiante la publica
+  [*] --> PENDING : el solicitante la publica
   PENDING --> MATCHED : el worker guarda el top 3
-  MATCHED --> ACCEPTED : un ayudante acepta
+  MATCHED --> ACCEPTED : un colaborador acepta
   PENDING --> CLOSED : el autor la cierra
   MATCHED --> CLOSED : el autor la cierra
   ACCEPTED --> CLOSED : el autor la cierra
@@ -31,8 +31,8 @@ state "Candidato (Match)" as Mat {
   state "ACCEPTED" as MACC
   state REJECTED
   [*] --> PROPOSED : creado por el worker
-  PROPOSED --> MACC : el ayudante acepta
-  PROPOSED --> REJECTED : el ayudante rechaza
+  PROPOSED --> MACC : el colaborador acepta
+  PROPOSED --> REJECTED : el colaborador rechaza
   MACC --> [*]
   REJECTED --> [*]
 }

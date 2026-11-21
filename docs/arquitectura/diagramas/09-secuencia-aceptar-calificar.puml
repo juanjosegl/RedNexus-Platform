@@ -10,8 +10,8 @@ skinparam DatabaseBackgroundColor #dbeafe
 skinparam ActorBackgroundColor #08427b
 autonumber
 
-actor "Ayudante" as H
-actor "Estudiante" as S
+actor "Colaborador" as H
+actor "Solicitante" as S
 box "RedNexus" #f4f8fc
   participant "Aplicación web" as W
   participant "API" as A
@@ -25,12 +25,12 @@ A --> W : Solicitudes con score y explicación
 H -> W : Acepta una solicitud
 W -> A : POST /api/matches/:id/accept
 A -> DB : Transacción: solicitud MATCHED → ACCEPTED
-alt Otro ayudante ya aceptó
+alt Otro colaborador ya aceptó
   A --> W : 409 La solicitud ya fue aceptada o cerrada
 else Es el primero en aceptar
   A -> DB : Match PROPOSED → ACCEPTED
   A --> W : 200 { authorEmail }
-  W --> H : Correo del estudiante para contactarlo
+  W --> H : Correo del solicitante para contactarlo
 end
 
 ... La ayuda ocurre fuera de la plataforma (correo, reunión) ...

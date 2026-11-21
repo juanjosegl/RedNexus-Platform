@@ -30,6 +30,10 @@ if [ "$TOOL" = k3d ]; then
   if ! k3d cluster list "$CLUSTER" >/dev/null 2>&1; then
     echo "==> Creando el clúster $CLUSTER (k3d)"
     k3d cluster create --config k3d/cluster.yaml
+  elif ! k3d cluster list "$CLUSTER" --no-headers | awk '{print $2}' | grep -q '^1/1$'; then
+    # Existe pero esta apagado (por ejemplo, despues de reiniciar el equipo o de k3d cluster stop)
+    echo "==> Encendiendo el clúster $CLUSTER (k3d)"
+    k3d cluster start "$CLUSTER"
   fi
   kubectl config use-context "k3d-$CLUSTER" >/dev/null
 else
@@ -58,6 +62,8 @@ else
 fi
 
 echo "==> Aplicando manifiestos (deploy/overlays/$TOOL)"
+# Un Job terminado no se vuelve a ejecutar: se borra para que el seed corra otra vez (es upsert)
+kubectl -n rednexus delete job seed --ignore-not-found >/dev/null
 kubectl apply -k "deploy/overlays/$TOOL"
 
 # Las imagenes :dev conservan el nombre al reconstruirse; reiniciar fuerza a usar las nuevas
@@ -68,6 +74,12 @@ kubectl -n rednexus rollout status statefulset/postgres --timeout=180s
 for d in redis api worker web; do
   kubectl -n rednexus rollout status "deployment/$d" --timeout=180s
 done
+
+echo "==> Cargando datos sinteticos (Job seed)"
+kubectl -n rednexus wait --for=condition=complete job/seed --timeout=180s
+# El seed borra los embeddings de los perfiles; el worker los recalcula al arrancar
+kubectl -n rednexus rollout restart deployment/worker >/dev/null
+kubectl -n rednexus rollout status deployment/worker --timeout=180s
 
 echo
 if [ "$TOOL" = k3d ]; then
