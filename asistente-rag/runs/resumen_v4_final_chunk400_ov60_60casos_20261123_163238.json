@@ -1,0 +1,95 @@
+{
+  "run_tag": "v4_final_chunk400_ov60_60casos",
+  "target_model": "asistente-rednexus",
+  "judge_model": "qwen2.5:7b",
+  "total": 60,
+  "api_errors": 0,
+  "success": 50,
+  "success_pct": 83.3,
+  "error_pct": 16.7,
+  "keywords_pct": 61.7,
+  "latency_mean_s": 17.56,
+  "latency_median_s": 16.709,
+  "latency_p95_s": 23.245,
+  "fidelidad_mean": 4.67,
+  "completitud_mean": 4.3,
+  "by_category": {
+    "calificaciones": {
+      "total": 8,
+      "success_pct": 87.5,
+      "fidelidad_mean": 4.75,
+      "completitud_mean": 4.5,
+      "latency_mean_s": 17.7
+    },
+    "emparejamiento": {
+      "total": 6,
+      "success_pct": 66.7,
+      "fidelidad_mean": 4.5,
+      "completitud_mean": 4.33,
+      "latency_mean_s": 17.29
+    },
+    "fuera_de_alcance": {
+      "total": 3,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 5,
+      "latency_mean_s": 16.22
+    },
+    "fuera_de_base": {
+      "total": 3,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 4.33,
+      "latency_mean_s": 17.36
+    },
+    "normas": {
+      "total": 4,
+      "success_pct": 75.0,
+      "fidelidad_mean": 4.75,
+      "completitud_mean": 4.25,
+      "latency_mean_s": 15.71
+    },
+    "pqrs": {
+      "total": 4,
+      "success_pct": 50.0,
+      "fidelidad_mean": 4.5,
+      "completitud_mean": 3,
+      "latency_mean_s": 21.92
+    },
+    "privacidad": {
+      "total": 4,
+      "success_pct": 75.0,
+      "fidelidad_mean": 4.75,
+      "completitud_mean": 4.25,
+      "latency_mean_s": 16.06
+    },
+    "problemas_comunes": {
+      "total": 8,
+      "success_pct": 75.0,
+      "fidelidad_mean": 4.5,
+      "completitud_mean": 3.88,
+      "latency_mean_s": 19.07
+    },
+    "registro_perfil": {
+      "total": 8,
+      "success_pct": 100.0,
+      "fidelidad_mean": 4.62,
+      "completitud_mean": 4.75,
+      "latency_mean_s": 17.34
+    },
+    "seguridad": {
+      "total": 4,
+      "success_pct": 100.0,
+      "fidelidad_mean": 5,
+      "completitud_mean": 4.75,
+      "latency_mean_s": 17.64
+    },
+    "solicitudes": {
+      "total": 8,
+      "success_pct": 87.5,
+      "fidelidad_mean": 4.5,
+      "completitud_mean": 4.25,
+      "latency_mean_s": 16.37
+    }
+  }
+}
