@@ -166,8 +166,9 @@ backend. Todo lo de la actividad (base de conocimiento, modelo, golden dataset, 
 
 - **Maria Paula Andrade** ([@MariPau-dev](https://github.com/MariPau-dev)): preguntas frecuentes en la página de ayuda y acceso a la ayuda desde el inicio (FE-12), con sus pruebas.
 
-- **Maria Alejandra Guzman** ([@alejandraguzman12](https://github.com/alejandraguzman12)): documento de la base de
-  conocimiento "Registro y perfil", 8 casos del golden dataset (registro_perfil), portada e índice del informe.
+- **Maria Alejandra Guzman** ([@alejandraguzman12](https://github.com/alejandraguzman12)): documentos de la base de
+  conocimiento "Registro y perfil" y "Solicitudes de ayuda", 16 casos del golden dataset (8 de registro_perfil y 8 de
+  solicitudes), portada e índice del informe.
 
 ## Flujo de trabajo
 

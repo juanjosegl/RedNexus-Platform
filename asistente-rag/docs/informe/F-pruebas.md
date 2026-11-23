@@ -148,6 +148,23 @@ parte. El corte de 300 tokens es apenas 1 s más rápido en promedio, porque el 
 corto, y esa ganancia no compensa la pérdida de precisión. Las categorías de seguridad y alcance quedan al 100 %
 con los dos cortes, porque dependen del system prompt y no de la recuperación.
 
+### Corrida posterior con la base de 8 documentos (60 casos)
+
+El 23/11/2026 se sumó el documento "Solicitudes de ayuda" (DOC-06) y sus 8 casos de la categoría `solicitudes`.
+Se volvió a cargar la base con `scripts/setup_openwebui.py` (400/60, Top K 4) y se repitió la evaluación con el
+mismo prompt v2.2 y el mismo juez:
+
+| Run | Corte | Éxito | Error | Palabras clave | Fidelidad | Completitud | Latencia media | Mediana | p95 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `v4_final_chunk400_ov60_60casos` | 400 / 60 | **83,3 %** (50/60) | 16,7 % | 61,7 % | 4,67 | 4,30 | 17,6 s | 16,7 s | 23,2 s |
+
+La meta del 70 % se sigue cumpliendo. Los 8 casos nuevos pasan 7 (87,5 %); el que falla (sol-06) es un rechazo
+indebido sobre el mensaje "Nadie en la red sabe de este tema", que sí está en la base. En los 52 casos anteriores
+el resultado baja de 46 a 43: fallan emp-04, nor-01, pc-03 y pri-04 y pasa emp-03. Con temperatura 0,2 y un juez
+local de 7B parte de esa diferencia es variación entre corridas, y otra parte puede venir de que el nuevo documento
+compite por los 4 fragmentos que se recuperan. Subir Top K o separar mejor los documentos por tema queda como
+trabajo futuro.
+
 ### Análisis de los fallos de la configuración elegida
 
 | Caso | Pregunta | Qué pasó | Tipo de fallo |
