@@ -83,7 +83,8 @@ palabras clave y el juez le da al menos 3. Meta: **70 % o más**.
 
 Las tres primeras son corridas parciales con los 18 casos difíciles (seguridad, fuera de alcance, normas,
 privacidad, PQRS y emparejamiento), usadas para ajustar el prompt. Las dos últimas son la evaluación final con los
-52 casos y la comparación de cortes; la configuración elegida es **400/60**.
+52 casos y la comparación de cortes; la configuración elegida es **400/60**. La corrida `v4` (23/11/2026) repite
+la evaluación con el octavo documento (solicitudes de ayuda, DOC-06) y sus 8 casos: 60 casos en total.
 
 | Run | Prompt | Corte | Éxito | Fidelidad | Completitud | Latencia media |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -92,6 +93,7 @@ privacidad, PQRS y emparejamiento), usadas para ajustar el prompt. Las dos últi
 | `v2.2_prompt_chunk400_ov60_parcial18` | v2.2 | 400/60 | 88,9 % | 4,83 | 4,33 | 19,3 s |
 | `v3_final_chunk400_ov60` (52 casos) | v2.2 | **400/60** | **88,5 %** | 4,67 | 4,44 | 18,7 s |
 | `v3_chunk300_ov30` (52 casos) | v2.2 | 300/30 | 80,8 % | 4,69 | 4,19 | 17,7 s |
+| `v4_final_chunk400_ov60_60casos` (60 casos, con DOC-06) | v2.2 | 400/60 | 83,3 % | 4,67 | 4,30 | 17,6 s |
 
 Detalle y análisis en [docs/informe/F-pruebas.md](docs/informe/F-pruebas.md#f4-resultados-con-el-golden-dataset).
 
