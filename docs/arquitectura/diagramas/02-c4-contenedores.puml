@@ -16,14 +16,15 @@ Person(ayu, "Colaborador")
 Boundary(rn, "RedNexus", "sistema") {
   Container(web, "Aplicación web", "Vue 3, Vite, Pinia, Tailwind; servida por Nginx", "Interfaz del solicitante y del colaborador. Reenvía /api a la API")
   Container(api, "API", "NestJS 12, Prisma 7", "REST bajo /api con JWT y Swagger. Registra solicitudes y encola el trabajo de IA")
-  Container(worker, "Worker de IA", "NestJS + BullMQ", "Clasifica, genera embeddings, empareja el top 3 y explica")
+  Container(worker, "Worker de IA", "NestJS + BullMQ", "Transcribe la voz, clasifica, genera embeddings, empareja el top 3 y explica")
   ContainerDb(db, "Base de datos", "PostgreSQL 17 + pgvector", "Usuarios, solicitudes, candidatos, calificaciones y vectores de 768 dimensiones")
   ContainerQueue(redis, "Cola de trabajos", "Redis 7", "Trabajos de BullMQ con 3 reintentos y backoff")
-  ContainerDb(audio, "Audios", "Volumen compartido", "Notas de voz (previsto)", $tags="previsto")
-  Container(whisper, "Transcripción", "whisper.cpp", "Voz a texto (previsto)", $tags="previsto")
 }
 
 System_Ext(ollama, "Ollama", "En el equipo anfitrión: qwen2.5:3b y paraphrase-multilingual")
+System_Ext(whisper, "whisper.cpp", "En el equipo anfitrión: voz a texto (ggml-base); el audio no se guarda")
+System_Ext(owui, "Open WebUI", "Modelo asistente-rednexus con RAG (8 documentos, fragmentos de 400/60)")
+System_Ext(otel, "Observabilidad", "OpenTelemetry → Grafana, Tempo y Prometheus (opcional)")
 
 Rel(sol, web, "Usa", "HTTPS")
 Rel(ayu, web, "Usa", "HTTPS")
@@ -33,9 +34,11 @@ Rel(api, redis, "Encola trabajos")
 Rel(worker, redis, "Consume trabajos")
 Rel(worker, db, "Guarda candidatos y vectores", "SQL")
 Rel(worker, ollama, "embed, classify, explain", "HTTP/JSON :11434")
-Rel(api, audio, "Guarda el audio", $tags="previsto")
-Rel(worker, audio, "Lee el audio", $tags="previsto")
-Rel(worker, whisper, "Transcribe", $tags="previsto")
+Rel(api, redis, "Nota de voz dentro del trabajo transcribe")
+Rel(worker, whisper, "Transcribe", "HTTP :8178")
+Rel(api, owui, "Asistente de ayuda", "HTTP/JSON :3001")
+Rel(api, otel, "Trazas y métricas", "OTLP")
+Rel(worker, otel, "SLI rednexus.match.latency", "OTLP")
 
 Lay_R(sol, ayu)
 Lay_R(api, worker)
@@ -45,6 +48,5 @@ legend right
   |<#08427b>     | Persona |
   |<#438dd5>     | Contenedor |
   |<#999999>     | Sistema externo |
-  | - - - -      | Previsto, no construido |
 endlegend
 @enduml

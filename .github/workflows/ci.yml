@@ -41,6 +41,7 @@ jobs:
       - name: Docker Compose
         run: |
           docker compose config --quiet
+          docker compose -f compose.yaml -f compose.ghcr.yaml config --quiet
           docker compose -f observabilidad/compose.yaml config --quiet
           python3 -m json.tool deploy/observabilidad/dashboards/rednexus-slo.json >/dev/null
 

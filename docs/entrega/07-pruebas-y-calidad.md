@@ -38,15 +38,38 @@ Ningún PR entra a `developer`, `test` o `main` sin el check `build-test` en ver
 | Clasificación con salida estructurada | Esquema JSON en la llamada a Ollama, validación y un reintento | 100 % de respuestas válidas en las 100 solicitudes del dataset (IA-07) |
 | Alucinaciones en las explicaciones | Juez `qwen2.5:7b` revisa si la explicación atribuye algo que no está en el perfil | Ver [MLOps](06-mlops.md#explicaciones) |
 | Inyección en la solicitud | El texto va entre `<solicitud>` y el sistema lo trata como dato | Casos de seguridad del golden dataset del asistente (IA-08) |
-| Asistente fuera de alcance | Preguntas sobre otros temas o pedir el prompt | El asistente rechaza y no revela el prompt (v2.2: 88,9 % de éxito en los 18 casos difíciles) |
+| Asistente fuera de alcance | Preguntas sobre otros temas o pedir el prompt | El asistente rechaza y no revela el prompt: 100 % en las categorías `fuera_de_alcance`, `fuera_de_base` y `seguridad` de la evaluación final (60 casos, 83,3 % de éxito global) |
 
-## 7.4 Resultados
+## 7.4 Resultados (24/11/2026, rama `developer`)
 
-| Repo | Pruebas automáticas |
+| Repo | Pruebas automáticas | Resultado |
+| --- | --- | --- |
+| RedNexus-Backend | 23 archivos con 113 pruebas unitarias (`npm test`) y 5 pruebas e2e (`npm run test:e2e`) | 118 de 118 en verde; lint (oxlint) y `tsc` sin errores |
+| RedNexus-Frontend | 24 archivos con 69 pruebas de componentes (`npx vitest run`) | 69 de 69 en verde |
+| RedNexus-Platform | CI `validate`: kubeconform con CRD, `tofu validate`, `docker compose config`, shellcheck, pruebas del RAG y del ML | En verde en `developer`, `test` y `main` |
+| ml/ | 39 runs comparables en MLflow | Configuración ganadora registrada (`rednexus-matching` v1) |
+| asistente-rag/ | Golden dataset de 60 casos con juez `qwen2.5:7b` | 83,3 % de éxito (meta 70 %) |
+
+| Evidencia | Captura |
 | --- | --- |
-| RedNexus-Backend | 16+ archivos, unas 75 pruebas unitarias y e2e (con BE-04, BE-05, DOC-02 e IA-07 fusionados) |
-| RedNexus-Frontend | 21 archivos, unas 60 pruebas de componentes (con FE-05 a FE-07 y DOC-02 fusionados) |
-| ml/ | 30 runs comparables en MLflow |
-| asistente-rag/ | Golden dataset de 50 casos (meta 70 % de éxito) |
+| CI del backend en `main` (lint, tipos, pruebas y build) | [gh-03-ci-backend.png](evidencias/gh-03-ci-backend.png) |
+| CI de Platform en `main` | [gh-04-ci-platform.png](evidencias/gh-04-ci-platform.png) |
+| Workflow *Imagen* del backend (Trivy, SBOM, firma) | [gh-01-imagen-backend.png](evidencias/gh-01-imagen-backend.png) |
+| Workflow *GitOps (kind)* en `main` | [gh-02-gitops-kind.png](evidencias/gh-02-gitops-kind.png) |
 
-> **Pendiente (issue DOC-10):** al cierre, pegar aquí el número exacto que muestra `npm test` en cada repo y una captura del CI en verde.
+## 7.5 Prueba de integración de punta a punta con la IA real
+
+Ejecutada el 24/11/2026 contra la demo local (imágenes de `main`, Ollama, whisper.cpp y Open WebUI), por la API y luego en el navegador (capturas en [evidencias/](evidencias)).
+
+| Caso | Resultado |
+| --- | --- |
+| PF-02 · Solicitud por texto: *"No entiendo cómo unir tres tablas con una tabla intermedia en SQL…"* | Clasificada como `bases-de-datos`, temas `join, sql, tablas`, nivel intermedio; 3 candidatos (Ana 0,65; Julián 0,48; David 0,44) en **11 s** |
+| PF-03 · Nota de voz generada con la voz del sistema (*"…calcular subredes y máscaras en redes de computadores"*) | Transcrita por whisper.cpp ("sobredes y mascaras": error menor de transcripción), área `redes`, 3 candidatos en **13 s** |
+| PF-04 · Ana acepta | La API devuelve el correo de la autora |
+| PF-05 · Julián acepta después | `409 Conflict`: "La solicitud ya fue aceptada o cerrada" |
+| PF-06 · Laura califica con 5 estrellas | Calificación guardada |
+| PF-08 · Asistente: *"¿Cómo califico a la persona que me ayudó?"* | Pasos correctos con fuentes `calificaciones.md` y `emparejamiento.md`, en 24,6 s |
+| PF-09 · PQRS de sugerencia | Radicado `PQRS-000001`, estado `RADICADA` |
+| PF-07 · Ollama apagado | Candidatos por etiquetas en 1,2 s (ver simulacros del capítulo 9) |
+
+**Observaciones:** la explicación del tercer candidato dijo con honestidad que "no domina SQL" (su perfil es NoSQL): el umbral lo dejó pasar con 0,44. En otra corrida, el modelo escribió mal un apellido en la explicación ("Bosen" por "Bolaños"). Ambos casos confirman que la explicación es de apoyo y que la decisión final es del estudiante.

@@ -1,0 +1,17 @@
+[
+  {
+    "sev": "HIGH",
+    "total": 11,
+    "con_arreglo": 11
+  },
+  {
+    "sev": "LOW",
+    "total": 7,
+    "con_arreglo": 7
+  },
+  {
+    "sev": "MEDIUM",
+    "total": 23,
+    "con_arreglo": 23
+  }
+]

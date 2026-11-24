@@ -37,7 +37,7 @@ rectangle "RedNexus" {
   usecase "Gestionar perfil\ny habilidades" as UC3
 
   usecase "Publicar solicitud\npor texto" as UC4
-  usecase "Publicar solicitud\npor nota de voz" as UC5 <<previsto>>
+  usecase "Publicar solicitud\npor nota de voz" as UC5
   usecase "Ver mis solicitudes\ny candidatos" as UC6
   usecase "Cerrar solicitud" as UC7
   usecase "Calificar la ayuda" as UC8
@@ -45,15 +45,22 @@ rectangle "RedNexus" {
   usecase "Ver solicitudes donde\nsoy candidato" as UC9
   usecase "Aceptar o rechazar\nsolicitud" as UC10
 
+  usecase "Preguntar al asistente\nde ayuda (RAG)" as UC15
+  usecase "Radicar una PQRS" as UC16
+  usecase "Descargar o eliminar\nmis datos" as UC17
+
   usecase "Emparejar top 3\ncon explicación" as UC13
   usecase "Clasificar la solicitud" as UC11
   usecase "Generar embeddings" as UC12
-  usecase "Transcribir nota de voz" as UC14 <<previsto>>
+  usecase "Transcribir nota de voz" as UC14
 }
 
 usr --> UC1
 usr --> UC2
 usr --> UC3
+usr --> UC15
+usr --> UC16
+usr --> UC17
 sol --> UC4
 sol --> UC5
 sol --> UC6
@@ -72,7 +79,4 @@ UC12 <-- ia
 UC13 <-- ia
 UC14 <-- ia
 
-legend right
-  Borde punteado: previsto, no construido
-endlegend
 @enduml

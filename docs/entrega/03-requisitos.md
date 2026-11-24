@@ -2,7 +2,7 @@
 
 ## 3.1 Requisitos funcionales
 
-Cada requisito se verifica con las pruebas automáticas indicadas y con el guion de la demo.
+Cada requisito se verifica con las pruebas automáticas indicadas y con el guion de la demo. El 24/11/2026 los 17 se verificaron contra la aplicación funcionando: ver [verificacion-requisitos.md](verificacion-requisitos.md) (todos ✅).
 
 | ID | Requisito | Criterio de aceptación | Endpoint / ruta | Prueba |
 | --- | --- | --- | --- | --- |

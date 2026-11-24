@@ -1,6 +1,6 @@
 @startuml 05-despliegue-demo-cicd
-' Vista física (4+1) del ambiente de demo y del flujo de CI/CD (previsto: PL-01 a PL-07)
-skinparam dpi 200
+' Vista física (4+1) de la entrega continua y de los ambientes de demo (PL-01 a PL-09)
+skinparam dpi 140
 skinparam defaultFontName "Helvetica"
 skinparam shadowing false
 skinparam LegendBackgroundColor #ffffff
@@ -19,20 +19,10 @@ skinparam artifact {
   FontColor white
   BorderColor #2e6295
 }
-skinparam artifact<<previsto>> {
-  BackgroundColor #eef4fb
-  FontColor #1d3b5c
-  BorderColor #438dd5
-  BorderStyle dashed
-}
-skinparam database<<previsto>> {
-  BackgroundColor #eef4fb
-  FontColor #1d3b5c
-  BorderColor #438dd5
-  BorderStyle dashed
-}
-skinparam node<<previsto>> {
-  BorderStyle dashed
+skinparam database {
+  BackgroundColor #438dd5
+  FontColor white
+  BorderColor #2e6295
 }
 hide stereotype
 
@@ -40,31 +30,45 @@ actor "Equipo\n(5 personas)" as devs
 
 node "GitHub" as gh {
   artifact "Repos Backend, Frontend y Platform\nramas developer → test → main" as repos
-  artifact "GitHub Actions\nlint, typecheck, pruebas y build" as ci
-  artifact "Trivy (escaneo), Syft (SBOM)\ncosign keyless (firma)" <<previsto>> as sec
-  database "GHCR\nrednexus-backend\nrednexus-frontend" <<previsto>> as ghcr
+  artifact "CI (build-test / validate)\nlint, tipos, pruebas, kubeconform, OpenTofu" as ci
+  artifact "Workflow Imagen: buildx amd64+arm64\nTrivy, SBOM (Syft), firma Cosign keyless" as sec
+  database "GHCR\nrednexus-backend\nrednexus-frontend" as ghcr
+  artifact "Promover imágenes\nPR que cambia newTag del overlay demo" as prom
+  artifact "GitOps (kind)\nprueba de punta a punta en cada PR" as e2e
 }
 
-node "Servidor de demo\n(Dokploy o clúster con Argo CD, por decidir)" <<previsto>> as demo {
-  artifact "Argo CD o Dokploy\nsincroniza deploy/overlays/demo" <<previsto>> as cd
-  artifact "Kyverno: solo imágenes firmadas\nSealed Secrets: secretos cifrados" <<previsto>> as pol
-  artifact "Pods de RedNexus\n(misma topología del diagrama de despliegue local)" <<previsto>> as app
-  artifact "OpenTelemetry → Grafana\nSLO: 95 % con candidatos en menos de 30 s" <<previsto>> as obs
+node "Clúster de demo GitOps\n(k3d en el Mac o kind en Actions)" as demo {
+  artifact "OpenTofu (iac/cluster)\ninstala Argo CD, Kyverno y Sealed Secrets" as tofu
+  artifact "Argo CD\nsincroniza deploy/overlays/demo" as cd
+  artifact "Kyverno: solo imágenes firmadas\nSealed Secrets: secretos cifrados" as pol
+  artifact "Pods de RedNexus\n(misma topología del despliegue local)" as app
+  artifact "OpenTelemetry → Grafana\nSLO: 95 % con candidatos en menos de 30 s" as obs
+}
+
+node "Equipo del líder (Mac M1)" as mac {
+  artifact "Demo local: Docker Compose\ncon las imágenes firmadas de GHCR" as local
+  artifact "Ollama, whisper.cpp y Open WebUI\n(IA real fuera de los contenedores)" as ia
 }
 
 devs --> repos : Pull Request
 repos --> ci : push / PR
-ci ..> sec : imagen multiarquitectura
-sec ..> ghcr : push con etiqueta sha
-ci ..> repos : actualiza la etiqueta del overlay
-cd ..> repos : GitOps: pull
-app ..> ghcr : pull de imágenes
-cd ..> app : despliega
-pol ..> app : controla
-app ..> obs : trazas y métricas
+repos --> sec : push a developer, test o main
+sec --> ghcr : imagen con etiqueta sha
+ghcr --> prom : firmas verificadas
+prom --> repos : PR al overlay demo
+repos --> e2e : PR que toca deploy/ o iac/
+tofu --> cd
+cd --> repos : GitOps: pull
+cd --> app : despliega
+pol --> app : controla
+app --> ghcr : pull de imágenes
+app --> obs : trazas y métricas
+local --> ghcr : pull de imágenes
+local --> ia : clasifica, vectoriza, transcribe
 
-legend right
-  Línea continua: construido
-  Línea y borde punteados: previsto
+legend bottom
+  El Dokploy compartido del diplomado no quedó disponible:
+  la demo se hace en el Mac y la evidencia de GitOps
+  se genera en GitHub Actions (kind)
 endlegend
 @enduml
