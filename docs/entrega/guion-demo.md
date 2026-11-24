@@ -52,5 +52,5 @@ Antes de empezar: `bash scripts/demo-local.sh` (enciende Ollama, whisper.cpp, Op
 
 | Fecha | Duración total | Qué falló | Ajuste |
 | --- | --- | --- | --- |
-| 24/11/2026 (ensayo técnico de la demo, sin diapositivas) | Recorrido completo por la API y el navegador en unos **4 minutos** (20:03 a 20:07): texto emparejado en 11 s, voz en 13 s, aceptar, conflicto 409, calificar, asistente en 25 s y PQRS | El asistente muestra el Markdown sin formato (`**negrita**`); una explicación escribió mal un apellido | Se explica en la demo que la explicación es de apoyo; el formato del chat queda como mejora (FE) |
+| 24/11/2026 (ensayo técnico de la demo, sin diapositivas) | Recorrido completo por la API y el navegador en unos **4 minutos** (20:03 a 20:07): texto emparejado en 11 s, voz en 13 s, aceptar, conflicto 409, calificar, asistente en 25 s y PQRS | El asistente muestra el Markdown sin formato (`**negrita**`); una explicación escribió mal un apellido | Se explica en la demo que la explicación es de apoyo; el formato del chat se corrigió el mismo día (FE-17: pasos numerados y negrita, sin `v-html`) |
 | Pendiente (con el equipo y las diapositivas de DOC-13) | | | |
