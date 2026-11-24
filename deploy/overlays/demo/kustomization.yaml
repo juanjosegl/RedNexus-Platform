@@ -17,10 +17,10 @@ resources:
 images:
   - name: rednexus-api
     newName: ghcr.io/juanjosegl/rednexus-backend
-    newTag: sha-b1c333a # backend
+    newTag: sha-6a2ee94 # backend
   - name: rednexus-web
     newName: ghcr.io/juanjosegl/rednexus-frontend
-    newTag: sha-7fd2e94 # frontend
+    newTag: sha-c3ef50a # frontend
 configMapGenerator:
   - name: api-config
     behavior: merge

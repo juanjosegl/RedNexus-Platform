@@ -1,0 +1,12 @@
+[
+  {
+    "sev": "LOW",
+    "total": 4,
+    "con_arreglo": 4
+  },
+  {
+    "sev": "MEDIUM",
+    "total": 6,
+    "con_arreglo": 6
+  }
+]

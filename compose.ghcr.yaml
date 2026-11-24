@@ -1,0 +1,20 @@
+# Usa las imágenes ya construidas, escaneadas y firmadas en GHCR en lugar de compilar el código.
+# Es la forma recomendada para revisar o evaluar RedNexus: no hace falta clonar Backend ni Frontend.
+#
+#   docker compose -f compose.yaml -f compose.ghcr.yaml up -d      ->  http://localhost:8088
+#
+# TAG elige la versión: main (por defecto), developer o sha-xxxxxxx (un commit exacto).
+# Verificar la firma: cosign verify ghcr.io/juanjosegl/rednexus-backend:main \
+#   --certificate-identity-regexp 'https://github.com/juanjosegl/RedNexus-.*' \
+#   --certificate-oidc-issuer https://token.actions.githubusercontent.com
+services:
+  migrate:
+    image: ghcr.io/juanjosegl/rednexus-backend:${TAG:-main}
+  api:
+    image: ghcr.io/juanjosegl/rednexus-backend:${TAG:-main}
+    build: !reset null
+  worker:
+    image: ghcr.io/juanjosegl/rednexus-backend:${TAG:-main}
+  web:
+    image: ghcr.io/juanjosegl/rednexus-frontend:${TAG:-main}
+    build: !reset null

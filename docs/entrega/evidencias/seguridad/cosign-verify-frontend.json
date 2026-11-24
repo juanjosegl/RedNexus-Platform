@@ -1,0 +1,2 @@
+
+[{"critical":{"identity":{"docker-reference":"ghcr.io/juanjosegl/rednexus-frontend:main"},"image":{"docker-manifest-digest":"sha256:70ac603896494b78fa66626195a51c704f54b9e9acdf1e50d0fd16390fbd6e67"},"type":"https://sigstore.dev/cosign/sign/v1"},"optional":{}},{"critical":{"identity":{"docker-reference":"ghcr.io/juanjosegl/rednexus-frontend:main"},"image":{"docker-manifest-digest":"sha256:70ac603896494b78fa66626195a51c704f54b9e9acdf1e50d0fd16390fbd6e67"},"type":"https://spdx.dev/Document"},"optional":{}}]

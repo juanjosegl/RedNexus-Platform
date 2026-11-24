@@ -17,6 +17,7 @@ nav:
       - Diccionario de datos: arquitectura/diccionario-de-datos.md
   - Operación:
       - GitOps, secretos y Kyverno: gitops.md
+      - Demo sin Dokploy: demo-local.md
   - Entrega:
       - Índice: entrega/README.md
       - 1. Contexto y problema: entrega/01-contexto-y-problema.md
