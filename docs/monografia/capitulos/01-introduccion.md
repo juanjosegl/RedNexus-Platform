@@ -102,7 +102,7 @@ Tabla: Relación entre objetivos, actividades, instrumentos y productos
 | Objetivo | Actividad | Instrumento | Producto a obtener |
 | --- | --- | --- | --- |
 | 1. Requisitos y arquitectura | Análisis del problema, partes interesadas, requisitos y decisiones | Historias de usuario, ISO/IEC 25010, plantilla ADR, PlantUML | Documento de contexto, 17 RF, RNF, 12 ADR y 11 diagramas |
-| 2. Aplicación web | Desarrollo por *issues* en Backend y Frontend | NestJS, Prisma, Vue 3, Vitest, Swagger | API y aplicación web con 187 pruebas automatizadas |
+| 2. Aplicación web | Desarrollo por *issues* en Backend y Frontend | NestJS, Prisma, Vue 3, Vitest, Swagger | API y aplicación web con 193 pruebas automatizadas |
 | 3. Emparejamiento con IA | Dataset sintético y 39 experimentos | Ollama, Python, MLflow | Configuración `rednexus-matching` v1 registrada y desplegada |
 | 4. Asistente RAG | Base de conocimiento, modelo personalizado y evaluación | Open WebUI, `evaluate_rag.py`, juez `qwen2.5:7b` | Asistente con 83,3 % de éxito en 60 casos e informe |
 | 5. Automatización y despliegue | CI/CD, imágenes firmadas, Kubernetes, GitOps e IaC | GitHub Actions, Trivy, Syft, Cosign, Kustomize, Argo CD, Kyverno, OpenTofu | Pipelines, manifiestos, repositorio GitOps y evidencia de firma |

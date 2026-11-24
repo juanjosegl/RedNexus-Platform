@@ -2,11 +2,25 @@
 
 Relación de los 15 entregables pedidos por el Diplomado CloudForge AI 5.0 con la evidencia de RedNexus. Estado al 24/11/2026. Los enlaces a otros repositorios apuntan a la rama `main`.
 
+## Para presentar: qué abrir
+
+| Qué | Dónde |
+| --- | --- |
+| Monografía (documento formal para la dirección del programa) | [docs/monografia/Monografia-RedNexus.docx](../monografia/Monografia-RedNexus.docx); se regenera con `python3 docs/monografia/build.py` |
+| Informe ejecutivo | [informe-ejecutivo.md](informe-ejecutivo.md) y [PDF](pdf) |
+| Esta matriz en PDF, guion del video y guion de la sustentación | [docs/entrega/pdf/](pdf) (se regeneran con `python3 docs/entrega/build_pdfs.py`) |
+| Instalación y demo para el jurado | [README, sección *Instalar y probar RedNexus*](../../README.md#instalar-y-probar-rednexus-guía-para-el-jurado) |
+| Informe del asistente RAG (actividad del módulo 6) | [asistente-rag/docs/Informe-modelo-rag-RedNexus.pdf](../../asistente-rag/docs/Informe-modelo-rag-RedNexus.pdf) |
+| Evidencias (capturas, Trivy, SBOM y firmas) | [evidencias/](evidencias) |
+| Tablero y código | [Tablero](https://github.com/users/juanjosegl/projects/1) · [Backend](https://github.com/juanjosegl/RedNexus-Backend) · [Frontend](https://github.com/juanjosegl/RedNexus-Frontend) · [Platform](https://github.com/juanjosegl/RedNexus-Platform) |
+
+## Matriz
+
 | # | Entregable | Evidencia principal | Estado |
 | --- | --- | --- | --- |
 | 1 | Documento de contexto, usuarios, requisitos, restricciones y decisiones de arquitectura | Capítulos [1](01-contexto-y-problema.md), [2](02-alcance-y-partes-interesadas.md), [3](03-requisitos.md) y [4](04-decisiones-de-arquitectura.md); [diagramas C4 y 4+1](../arquitectura/diagramas.md); [verificación de requisitos contra la app](verificacion-requisitos.md); monografía (capítulos 1 y 3) | Completo |
 | 2 | Repositorio Git con estrategia de ramas, issues, README y convenciones de contribución | 3 repos públicos ([Backend](https://github.com/juanjosegl/RedNexus-Backend), [Frontend](https://github.com/juanjosegl/RedNexus-Frontend), [Platform](https://github.com/juanjosegl/RedNexus-Platform)); ramas `developer → test → main` con rulesets y CI obligatorio; [CONTRIBUTING](../../CONTRIBUTING.md); [tablero](https://github.com/users/juanjosegl/projects/1) con 75 issues `[ID] título` (28 Backend, 16 Frontend, 31 Platform) y PR por tarea; [captura del tablero](evidencias/gh-05-tablero.png) | Completo |
-| 3 | Aplicación o servicio contenedorizado con pruebas automatizadas | `Dockerfile` multi-etapa en Backend y Frontend (una imagen para API, worker y migraciones, ADR-002); [compose.yaml](../../compose.yaml); 118 pruebas en el backend (113 unitarias y 5 e2e) y 69 en el frontend, todas en verde ([capítulo 7](07-pruebas-y-calidad.md)) | Completo |
+| 3 | Aplicación o servicio contenedorizado con pruebas automatizadas | `Dockerfile` multi-etapa en Backend y Frontend (una imagen para API, worker y migraciones, ADR-002); [compose.yaml](../../compose.yaml); 118 pruebas en el backend (113 unitarias y 5 e2e) y 75 en el frontend, todas en verde ([capítulo 7](07-pruebas-y-calidad.md)) | Completo |
 | 4 | Manifiestos de Kubernetes y/o Helm/Kustomize para despliegue reproducible | [deploy/base](../../deploy/base) con overlays [k3d](../../deploy/overlays/k3d), [minikube](../../deploy/overlays/minikube) y [demo](../../deploy/overlays/demo) (Kustomize); `bash scripts/k8s-up.sh [k3d\|minikube]`; validados con kubeconform en cada PR | Completo |
 | 5 | Pipeline CI/CD con controles de calidad y seguridad | CI `build-test` (lint, tipos, pruebas, build) y workflow **Imagen** (buildx multiarquitectura, Trivy, SBOM, Cosign) en Backend y Frontend; `validate` y **GitOps (kind)** en Platform; **Promover imágenes** como CD ([capítulo 8](08-devsecops-y-despliegue.md), [capturas](evidencias/)) | Completo |
 | 6 | Evidencia de SBOM, escaneo de vulnerabilidades y firma/verificación de artefactos | SBOM SPDX (Syft) adjunto a cada imagen como atestación; Trivy en cada build; `cosign verify` de las dos imágenes ([evidencias/seguridad](evidencias/seguridad)); política de Kyverno que rechaza imágenes sin firma; [bitácora de hallazgos](08-devsecops-y-despliegue.md#84-bitácora-de-hallazgos-de-seguridad) | Completo |

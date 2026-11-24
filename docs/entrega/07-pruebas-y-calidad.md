@@ -45,7 +45,7 @@ Ningún PR entra a `developer`, `test` o `main` sin el check `build-test` en ver
 | Repo | Pruebas automáticas | Resultado |
 | --- | --- | --- |
 | RedNexus-Backend | 23 archivos con 113 pruebas unitarias (`npm test`) y 5 pruebas e2e (`npm run test:e2e`) | 118 de 118 en verde; lint (oxlint) y `tsc` sin errores |
-| RedNexus-Frontend | 24 archivos con 69 pruebas de componentes (`npx vitest run`) | 69 de 69 en verde |
+| RedNexus-Frontend | 25 archivos con 75 pruebas de componentes (`npx vitest run`) | 75 de 75 en verde |
 | RedNexus-Platform | CI `validate`: kubeconform con CRD, `tofu validate`, `docker compose config`, shellcheck, pruebas del RAG y del ML | En verde en `developer`, `test` y `main` |
 | ml/ | 39 runs comparables en MLflow | Configuración ganadora registrada (`rednexus-matching` v1) |
 | asistente-rag/ | Golden dataset de 60 casos con juez `qwen2.5:7b` | 83,3 % de éxito (meta 70 %) |

@@ -25,7 +25,7 @@ Tabla: Resultados de las pruebas automatizadas
 | Repositorio | Pruebas | Resultado |
 | --- | --- | --- |
 | RedNexus-Backend | 23 archivos con 113 pruebas unitarias y 5 *end-to-end* | 118 de 118 aprobadas; lint y tipos sin errores |
-| RedNexus-Frontend | 24 archivos con 69 pruebas de componentes | 69 de 69 aprobadas |
+| RedNexus-Frontend | 25 archivos con 75 pruebas de componentes | 75 de 75 aprobadas |
 | RedNexus-Platform | Validación de manifiestos, OpenTofu, Compose, *scripts*, *golden dataset* y dataset de ML | Aprobada en `developer`, `test` y `main` |
 Nota: Ejecución local sobre la rama `developer` el 24/11/2026; los mismos resultados se observan en GitHub Actions.
 
@@ -125,7 +125,7 @@ La aplicación es liviana; el costo dominante es el modelo de lenguaje, que corr
 
 ## 6.9 Conclusiones del capítulo
 
-- Las 187 pruebas automatizadas y la verificación de los 17 requisitos contra la aplicación funcionando muestran que el producto cumple lo especificado.
+- Las 193 pruebas automatizadas y la verificación de los 17 requisitos contra la aplicación funcionando muestran que el producto cumple lo especificado.
 - Con la IA real, todas las solicitudes medidas recibieron candidatos entre 11 y 17 s, dentro del SLO de 30 s; sin IA, el respaldo responde en poco más de un segundo.
 - La cadena de suministro funciona como control y no solo como documentación: detuvo una publicación con vulnerabilidades críticas, permitió encontrar y corregir 11 vulnerabilidades altas, y sus firmas son verificables por terceros.
 - Los simulacros demostraron la degradación controlada, la recuperación de la cola, la restauración de respaldos y la reconstrucción desde cero en segundos, y aportaron lecciones concretas al *runbook*.

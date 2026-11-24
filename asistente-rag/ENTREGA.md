@@ -18,6 +18,8 @@ proyecto. Usa RAG en **Open WebUI** con modelos locales de **Ollama** y está in
 **Resultado:** **88,5 % de éxito** (46 de 52 casos) en el golden dataset, frente a la meta del 70 %, con una
 latencia media de 18,7 s. Las categorías de seguridad, fuera de alcance y fuera de la base quedan al 100 %.
 
+> **Actualización 23/11/2026:** al agregar el octavo documento de la base de conocimiento (solicitudes de ayuda) y sus 8 casos, la evaluación con **60 casos** dio **83,3 %** (`runs/resumen_v4_final_chunk400_ov60_60casos_*`), también por encima de la meta. El PDF entregado conserva los resultados del 20/11.
+
 ## Dónde está cada requisito
 
 | Requisito de la actividad | Dónde está |

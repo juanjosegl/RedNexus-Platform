@@ -13,7 +13,7 @@ Fuente de todos los documentos que se entregan. Se escriben aquí en Markdown (v
 | 4 | Arquitectura y ADR | [04-decisiones-de-arquitectura.md](04-decisiones-de-arquitectura.md) + [diagramas](../arquitectura/diagramas.md) | Listo para revisión |
 | 5 | Privacidad, licencias y riesgos de la IA (DOC-02) | [05-privacidad-y-riesgos-ia.md](05-privacidad-y-riesgos-ia.md) | Listo para revisión |
 | 6 | MLOps: dataset, experimentos y configuración ganadora | [06-mlops.md](06-mlops.md) | Listo para revisión |
-| 7 | Pruebas y calidad | [07-pruebas-y-calidad.md](07-pruebas-y-calidad.md) | Listo (118 + 69 pruebas, integración con IA real) |
+| 7 | Pruebas y calidad | [07-pruebas-y-calidad.md](07-pruebas-y-calidad.md) | Listo (118 + 75 pruebas, integración con IA real) |
 | 8 | DevSecOps, CI/CD y despliegue | [08-devsecops-y-despliegue.md](08-devsecops-y-despliegue.md) | Listo (bitácora del 24/11 y `cosign verify`) |
 | 9 | Runbook de operación (PL-09) | [09-runbook.md](09-runbook.md) | Listo (6 simulacros cronometrados) |
 | 10 | Sostenibilidad, impacto y plan de adopción (DOC-03) | [10-sostenibilidad-e-impacto.md](10-sostenibilidad-e-impacto.md) | Listo para revisión |
