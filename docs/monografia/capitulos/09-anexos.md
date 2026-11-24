@@ -7,7 +7,7 @@ Tabla: Relación de los 15 entregables mínimos del diplomado con la evidencia d
 | --- | --- | --- | --- |
 | 1 | Documento de contexto, usuarios, requisitos, restricciones y decisiones de arquitectura | Capítulos 1 y 3 de esta monografía; `docs/entrega/01` a `04`; diagramas en `docs/arquitectura/` | Completo |
 | 2 | Repositorio Git con estrategia de ramas, *issues*, README y convenciones de contribución | Tres repositorios públicos; ramas `developer → test → main` con reglas como código; `CONTRIBUTING.md`; 75 *issues* y tablero | Completo |
-| 3 | Aplicación o servicio contenedorizado con pruebas automatizadas | `Dockerfile` multietapa; `compose.yaml`; 187 pruebas en verde | Completo |
+| 3 | Aplicación o servicio contenedorizado con pruebas automatizadas | `Dockerfile` multietapa; `compose.yaml`; 193 pruebas en verde | Completo |
 | 4 | Manifiestos de Kubernetes y/o Kustomize para despliegue reproducible | `deploy/base` y overlays `k3d`, `minikube` y `demo`; validación con kubeconform | Completo |
 | 5 | Pipeline CI/CD con controles de calidad y seguridad | CI obligatorio, *Imagen*, *Promover imágenes* y *GitOps (kind)* | Completo |
 | 6 | SBOM, escaneo de vulnerabilidades y firma/verificación | Syft, Trivy, Cosign, `cosign verify` y política de Kyverno; bitácora de hallazgos | Completo |

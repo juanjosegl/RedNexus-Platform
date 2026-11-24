@@ -73,7 +73,7 @@ Es una buena base. Para que cuadre con lo construido y con lo que piden:
 | 006 | Degradación controlada: respaldo por etiquetas y explicación por plantilla si la IA falla | Decidido |
 | 007 | Tres repositorios (Backend, Frontend, Platform) con flujo developer → test → main | Decidido |
 | 008 | JWT sin estado para la autenticación | Decidido |
-| 009 | Ambiente de demo y CD: Dokploy, Argo CD o los dos | **Pendiente** |
+| 009 | Ambiente de demo y CD: GitOps con Argo CD e imágenes firmadas; demo local porque Dokploy no quedó disponible | Aceptado (24/11/2026) |
 | 010 | Observabilidad con OpenTelemetry y Grafana | Previsto |
 
 ## 5. Problemas encontrados (para la exposición)
