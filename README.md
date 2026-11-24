@@ -8,6 +8,100 @@ Plataforma de **RedNexus**: todo lo necesario para construir, desplegar y operar
 | [RedNexus-Frontend](https://github.com/juanjosegl/RedNexus-Frontend) | Interfaz Vue 3 |
 | **RedNexus-Platform** (este) | Docker Compose, Kubernetes, GitOps con Argo CD, IaC con OpenTofu, políticas de Kyverno, observabilidad, ML, el asistente de soporte con RAG y la documentación |
 
+RedNexus es una red de apoyo académico: un estudiante publica una duda (por texto o nota de voz) y una IA que corre en la propia infraestructura la clasifica, la compara por significado con los perfiles y propone a los tres compañeros que mejor pueden ayudar, explicando por qué. Proyecto integrador del Diplomado CloudForge AI 5.0 (Unicomfacauca, 2026).
+
+**Entregables del diplomado:** [docs/entrega/ENTREGABLES.md](docs/entrega/ENTREGABLES.md) relaciona cada uno de los 15 entregables con su evidencia.
+
+## Instalar y probar RedNexus (guía para el jurado)
+
+Dos niveles. El **nivel 1** corre en cualquier computador con Docker y no descarga modelos de IA (usa el respaldo por etiquetas). El **nivel 2** agrega la IA real con Ollama. Ninguno compila código: usan las imágenes ya construidas, escaneadas y **firmadas** en GitHub Container Registry. Se probaron desde un clon limpio el 24/11/2026.
+
+### Requisitos
+
+| | Windows 10/11 | macOS | Linux |
+| --- | --- | --- | --- |
+| Git | [git-scm.com](https://git-scm.com/downloads) | `xcode-select --install` | `sudo apt install git` |
+| Docker | [Docker Desktop](https://www.docker.com/products/docker-desktop/) | Docker Desktop, o `brew install colima docker docker-compose` y `colima start --memory 4` | Docker Engine con el plugin Compose |
+| Memoria libre | 4 GB (nivel 1) · 8 GB (nivel 2) | igual | igual |
+| Puertos libres | 8088 (app) y 3000 (API) | igual | igual |
+
+### Nivel 1: la aplicación completa en 5 minutos
+
+```bash
+git clone https://github.com/juanjosegl/RedNexus-Platform.git
+cd RedNexus-Platform
+docker compose -f compose.yaml -f compose.ghcr.yaml up -d
+```
+
+La primera vez descarga unos 1,2 GB de imágenes. Cuando `docker compose ps` muestre `api`, `worker` y `web` en *running*, abre **http://localhost:8088**.
+
+| Qué | Dónde |
+| --- | --- |
+| Aplicación | http://localhost:8088 |
+| API y su documentación (Swagger) | http://localhost:3000/api/docs |
+| Salud de la API, la base y Redis | http://localhost:8088/api/health/ready |
+| Usuarios de prueba (datos sintéticos) | `ana.demo@rednexus.dev`, `laura.demo@rednexus.dev`, `daniela.demo@rednexus.dev`… · contraseña `demo12345` |
+
+### Nivel 2: con la IA real (Ollama)
+
+1. Instala [Ollama](https://ollama.com/download) (Windows, macOS o Linux) y descarga los modelos (unos 2,5 GB):
+
+   ```bash
+   ollama pull qwen2.5:3b
+   ollama pull paraphrase-multilingual
+   ```
+
+2. En la carpeta `RedNexus-Platform`, activa la IA y vuelve a levantar:
+
+   ```bash
+   cp ia.env.example .env          # en Windows (cmd o PowerShell): copy ia.env.example .env
+   docker compose -f compose.yaml -f compose.ghcr.yaml up -d
+   ```
+
+3. Comprueba que tomó la IA: `docker compose logs worker | grep -i proveedor` debe decir `Proveedor de IA: ollama` (en PowerShell: `docker compose logs worker | Select-String proveedor`).
+
+Las notas de voz reales (whisper.cpp) y el asistente de `/ayuda` con Open WebUI son opcionales y se activan en el mismo `.env` (ver [ia.env.example](ia.env.example), [docs/demo-local.md](docs/demo-local.md) y [asistente-rag/README.md](asistente-rag/README.md)). Sin ellos, la voz y el asistente usan respuestas de respaldo y la app sigue funcionando. En el Mac del líder todo se enciende con `bash scripts/demo-local.sh`.
+
+### Recorrido de la demo (10 minutos)
+
+| # | Paso | Qué se espera |
+| --- | --- | --- |
+| 1 | Abrir http://localhost:8088 → **Crear cuenta** sin marcar la autorización de datos; luego marcándola | Primero un error (Ley 1581); luego entra a la aplicación |
+| 2 | Entrar como `laura.demo@rednexus.dev` → **Solicitudes → Nueva solicitud** → *"No entiendo cómo unir tres tablas con una tabla intermedia en SQL"* | Pasa de *Pendiente* a *Con candidatos* en menos de 30 s, con 3 compañeros, su puntaje y una frase que explica por qué |
+| 3 | En una ventana privada, entrar como el primer candidato (por ejemplo `ana.demo@rednexus.dev`) → **Ayudar** → **Aceptar** | Se muestra el correo de Laura; si otro candidato acepta después, ve "Otro compañero aceptó primero" |
+| 4 | Volver a Laura → abrir la solicitud → **Calificar** con 5 estrellas | La calificación queda guardada y mejora el ranking de Ana |
+| 5 | **Nueva solicitud → Grabar** (necesita micrófono) y **Publicar** | La duda aparece transcrita y con candidatos |
+| 6 | **Ayuda** → *"¿Qué pasa si nadie acepta mi solicitud?"* | Respuesta con pasos y fuentes (respaldo por palabras clave en el nivel 1) |
+| 7 | **Ayuda → Radicar una PQRS** | Queda con número `PQRS-000N` y estado *Radicada* |
+| 8 | Con la cuenta creada en el paso 1: **Perfil → Descargar mis datos** y **Eliminar mi cuenta** | Baja un JSON con todo lo del titular; después no se puede volver a entrar |
+| 9 | Degradación (nivel 2): cerrar Ollama y publicar otra duda | Igual llegan candidatos; el log del worker dice `por tags` |
+
+### Apagar, reiniciar desde cero y problemas comunes
+
+```bash
+docker compose -f compose.yaml -f compose.ghcr.yaml down       # apaga; los datos se conservan
+docker compose -f compose.yaml -f compose.ghcr.yaml down -v    # apaga y borra la base (vuelve a los datos de prueba)
+```
+
+| Síntoma | Solución |
+| --- | --- |
+| `port is already allocated` (8088 o 3000) | Cierra lo que usa ese puerto o apaga otro stack de Docker |
+| La página carga pero no deja entrar | Espera a que `migrate` termine (`docker compose ps -a` lo muestra *Exited (0)*) y recarga |
+| La solicitud se queda en *Pendiente* | `docker compose logs worker`; si dice que no llega a Ollama, revisa que Ollama esté abierto o borra el `.env` para volver al nivel 1 |
+| `no space left on device` | `docker system df` y libera imágenes que no uses (`docker image prune`) |
+
+Más fallas y cómo resolverlas: [runbook](docs/entrega/09-runbook.md). Kubernetes (k3d o minikube) y la demo GitOps con Argo CD están más abajo.
+
+## Equipo
+
+| Integrante | GitHub | Aportes principales |
+| --- | --- | --- |
+| Juan José Gutiérrez Lasso (líder) | [@juanjosegl](https://github.com/juanjosegl) | Arquitectura, backend, IA y MLOps, plataforma (Kubernetes, GitOps, DevSecOps, IaC, observabilidad), asistente RAG y documentación |
+| Victor Daniel Fernández | [@daniel200231](https://github.com/daniel200231) | Frontend del chat de ayuda (FE-11), documentación y revisión de requisitos |
+| José Sebastián Fernández | [@josesfa](https://github.com/josesfa) | Frontend de la ayuda (FE-09, FE-10), pruebas y evidencias de CI |
+| María Paula Andrade Muñoz | [@MariPau-dev](https://github.com/MariPau-dev) | Frontend de preguntas frecuentes (FE-12), documento base y diapositivas |
+| María Alejandra Guzmán Ruiz | [@alejandraguzman12](https://github.com/alejandraguzman12) | Base de conocimiento y golden dataset del RAG, pruebas manuales y simulacros |
+
 ## Empieza aquí
 
 | Documento | Para qué |
@@ -16,6 +110,7 @@ Plataforma de **RedNexus**: todo lo necesario para construir, desplegar y operar
 | [Tareas](docs/tareas.md) | Qué hay que hacer, con ramas y commits por tarea |
 | [CONTRIBUTING](CONTRIBUTING.md) | Resumen de las reglas de ramas, commits y PR |
 | [Entorno en Mac](docs/entorno-mac.md) | Instalación en macOS (Apple Silicon) |
+| [Demo sin Dokploy](docs/demo-local.md) | Cómo mostrar el sistema funcionando: demo local con IA real, URL pública temporal, GitOps en Actions y Render |
 | [GitOps](docs/gitops.md) | Demo con Argo CD, Sealed Secrets e imágenes firmadas (Kyverno): desplegar, *drift*, rollback y secretos |
 | [OpenTofu](iac/README.md) | Clúster de la demo y reglas de ramas de GitHub como código |
 | [Observabilidad](observabilidad/README.md) | OpenTelemetry, Grafana y el SLO de 30 s |
@@ -35,6 +130,7 @@ rednexus/
 | Si vas a… | Dónde | Comando | Qué obtienes |
 | --- | --- | --- | --- |
 | **Ver el sistema completo funcionando** | RedNexus-Platform | `docker compose up -d --build` | App en http://localhost:8088 |
+| **Hacer la demo con la IA real** (Ollama, voz y asistente) | RedNexus-Platform | `bash scripts/demo-local.sh` (`--tunel` para una URL pública temporal; ver [Demo sin Dokploy](docs/demo-local.md)) | App en http://localhost:8088 con las imágenes firmadas de GHCR |
 | **Programar el frontend** | RedNexus-Platform, y luego RedNexus-Frontend | `docker compose up -d --build api worker`, y luego `npm run dev` en el frontend | Backend listo en Docker, con datos de prueba; tu frontend en http://localhost:5173 con recarga automática |
 | **Programar el backend** | RedNexus-Backend | `docker compose up -d` (Postgres y Redis) y `npm run start:dev` (ver su README para la primera vez) | Tu API en http://localhost:3000 con recarga automática |
 | **Probar en Kubernetes** | RedNexus-Platform | `bash scripts/k8s-up.sh` (k3d) o `bash scripts/k8s-up.sh minikube` | App en http://localhost:8080 |
@@ -118,6 +214,7 @@ observabilidad/               # stack de observabilidad local con Docker
 scripts/
 ├── k8s-up.sh                 # construir + cargar imágenes + desplegar (k3d o minikube)
 ├── gitops-up.sh              # demo GitOps desde cero, cronometrada
+├── demo-local.sh             # demo en el Mac con la IA real y URL pública opcional
 └── seal-secrets.sh           # cifrar los secretos de la demo con kubeseal
 docs/                         # guías del equipo, arquitectura, GitOps y la entrega por capítulos
 ml/                           # experimentos de emparejamiento con MLflow
