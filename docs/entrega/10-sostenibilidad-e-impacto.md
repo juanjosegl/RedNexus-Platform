@@ -2,7 +2,7 @@
 
 Los requisitos de certificación piden un "Plan estratégico de desarrollo sostenible y marketing" con criterios ESG (ambientales, sociales y de gobernanza). Este capítulo lo aterriza a RedNexus.
 
-> **Pendiente:** confirmar con el coordinador del diplomado el alcance exacto de este requisito (en la propuesta se señaló que parece venir de otro programa).
+> Nota: el alcance exacto de este requisito no se confirmó con el coordinador (parece venir de otro programa); se deja como análisis de sostenibilidad del proyecto.
 
 ## 10.1 Ambiental (E)
 

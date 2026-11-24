@@ -107,3 +107,27 @@ El juez es `qwen2.5:7b` con criterios explícitos (usar el nombre o resumir el p
 **Prueba en vivo:** con Ollama y la base de la demo, "unir tres tablas con una intermedia" propone a Ana y Natalia, "subredes y máscaras" a Daniela y Andrea (13 a 17 s por solicitud) y "cómo preparo una lasaña" no propone a nadie. **Limitación observada:** "mi modelo tiene 99 % en entrenamiento y 60 % en prueba" se clasificó como ingeniería de software (por la palabra "prueba") y el área equivocada arrastró a perfiles de pruebas de software; las explicaciones, al menos, dicen con honestidad que esos perfiles no encajan. Con un acierto del área del 75 %, mejorar la clasificación es la siguiente palanca (por ejemplo, `qwen2.5:7b` si el hardware lo permite).
 
 **Costo:** la clasificación tarda 1,5 s (mediana) y la explicación 2 s por candidato en el Mac M1, dentro del SLO de 30 s por solicitud.
+
+## 6.5 Evidencia en MLflow (IA-09)
+
+| Captura | Qué muestra |
+| --- | --- |
+| ![Runs del experimento](evidencias/mlflow-01-experimentos.png) | Los 39 runs del experimento `rednexus-emparejamiento` (embeddings, clasificación, híbrido, pesos, umbral, explicaciones y la configuración ganadora) |
+| ![Modelo registrado](evidencias/mlflow-02-modelo-registrado.png) | El modelo `rednexus-matching` en el Model Registry |
+| ![Versión 1](evidencias/mlflow-03-version-1.png) | La versión 1, creada desde el run `08-configuracion-ganadora`, con `precision_at_3 = 0.94` |
+
+Para abrirlas de nuevo: `cd ml && uv sync --group ui && uv run mlflow ui --backend-store-uri sqlite:///mlflow.db --port 5000`.
+
+## 6.6 Rendimiento del LLM: TTFT y TPS
+
+Medido el 24/11/2026 con `asistente-rag/scripts/medir_tps_ttft.py` (Ollama nativo en el Mac M1 de 8 GB, `qwen2.5:3b` Q4_K_M ya cargado, 6 preguntas reales del asistente y del clasificador × 2 repeticiones; resultados en `asistente-rag/runs/tps_ttft_*`).
+
+| Métrica | Mediana | p90 |
+| --- | --- | --- |
+| TTFT, tiempo al primer token (s) | 0,17 | 0,21 |
+| TPS de generación (tokens/s) | 24,3 | 24,6 |
+| TPS de lectura del prompt (tokens/s) | 334,6 | 355,8 |
+| Tokens de salida por respuesta | 190 | 230 |
+| Tiempo total por respuesta (s) | 8,1 | 9,7 |
+
+Con 24 tokens/s, una explicación de 40 tokens tarda menos de 2 s, lo que confirma el costo medido arriba. En el asistente con RAG la latencia de punta a punta (17,6 s de media en la evaluación de 60 casos) la domina la generación de respuestas largas y la lectura de los 4 fragmentos recuperados, no el primer token.

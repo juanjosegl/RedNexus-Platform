@@ -18,12 +18,14 @@ System(rn, "RedNexus", "Red de apoyo académico que empareja solicitudes con col
 
 System_Ext(ia, "Modelos de IA locales (Ollama)", "qwen2.5:3b para clasificar y explicar; paraphrase-multilingual para embeddings; whisper.cpp para notas de voz")
 System_Ext(gh, "GitHub", "Repositorios, GitHub Actions y registro de imágenes GHCR")
+System_Ext(owui, "Open WebUI", "Asistente de soporte con RAG sobre la documentación de RedNexus")
 
 Rel(sol, rn, "Publica solicitudes, ve candidatos y califica", "HTTPS")
 Rel(ayu, rn, "Mantiene su perfil, acepta o rechaza", "HTTPS")
 Rel(rn, ia, "Clasifica, vectoriza y explica", "HTTP/JSON, red propia")
 Rel(ops, gh, "Sube código y revisa PR")
-Rel(gh, rn, "Publica imágenes y despliega (previsto)", $tags="previsto")
+Rel(rn, owui, "Preguntas de ayuda (/api/support/chat)", "HTTP/JSON")
+Rel(gh, rn, "Publica imágenes firmadas; Argo CD despliega desde Git")
 
 Lay_R(sol, ayu)
 Lay_D(ayu, ops)
@@ -32,6 +34,5 @@ legend right
   |<#08427b>     | Persona |
   |<#1168bd>     | Nuestro sistema |
   |<#999999>     | Sistema externo |
-  | - - - -      | Previsto, no construido |
 endlegend
 @enduml

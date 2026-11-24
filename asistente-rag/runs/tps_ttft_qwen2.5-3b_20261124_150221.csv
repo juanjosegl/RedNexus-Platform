@@ -1,0 +1,13 @@
+modelo,pregunta,ttft_s,total_s,tokens_salida,tps,tokens_prompt,tps_prompt,carga_modelo_s
+qwen2.5:3b,¿Cómo califico a la persona que me ayudó?,0.179,7.964,179,23.01,42,261.31,0.006
+qwen2.5:3b,¿Qué pasa si nadie acepta mi solicitud?,0.607,13.418,304,23.73,40,69.29,0.012
+qwen2.5:3b,¿Puedo pedir ayuda con una nota de voz?,0.214,2.205,50,25.08,42,260.94,0.013
+qwen2.5:3b,"Clasifica esta duda en área, temas y nivel: no entiendo cómo unir tres tablas con una intermedia",0.17,8.692,207,24.29,55,355.79,0.003
+qwen2.5:3b,"Explica en una frase por qué Ana, que sabe de joins y modelado relacional, puede ayudar con SQL",0.171,1.896,41,23.78,53,331.36,0.001
+qwen2.5:3b,¿Cómo descargo o elimino mis datos personales?,0.129,8.341,196,23.89,41,351.51,0.006
+qwen2.5:3b,¿Cómo califico a la persona que me ayudó?,0.16,9.191,214,23.69,42,351.31,0.016
+qwen2.5:3b,¿Qué pasa si nadie acepta mi solicitud?,0.128,7.69,184,24.33,40,339.27,0.001
+qwen2.5:3b,¿Puedo pedir ayuda con una nota de voz?,0.173,4.409,103,24.33,42,263.62,0.001
+qwen2.5:3b,"Clasifica esta duda en área, temas y nivel: no entiendo cómo unir tres tablas con una intermedia",0.182,8.203,195,24.31,55,337.79,0.002
+qwen2.5:3b,"Explica en una frase por qué Ana, que sabe de joins y modelado relacional, puede ayudar con SQL",0.059,1.602,38,24.63,53,1257.24,0.002
+qwen2.5:3b,¿Cómo descargo o elimino mis datos personales?,0.172,9.647,230,24.28,41,253.89,0.004
