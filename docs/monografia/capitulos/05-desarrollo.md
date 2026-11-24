@@ -8,12 +8,12 @@ El código vive en tres repositorios públicos de GitHub. RedNexus-Backend conti
 
 El trabajo se repartió en *issues* con identificador por área (`BE-`, `FE-`, `IA-`, `PL-`, `DOC-`) en un tablero Kanban público con las columnas *Por hacer*, *En curso*, *En revisión* y *Hecho*. Cada *issue* se resolvió en una rama temporal y un *pull request* con la integración continua obligatoria; los aportes de los compañeros quedaron como coautores en los *commits*.
 
-Tabla: Actividad en los repositorios al 24/11/2026
+Tabla: Actividad en los repositorios al cierre del 24/11/2026
 | Repositorio | *Issues* | *Pull requests* fusionados | Contenido principal |
 | --- | --- | --- | --- |
-| RedNexus-Backend | 28 | 52 | NestJS 12, Prisma 7, PostgreSQL 17 con pgvector, BullMQ y Redis, OpenTelemetry |
-| RedNexus-Frontend | 16 | 39 | Vue 3, Vite, Pinia, Tailwind CSS y Vitest |
-| RedNexus-Platform | 31 | 32 | Compose, Kustomize, Argo CD, Kyverno, Sealed Secrets, OpenTofu, MLflow, Open WebUI y documentación |
+| RedNexus-Backend | 28 | 55 | NestJS 12, Prisma 7, PostgreSQL 17 con pgvector, BullMQ y Redis, OpenTelemetry |
+| RedNexus-Frontend | 16 | 42 | Vue 3, Vite, Pinia, Tailwind CSS y Vitest |
+| RedNexus-Platform | 31 | 39 | Compose, Kustomize, Argo CD, Kyverno, Sealed Secrets, OpenTofu, MLflow, Open WebUI y documentación |
 Nota: Elaboración propia con datos de GitHub. Los *pull requests* incluyen las promociones `developer → test → main`.
 
 ![Tablero del proyecto en GitHub](docs/entrega/evidencias/gh-05-tablero.png)
@@ -63,7 +63,7 @@ Nota: Captura de la aplicación. whisper.cpp transcribió el audio y el sistema 
 Nota: Captura de la aplicación (vista *Ayudar*).
 
 ![Asistente de ayuda respondiendo con base en la documentación](docs/entrega/evidencias/app-12-asistente-ayuda.png)
-Nota: Captura de la aplicación. La respuesta cita sus fuentes (`preguntas-frecuentes.md` y `solicitudes-de-ayuda.md`). El chat muestra el formato Markdown sin interpretar, una mejora pendiente de la interfaz.
+Nota: Captura de la aplicación. La respuesta se muestra como pasos numerados con negrita y cita sus fuentes. El formato se interpreta en el navegador sin insertar HTML del modelo (FE-17), para evitar inyecciones.
 
 ![Perfil con las opciones de descargar y eliminar mis datos](docs/entrega/evidencias/app-10-perfil-mis-datos.png)
 Nota: Captura de la aplicación.
@@ -124,6 +124,6 @@ Nota: Captura de GitHub Actions.
 ## 5.8 Conclusiones del capítulo
 
 - El producto mínimo viable quedó completo de punta a punta y con un alcance mayor al de la propuesta: voz, asistente, PQRS y derechos de datos.
-- La separación en módulos del *backend* y en funcionalidades del *frontend* permitió repartir el trabajo entre cinco personas con *issues* pequeños y verificables; 123 *pull requests* fusionados dejan la trazabilidad del proceso.
+- La separación en módulos del *backend* y en funcionalidades del *frontend* permitió repartir el trabajo entre cinco personas con *issues* pequeños y verificables; más de 130 *pull requests* fusionados dejan la trazabilidad del proceso.
 - La misma imagen firmada corre en Docker Compose, en Kubernetes local y en el clúster GitOps, lo que hace que lo evaluado sea exactamente lo desplegado.
 - La ausencia de un servidor público se compensó con dos mecanismos verificables: una guía de instalación que cualquier evaluador reproduce en minutos y un *workflow* que despliega la plataforma completa desde cero en cada cambio de infraestructura.

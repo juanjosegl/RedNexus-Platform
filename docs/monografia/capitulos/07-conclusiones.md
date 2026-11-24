@@ -7,7 +7,7 @@
 **Sobre los objetivos específicos.**
 
 1. *Requisitos y arquitectura.* Se documentaron el contexto, las partes interesadas, 17 requisitos funcionales, los no funcionales según ISO/IEC 25010, 19 historias de usuario, 12 decisiones de arquitectura y 11 diagramas C4 y 4+1, actualizados con lo construido.
-2. *Aplicación web.* Se implementaron la cuenta y el perfil únicos, las solicitudes por texto y por voz, la bandeja del colaborador, la aceptación con asignación única garantizada por una transacción, la calificación, el asistente de ayuda, las PQRS y la exportación y eliminación de datos, con 187 pruebas automatizadas.
+2. *Aplicación web.* Se implementaron la cuenta y el perfil únicos, las solicitudes por texto y por voz, la bandeja del colaborador, la aceptación con asignación única garantizada por una transacción, la calificación, el asistente de ayuda, las PQRS y la exportación y eliminación de datos, con 193 pruebas automatizadas.
 3. *Emparejamiento con IA.* Treinta y nueve experimentos registrados en MLflow llevaron la precision@3 de 0,81 a 0,94 y el rechazo de dudas fuera de tema del 10 % al 90 %, y redujeron las explicaciones con afirmaciones no soportadas del 30 % al 17 %. La configuración quedó registrada como `rednexus-matching` v1 y se aplica por variables de entorno.
 4. *Asistente RAG.* El asistente alcanzó un 83,3 % de éxito en 60 casos evaluados con un modelo juez, por encima de la meta del 70 %, con rechazo correcto de todas las preguntas de seguridad y fuera de alcance.
 5. *Automatización y despliegue.* Cada imagen se construye para dos arquitecturas, se escanea, se inventaría con un SBOM y se firma; Argo CD la despliega desde Git en un clúster instalado con OpenTofu, Kyverno rechaza lo que no está firmado y los secretos viajan cifrados. Todo se reproduce desde cero en cuatro minutos en GitHub Actions.
@@ -19,7 +19,7 @@
 
 **Sobre la ingeniería.** La combinación de una imagen firmada para todos los roles, despliegue declarativo y una guía de instalación probada desde un clon limpio hace que lo evaluado sea exactamente lo desplegado. Esa fue también la respuesta a la principal limitación del proyecto, la falta de un servidor público: cualquier evaluador reproduce el sistema en minutos y el despliegue GitOps completo se verifica en cada cambio de infraestructura.
 
-**Sobre el trabajo en equipo.** Organizar el trabajo en *issues* pequeños, ramas por tarea, *pull requests* con integración continua obligatoria y documentación en el mismo repositorio permitió coordinar a cinco personas con equipos distintos y dejó trazabilidad de cada aporte en 123 *pull requests*.
+**Sobre el trabajo en equipo.** Organizar el trabajo en *issues* pequeños, ramas por tarea, *pull requests* con integración continua obligatoria y documentación en el mismo repositorio permitió coordinar a cinco personas con equipos distintos y dejó trazabilidad de cada aporte en más de 130 *pull requests*.
 
 ## 7.2 Trabajos futuros
 
@@ -27,7 +27,7 @@
 
 - **Piloto con estudiantes reales** de un programa de ingeniería, con bienestar universitario como responsable del tratamiento de los datos, para medir el tiempo hasta la primera ayuda, la tasa de aceptación y la satisfacción.
 - **Despliegue público permanente** en un servidor de la institución o en un VPS pequeño, reutilizando `docker-compose.dokploy.yml` o el overlay `demo` con Argo CD.
-- **Mejoras de la interfaz:** mostrar con formato las respuestas del asistente, transmitirlas en *streaming* y notificar por correo al colaborador propuesto.
+- **Mejoras de la interfaz:** transmitir en *streaming* las respuestas del asistente, para que el usuario vea el texto mientras se genera, y notificar por correo al colaborador propuesto.
 - **Publicar el video** de instalación y demostración y completar el ensayo cronometrado con las diapositivas institucionales.
 
 ### 7.2.2 Mediano plazo (un año)

@@ -15,19 +15,18 @@
 | PQRS | Radicar y consultar peticiones, quejas, reclamos y sugerencias | Hecho | BE-12, FE-13 |
 | MLOps | Dataset sintético, experimentos en MLflow, configuración ganadora registrada y aplicada | Hecho | IA-06, IA-07 |
 | DevSecOps | CI obligatorio, imágenes multiarquitectura en GHCR, Trivy, SBOM y firma con Cosign | Hecho | PL-01, PL-02 |
-| Despliegue | Docker Compose, Kubernetes (k3d y minikube), Dokploy con CD desde `main`, Render + Neon | Hecho | Platform, PL |
+| Despliegue | Docker Compose (también con las imágenes firmadas, `compose.ghcr.yaml`), Kubernetes (k3d y minikube), demo local con IA real; Dokploy y Render preparados pero sin usar (el servidor compartido no quedó disponible) | Hecho | Platform, PL-09 |
 | Privacidad | Autorización de tratamiento, exportar y eliminar mis datos, nota de voz que no se guarda | Hecho | DOC-02 |
+| GitOps | Argo CD sincroniza el overlay de demo con las imágenes firmadas de GHCR | Hecho | PL-03 |
+| Secretos | Sealed Secrets para el overlay de demo | Hecho | PL-04 |
+| Admisión | Kyverno exige imágenes firmadas y registros permitidos | Hecho | PL-05 |
+| IaC | OpenTofu para el clúster de demo (Argo CD, Kyverno, Sealed Secrets) y las reglas de los repos | Hecho | PL-06 |
+| Observabilidad | OpenTelemetry, Grafana y el SLO de 30 s medido con trazas | Hecho | PL-07 |
+| Catálogo | `catalog-info.yaml` y TechDocs | Hecho | PL-08 |
 
 ### Previsto (evolución)
 
-| Tema | Qué falta | Tarea |
-| --- | --- | --- |
-| GitOps | Argo CD sincronizando un overlay de demo con las imágenes de GHCR | PL-03 |
-| Secretos | Sealed Secrets para el overlay de demo | PL-04 |
-| Admisión | Kyverno exigiendo imágenes firmadas | PL-05 |
-| IaC | OpenTofu para namespaces, Argo CD y reglas de los repos | PL-06 |
-| Observabilidad | OpenTelemetry, Grafana y el SLO de 30 s medido con trazas | PL-07 |
-| Catálogo | `catalog-info.yaml` y TechDocs | PL-08 |
+Piloto con estudiantes reales, despliegue público permanente, respuestas del asistente en *streaming* y notificaciones por correo (ver el capítulo 7 de la monografía).
 
 ### Fuera de alcance
 
