@@ -60,8 +60,9 @@ spec:
             - secretRef:
                 name: api-secrets
           readinessProbe:
+            # BE-21: lista solo si responden la base de datos y Redis
             httpGet:
-              path: /api/health
+              path: /api/health/ready
               port: http
             periodSeconds: 5
           livenessProbe:

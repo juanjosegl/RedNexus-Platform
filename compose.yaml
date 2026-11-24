@@ -11,6 +11,8 @@
 #
 # Las imagenes se construyen con el codigo que tengas en ../RedNexus-Backend y ../RedNexus-Frontend:
 # haz `git pull` en esos repos y repite el comando con --build para usar la ultima version.
+# Sin construir nada, con las imagenes firmadas de GHCR (lo que usa el jurado y scripts/demo-local.sh):
+#   docker compose -f compose.yaml -f compose.ghcr.yaml up -d
 # Tambien las construye scripts/k8s-up.sh para Kubernetes.
 name: rednexus
 
@@ -25,6 +27,16 @@ x-api-env: &api-env
   OLLAMA_LLM_MODEL: qwen2.5:3b
   OLLAMA_EMBED_MODEL: paraphrase-multilingual
   JWT_SECRET: solo-para-desarrollo-local
+  # IA: mock por defecto (sin Ollama). Para la IA real, AI_PROVIDER=ollama en un archivo .env (ver ia.env.example);
+  # scripts/demo-local.sh además enciende whisper.cpp y Open WebUI
+  AI_PROVIDER: ${AI_PROVIDER:-mock}
+  TRANSCRIBE_PROVIDER: ${TRANSCRIBE_PROVIDER:-mock}
+  WHISPER_URL: ${WHISPER_URL:-http://host.docker.internal:8178}
+  SUPPORT_PROVIDER: ${SUPPORT_PROVIDER:-mock}
+  OPENWEBUI_URL: ${OPENWEBUI_URL:-http://host.docker.internal:3001}
+  OPENWEBUI_API_KEY: ${OPENWEBUI_API_KEY:-}
+  # PL-07: vacío = sin telemetría; con observabilidad/compose.yaml: http://host.docker.internal:4318
+  OTEL_EXPORTER_OTLP_ENDPOINT: ${OTEL_EXPORTER_OTLP_ENDPOINT:-}
 
 services:
   postgres:
